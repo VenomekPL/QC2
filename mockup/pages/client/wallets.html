@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallets - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Wallets</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">My Wallets</h1>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Balance Card -->
+        <div class="card mb-6">
+          <div style="text-align: center; padding: var(--space-6) var(--space-6) var(--space-4);">
+            <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">TOTAL PORTFOLIO VALUE</div>
+            <div style="font-size: var(--text-4xl); font-weight: var(--font-bold); margin-bottom: var(--space-2);">€187,456.75</div>
+            <div class="stat-card-change positive" style="justify-content: center;">
+              <span>▲</span>
+              <span>€4,320.15 (+2.36%) in the last 30 days</span>
+            </div>
+          </div>
+          <!-- 30 Day Chart -->
+          <div style="padding: 0 var(--space-6) var(--space-6);">
+            <svg width="100%" height="120" style="border-radius: var(--radius-md);">
+              <!-- Gradient background -->
+              <defs>
+                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:rgba(0, 102, 255, 0.2);stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:rgba(0, 102, 255, 0);stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              
+              <!-- Area fill under line -->
+              <path d="M 0 66 L 10 62 L 20 65 L 30 57 L 40 60 L 50 54 L 60 58 L 70 52 L 80 48 L 90 50 L 100 46 L 110 43 L 120 46 L 130 41 L 140 37 L 150 39 L 160 34 L 170 30 L 180 32 L 190 28 L 200 30 L 210 26 L 220 22 L 230 24 L 240 20 L 250 22 L 260 18 L 270 16 L 280 18 L 290 14 L 300 120 L 0 120 Z" 
+                    fill="url(#areaGradient)" />
+              
+              <!-- Line -->
+              <path d="M 0 66 L 10 62 L 20 65 L 30 57 L 40 60 L 50 54 L 60 58 L 70 52 L 80 48 L 90 50 L 100 46 L 110 43 L 120 46 L 130 41 L 140 37 L 150 39 L 160 34 L 170 30 L 180 32 L 190 28 L 200 30 L 210 26 L 220 22 L 230 24 L 240 20 L 250 22 L 260 18 L 270 16 L 280 18 L 290 14" 
+                    stroke="#0066FF" 
+                    stroke-width="3" 
+                    fill="none" 
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+              
+              <!-- Data points -->
+              <circle cx="0" cy="66" r="4" fill="#0066FF" opacity="0.5" />
+              <circle cx="290" cy="14" r="5" fill="#0066FF" />
+            </svg>
+            <div style="display: flex; justify-content: space-between; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--text-tertiary);">
+              <span>30 days ago</span>
+              <span>Today</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bitcoin Section -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 56px; height: 56px; background-color: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold;">₿</div>
+              <div>
+                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Bitcoin</h2>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">BTC • €29,950 per coin</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">2.45 BTC</div>
+              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €73,377.50</div>
+              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-2);">
+                <span>▲</span>
+                <span>+4.2% (24h)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BTC Accounts -->
+          <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Bitcoin Accounts</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAccount('btc')">+ Add Account</button>
+            </div>
+
+            <div id="btc-accounts">
+              <!-- Account 1 -->
+              <div class="account-item">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span class="badge badge-primary">Main</span>
+                      <span class="font-semibold">Main Wallet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)">Copy</button>
+                    </div>
+                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">1.85 BTC <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €55,407.50</span></div>
+                  </div>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('btc', 'Main Wallet', 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('btc', 'Main Wallet', 1.85)">Withdraw</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Account 2 -->
+              <div class="account-item">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span class="font-semibold">Savings Account</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el</code>
+                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el', this)">Copy</button>
+                    </div>
+                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">0.60 BTC <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €17,970.00</span></div>
+                  </div>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('btc', 'Savings Account', 'bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('btc', 'Savings Account', 0.60)">Withdraw</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ethereum Section -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 56px; height: 56px; background-color: #627EEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold;">Ξ</div>
+              <div>
+                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Ethereum</h2>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">ETH • €2,807 per coin</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">23.5 ETH</div>
+              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €65,964.50</div>
+              <div class="stat-card-change negative" style="justify-content: flex-end; margin-top: var(--space-2);">
+                <span>▼</span>
+                <span>-1.3% (24h)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ETH Accounts -->
+          <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Ethereum Accounts</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAccount('eth')">+ Add Account</button>
+            </div>
+
+            <div id="eth-accounts">
+              <!-- Account 1 -->
+              <div class="account-item">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span class="badge badge-primary">Main</span>
+                      <span class="font-semibold">Main Wallet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</code>
+                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', this)">Copy</button>
+                    </div>
+                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">18.7 ETH <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €52,490.90</span></div>
+                  </div>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('eth', 'Main Wallet', '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('eth', 'Main Wallet', 18.7)">Withdraw</button>
+                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white;" onclick="window.location.href='staking.html'">⚡ Stake</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Account 2 - Staking -->
+              <div class="account-item">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span class="badge badge-info">Staking</span>
+                      <span class="font-semibold">Staking Wallet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063</code>
+                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', this)">Copy</button>
+                    </div>
+                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">4.8 ETH <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €13,473.60</span></div>
+                  </div>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('eth', 'Staking Wallet', '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063')">Deposit</button>
+                    <a href="staking.html" class="btn btn-sm btn-primary">Manage Staking</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Avalanche Section -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 56px; height: 56px; background-color: #E84142; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">▲</div>
+              <div>
+                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Avalanche</h2>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">AVAX • €42.50 per coin</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">850 AVAX</div>
+              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €36,125.00</div>
+              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-2);">
+                <span>▲</span>
+                <span>+6.8% (24h)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AVAX Accounts -->
+          <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Avalanche Accounts</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAccount('avax')">+ Add Account</button>
+            </div>
+
+            <div id="avax-accounts">
+              <!-- Account 1 -->
+              <div class="account-item">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span class="badge badge-primary">Main</span>
+                      <span class="font-semibold">Main Wallet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj</code>
+                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj', this)">Copy</button>
+                    </div>
+                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">850 AVAX <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €36,125.00</span></div>
+                  </div>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('avax', 'Main Wallet', 'X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('avax', 'Main Wallet', 850)">Withdraw</button>
+                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white;" onclick="window.location.href='staking.html'">⚡ Stake</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polygon Section -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 56px; height: 56px; background-color: #8247E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">⬡</div>
+              <div>
+                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Polygon</h2>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">MATIC • €0.88 per coin</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">13,625 MATIC</div>
+              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €11,990.00</div>
+              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-2);">
+                <span>▲</span>
+                <span>+3.4% (24h)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MATIC Accounts -->
+          <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Polygon Accounts</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAccount('matic')">+ Add Account</button>
+            </div>
+
+            <div id="matic-accounts">
+              <!-- Account 1 -->
+              <div class="account-item">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span class="badge badge-primary">Main</span>
+                      <span class="font-semibold">Main Wallet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0</code>
+                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0', this)">Copy</button>
+                    </div>
+                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">13,625 MATIC <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €11,990.00</span></div>
+                  </div>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('matic', 'Main Wallet', '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('matic', 'Main Wallet', 13625)">Withdraw</button>
+                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white;" onclick="window.location.href='staking.html'">⚡ Stake</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+  <script>
+    // Account counters for each currency
+    let accountCounters = {
+      btc: 3,
+      eth: 3,
+      avax: 2,
+      matic: 2
+    };
+
+    // Add new account function
+    function addAccount(currency) {
+      const accountId = accountCounters[currency]++;
+      const currencyNames = {
+        btc: { name: 'Bitcoin', symbol: 'BTC' },
+        eth: { name: 'Ethereum', symbol: 'ETH' },
+        avax: { name: 'Avalanche', symbol: 'AVAX' },
+        matic: { name: 'Polygon', symbol: 'MATIC' }
+      };
+
+      // Generate mock address
+      const addresses = {
+        btc: 'bc1q' + generateRandomString(39),
+        eth: '0x' + generateRandomString(40),
+        avax: 'X-avax' + generateRandomString(38),
+        matic: '0x' + generateRandomString(40)
+      };
+
+      const container = document.getElementById(`${currency}-accounts`);
+      const accountDiv = document.createElement('div');
+      accountDiv.className = 'account-item';
+      accountDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3); border: 2px solid var(--primary);">
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+              <span class="badge badge-success">New</span>
+              <span class="font-semibold">Account ${accountId}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+              <code style="font-size: var(--text-sm); color: var(--text-secondary);">${addresses[currency]}</code>
+              <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('${addresses[currency]}', this)">Copy</button>
+            </div>
+            <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">0.00 ${currencyNames[currency].symbol} <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €0.00</span></div>
+          </div>
+          <div style="display: flex; gap: var(--space-2);">
+            <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('${currency}', 'Account ${accountId}', '${addresses[currency]}')">Deposit</button>
+            <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('${currency}', 'Account ${accountId}', 0)">Withdraw</button>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(accountDiv);
+      showSuccessMessage(`New ${currencyNames[currency].name} account created! Address: ${addresses[currency].substring(0, 20)}...`);
+    }
+
+    // Generate random string for addresses
+    function generateRandomString(length) {
+      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    // Initiate deposit
+    function initiateDeposit(currency, accountName, address) {
+      showSuccessModal(
+        'Deposit to ' + accountName,
+        `Send ${currency.toUpperCase()} to this address:<br><br><code style="word-break: break-all;">${address}</code><br><br>Your funds will be credited after network confirmation.`
+      );
+    }
+
+    // Initiate withdraw
+    function initiateWithdraw(currency, accountName, balance) {
+      if (balance === 0) {
+        showSuccessMessage('This account has zero balance. Deposit funds first.');
+        return;
+      }
+      window.location.href = `withdraw.html?asset=${currency}&account=${encodeURIComponent(accountName)}&balance=${balance}`;
+    }
+  </script>
+</body>
+</html>

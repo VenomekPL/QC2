@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIFM Admin Dashboard - QCrypto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="../client/dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="../client/wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="../client/transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="../client/deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="../client/withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="../client/staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search funds, investors, strategies...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">8</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">SA</div>
+            <div class="user-info">
+              <div class="user-name">Sarah Admin</div>
+              <div class="user-role">AIFM Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">AIFM Dashboard</h1>
+              <p class="page-subtitle">Multi-fund overview and management</p>
+            </div>
+            <div class="page-actions">
+              <a href="funds-create.html" class="btn btn-primary">+ Create New Fund</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="grid-4 mb-8">
+          <div class="stat-card">
+            <div class="stat-card-label">Total AUM</div>
+            <div class="stat-card-value">€285.4M</div>
+            <div class="stat-card-change positive">
+              <span>▲</span>
+              <span>+12.3% YTD</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-label">Active Funds</div>
+            <div class="stat-card-value">12</div>
+            <div class="stat-card-change positive">
+              <span>▲</span>
+              <span>+2 this quarter</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-label">Total Investors</div>
+            <div class="stat-card-value">348</div>
+            <div class="stat-card-change positive">
+              <span>▲</span>
+              <span>+28 this month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-label">Avg. Performance</div>
+            <div class="stat-card-value">+18.5%</div>
+            <div class="stat-card-change positive">
+              <span>▲</span>
+              <span>12-month return</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid-2 mb-8">
+          <!-- AUM by Fund -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">AUM Distribution by Fund</h2>
+            </div>
+            <div style="height: 300px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+              [Chart: Horizontal bar chart showing AUM per fund]
+            </div>
+          </div>
+
+          <!-- Performance Trends -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Performance Trends (YTD)</h2>
+            </div>
+            <div style="height: 300px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+              [Chart: Line chart showing performance over time]
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Performing Funds -->
+        <div class="card mb-8">
+          <div class="card-header">
+            <h2 class="card-title">Top Performing Funds</h2>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fund Name</th>
+                <th>Strategy</th>
+                <th>AUM</th>
+                <th>Investors</th>
+                <th>1M Return</th>
+                <th>YTD Return</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="font-weight: var(--font-semibold);">Bitcoin Growth Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">BGF-2024</div>
+                </td>
+                <td>Long-term Growth</td>
+                <td>€82.5M</td>
+                <td>127</td>
+                <td class="text-success font-semibold">+8.4%</td>
+                <td class="text-success font-semibold">+24.7%</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight: var(--font-semibold);">Ethereum Staking Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">ESF-2024</div>
+                </td>
+                <td>Staking Yield</td>
+                <td>€65.2M</td>
+                <td>94</td>
+                <td class="text-success font-semibold">+3.2%</td>
+                <td class="text-success font-semibold">+15.8%</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight: var(--font-semibold);">Balanced Crypto Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">BCF-2024</div>
+                </td>
+                <td>Diversified</td>
+                <td>€48.3M</td>
+                <td>68</td>
+                <td class="text-success font-semibold">+5.1%</td>
+                <td class="text-success font-semibold">+18.3%</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight: var(--font-semibold);">Conservative Digital Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">CDF-2025</div>
+                </td>
+                <td>Low Volatility</td>
+                <td>€35.7M</td>
+                <td>42</td>
+                <td class="text-success font-semibold">+2.8%</td>
+                <td class="text-success font-semibold">+11.2%</td>
+                <td><span class="badge badge-info">Raising</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="grid-2">
+          <!-- Investor Activity -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Recent Investor Activity</h2>
+            </div>
+            <div>
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                  <div class="font-semibold">New Subscription</div>
+                  <span class="text-success font-semibold">+€2.5M</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">Bitcoin Growth Fund • 2 hours ago</div>
+              </div>
+
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                  <div class="font-semibold">Pending Redemption</div>
+                  <span class="text-warning font-semibold">-€850K</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">Balanced Crypto Fund • 5 hours ago</div>
+              </div>
+
+              <div style="padding: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                  <div class="font-semibold">KYC Approved</div>
+                  <span class="badge badge-success">Approved</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">3 new investors • 1 day ago</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compliance Alerts -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Compliance Status</h2>
+            </div>
+            <div>
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                  <div class="font-semibold">AIFMD Reports</div>
+                  <span class="badge badge-success">Up to date</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">Next report due: Dec 31, 2025</div>
+              </div>
+
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                  <div class="font-semibold">KYC/AML Monitoring</div>
+                  <span class="badge badge-warning">2 Pending</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">2 investors require review</div>
+              </div>
+
+              <div style="padding: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                  <div class="font-semibold">Audit Trail</div>
+                  <span class="badge badge-success">Complete</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">All transactions logged</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

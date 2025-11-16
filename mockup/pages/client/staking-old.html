@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereum Staking - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Staking</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Ethereum Staking</h1>
+              <p class="page-subtitle">Earn rewards by staking your ETH</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Staking Overview -->
+        <div class="grid grid-cols-3 mb-6">
+          <div class="card">
+            <div class="stat-card-label">Currently Staked</div>
+            <div class="stat-card-value">15.2 ETH</div>
+            <div class="stat-card-secondary">≈ €42,636.00</div>
+          </div>
+          <div class="card">
+            <div class="stat-card-label">Est. Annual Reward</div>
+            <div class="stat-card-value">4.2%</div>
+            <div class="stat-card-secondary">~0.64 ETH / year</div>
+          </div>
+          <div class="card">
+            <div class="stat-card-label">Total Rewards Earned</div>
+            <div class="stat-card-value">0.0312 ETH</div>
+            <div class="stat-card-secondary">≈ €87.52</div>
+          </div>
+        </div>
+
+        <!-- Staking Form -->
+        <div class="grid grid-cols-2 gap-6">
+          <div class="card">
+            <h2 class="card-title">Stake Ethereum</h2>
+            
+            <div class="alert alert-info mb-4">
+              <strong>Important:</strong> Staked ETH will be locked for a minimum of 7 days. Unstaking requests are processed in 24-48 hours.
+            </div>
+
+            <form onsubmit="handleStaking(event)">
+              <div class="form-group">
+                <label class="form-label">Available Balance</label>
+                <div style="padding: var(--space-3); background: var(--bg-tertiary); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="font-semibold">Ethereum (ETH)</span>
+                    <span class="font-semibold">3.5 ETH</span>
+                  </div>
+                  <div style="margin-top: var(--space-1); color: var(--text-secondary); font-size: var(--text-sm);">
+                    ≈ €9,817.50
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="stakeAmount">Amount to Stake</label>
+                <div style="position: relative;">
+                  <input 
+                    type="number" 
+                    id="stakeAmount" 
+                    class="form-input" 
+                    placeholder="0.00" 
+                    step="0.01"
+                    min="0.01"
+                    max="3.5"
+                    required
+                    style="padding-right: 80px;"
+                  >
+                  <span style="position: absolute; right: var(--space-4); top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-weight: 600;">ETH</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div style="display: flex; gap: var(--space-2);">
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('stakeAmount').value = (3.5 * 0.25).toFixed(2)">25%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('stakeAmount').value = (3.5 * 0.5).toFixed(2)">50%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('stakeAmount').value = (3.5 * 0.75).toFixed(2)">75%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('stakeAmount').value = '3.50'">MAX</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Estimated Rewards</label>
+                <div style="padding: var(--space-4); background: var(--bg-tertiary); border-radius: var(--radius-md);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span style="color: var(--text-secondary);">Annual Percentage Yield</span>
+                    <span class="font-semibold" style="color: var(--success);">4.2%</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span style="color: var(--text-secondary);">Estimated Daily Reward</span>
+                    <span class="font-semibold">~0.0004 ETH</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Estimated Annual Reward</span>
+                    <span class="font-semibold">~0.147 ETH</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" required>
+                  <span>I understand that staked ETH will be locked for a minimum of 7 days</span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" required>
+                  <span>I have read and agree to the <a href="#" class="link">Staking Terms & Conditions</a></span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Stake ETH</button>
+            </form>
+          </div>
+
+          <div>
+            <!-- Current Staking Position -->
+            <div class="card mb-6">
+              <h2 class="card-title">Your Staking Position</h2>
+              
+              <div style="padding: var(--space-4); background: var(--bg-tertiary); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                  <span style="color: var(--text-secondary);">Staked Amount</span>
+                  <span class="font-semibold">15.2 ETH</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                  <span style="color: var(--text-secondary);">Start Date</span>
+                  <span class="font-semibold">Oct 15, 2025</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                  <span style="color: var(--text-secondary);">Lock Period Ends</span>
+                  <span class="font-semibold">Nov 22, 2025</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">Status</span>
+                  <span class="badge badge-success">Active</span>
+                </div>
+              </div>
+
+              <button class="btn btn-secondary btn-block">Request Unstaking</button>
+            </div>
+
+            <!-- Rewards History -->
+            <div class="card">
+              <h2 class="card-title">Recent Rewards</h2>
+              
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3); background: var(--bg-tertiary); border-radius: var(--radius-md);">
+                  <div>
+                    <div class="font-semibold">+0.0023 ETH</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">Nov 13, 2025</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: var(--text-secondary);">≈ €6.46</div>
+                    <div style="font-size: var(--text-sm); color: var(--success);">Daily Reward</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3); background: var(--bg-tertiary); border-radius: var(--radius-md);">
+                  <div>
+                    <div class="font-semibold">+0.0019 ETH</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">Nov 5, 2025</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: var(--text-secondary);">≈ €5.33</div>
+                    <div style="font-size: var(--text-sm); color: var(--success);">Daily Reward</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3); background: var(--bg-tertiary); border-radius: var(--radius-md);">
+                  <div>
+                    <div class="font-semibold">+0.0017 ETH</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">Oct 27, 2025</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: var(--text-secondary);">≈ €4.77</div>
+                    <div style="font-size: var(--text-sm); color: var(--success);">Daily Reward</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Staking Information -->
+        <div class="card">
+          <h2 class="card-title">About Ethereum Staking</h2>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6);">
+            <div>
+              <h3 style="font-weight: 600; margin-bottom: var(--space-2);">How It Works</h3>
+              <p style="color: var(--text-secondary); line-height: 1.6;">
+                Staking allows you to earn rewards by participating in the Ethereum network. Your ETH is locked for a minimum period and helps secure the network while generating passive income.
+              </p>
+            </div>
+            <div>
+              <h3 style="font-weight: 600; margin-bottom: var(--space-2);">Key Benefits</h3>
+              <ul style="color: var(--text-secondary); line-height: 1.8; padding-left: var(--space-5);">
+                <li>Earn up to 4.2% annual rewards</li>
+                <li>Rewards distributed daily</li>
+                <li>Secure and regulated custody</li>
+                <li>Unstake anytime after lock period</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

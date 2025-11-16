@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Workstation - QCrypto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    /* Trading-specific styles */
+    .trading-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: var(--space-4);
+      height: calc(100vh - var(--topbar-height) - var(--space-16));
+    }
+
+    .trading-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .market-ticker {
+      background-color: var(--bg-primary);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      display: flex;
+      gap: var(--space-6);
+      overflow-x: auto;
+    }
+
+    .ticker-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 120px;
+    }
+
+    .ticker-symbol {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-1);
+    }
+
+    .ticker-price {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-1);
+    }
+
+    .ticker-change {
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+    }
+
+    .chart-container {
+      background-color: var(--bg-primary);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      flex: 1;
+      min-height: 400px;
+    }
+
+    .order-entry-panel {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .order-tabs {
+      display: flex;
+      gap: var(--space-2);
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .order-tab {
+      padding: var(--space-3) var(--space-4);
+      font-weight: var(--font-medium);
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all var(--transition-fast);
+    }
+
+    .order-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+
+    .order-form {
+      background-color: var(--bg-primary);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+    }
+
+    .positions-panel {
+      background-color: var(--bg-primary);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="../client/dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="../client/wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="../client/transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="../client/deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="../client/withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="../client/staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+          <div style="display: flex; align-items: center; gap: var(--space-2); margin-left: var(--space-4);">
+            <span style="width: 12px; height: 12px; background-color: var(--color-success); border-radius: 50%;"></span>
+            <span style="font-size: var(--text-sm); font-weight: var(--font-medium);">Market Open</span>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <div style="display: flex; gap: var(--space-6); font-size: var(--text-sm);">
+            <div>
+              <span style="color: var(--text-secondary);">Available:</span>
+              <span class="font-semibold">€1,250,000</span>
+            </div>
+            <div>
+              <span style="color: var(--text-secondary);">Used Margin:</span>
+              <span class="font-semibold">€380,500</span>
+            </div>
+            <div>
+              <span style="color: var(--text-secondary);">Risk Limit:</span>
+              <span class="font-semibold">€5,000,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">3</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">MT</div>
+            <div class="user-info">
+              <div class="user-name">Mike Trader</div>
+              <div class="user-role">Senior Trader</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Market Ticker -->
+        <div class="market-ticker mb-4">
+          <div class="ticker-item">
+            <div class="ticker-symbol">BTC/EUR</div>
+            <div class="ticker-price">€29,950</div>
+            <div class="ticker-change text-success">+4.2% ▲</div>
+          </div>
+          <div class="ticker-item">
+            <div class="ticker-symbol">ETH/EUR</div>
+            <div class="ticker-price">€2,807</div>
+            <div class="ticker-change text-danger">-1.3% ▼</div>
+          </div>
+          <div class="ticker-item">
+            <div class="ticker-symbol">BTC/USD</div>
+            <div class="ticker-price">$32,450</div>
+            <div class="ticker-change text-success">+3.8% ▲</div>
+          </div>
+          <div class="ticker-item">
+            <div class="ticker-symbol">ETH/USD</div>
+            <div class="ticker-price">$3,042</div>
+            <div class="ticker-change text-danger">-0.9% ▼</div>
+          </div>
+        </div>
+
+        <!-- Trading Layout -->
+        <div class="trading-layout">
+          <!-- Main Trading Area -->
+          <div class="trading-main">
+            <!-- Price Chart -->
+            <div class="chart-container">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                <div style="display: flex; align-items: center; gap: var(--space-4);">
+                  <h2 style="font-size: var(--text-xl); font-weight: var(--font-semibold);">BTC/EUR</h2>
+                  <select style="padding: var(--space-2) var(--space-3); border: 1px solid var(--border-light); border-radius: var(--radius-sm);">
+                    <option>1m</option>
+                    <option>5m</option>
+                    <option>15m</option>
+                    <option selected>1h</option>
+                    <option>4h</option>
+                    <option>1d</option>
+                  </select>
+                </div>
+                <div style="display: flex; gap: var(--space-2);">
+                  <button class="btn btn-sm btn-secondary">Candlestick</button>
+                  <button class="btn btn-sm btn-secondary">Line</button>
+                  <button class="btn btn-sm btn-secondary">Indicators</button>
+                </div>
+              </div>
+              <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+                [Chart: Real-time candlestick chart with volume]
+              </div>
+            </div>
+
+            <!-- Order Book & Recent Trades -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+              <div class="card">
+                <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold); margin-bottom: var(--space-4);">Order Book</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); margin-bottom: var(--space-3); font-size: var(--text-sm); color: var(--text-secondary); font-weight: var(--font-medium);">
+                  <div>Price (EUR)</div>
+                  <div style="text-align: right;">Amount (BTC)</div>
+                  <div style="text-align: right;">Total (EUR)</div>
+                </div>
+                <!-- Asks -->
+                <div style="margin-bottom: var(--space-4);">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                    <div class="text-danger font-semibold">29,985</div>
+                    <div style="text-align: right;">0.8453</div>
+                    <div style="text-align: right;">25,342</div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                    <div class="text-danger font-semibold">29,978</div>
+                    <div style="text-align: right;">1.2340</div>
+                    <div style="text-align: right;">36,993</div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                    <div class="text-danger font-semibold">29,960</div>
+                    <div style="text-align: right;">0.5621</div>
+                    <div style="text-align: right;">16,840</div>
+                  </div>
+                </div>
+                <!-- Current Price -->
+                <div style="text-align: center; padding: var(--space-3); background-color: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-4); font-size: var(--text-lg); font-weight: var(--font-bold);">
+                  29,950.00
+                </div>
+                <!-- Bids -->
+                <div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                    <div class="text-success font-semibold">29,945</div>
+                    <div style="text-align: right;">0.9876</div>
+                    <div style="text-align: right;">29,570</div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                    <div class="text-success font-semibold">29,932</div>
+                    <div style="text-align: right;">1.4567</div>
+                    <div style="text-align: right;">43,595</div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                    <div class="text-success font-semibold">29,920</div>
+                    <div style="text-align: right;">0.7234</div>
+                    <div style="text-align: right;">21,645</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold); margin-bottom: var(--space-4);">Recent Trades</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); margin-bottom: var(--space-3); font-size: var(--text-sm); color: var(--text-secondary); font-weight: var(--font-medium);">
+                  <div>Time</div>
+                  <div style="text-align: right;">Price (EUR)</div>
+                  <div style="text-align: right;">Amount (BTC)</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                  <div>14:32:18</div>
+                  <div style="text-align: right;" class="text-success font-semibold">29,950</div>
+                  <div style="text-align: right;">0.4521</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                  <div>14:32:15</div>
+                  <div style="text-align: right;" class="text-danger font-semibold">29,945</div>
+                  <div style="text-align: right;">0.8340</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                  <div>14:32:10</div>
+                  <div style="text-align: right;" class="text-success font-semibold">29,948</div>
+                  <div style="text-align: right;">1.2340</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); padding: var(--space-2) 0; font-size: var(--text-sm);">
+                  <div>14:31:58</div>
+                  <div style="text-align: right;" class="text-success font-semibold">29,950</div>
+                  <div style="text-align: right;">0.5621</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Entry Sidebar -->
+          <div class="order-entry-panel">
+            <!-- Order Form -->
+            <div class="order-form">
+              <div class="order-tabs">
+                <div class="order-tab active">Market</div>
+                <div class="order-tab">Limit</div>
+                <div class="order-tab">OTC Quote</div>
+              </div>
+
+              <div style="margin-top: var(--space-6);">
+                <div class="form-group">
+                  <label>Fund Selection</label>
+                  <select>
+                    <option>Bitcoin Growth Fund</option>
+                    <option>Ethereum Staking Fund</option>
+                    <option>Balanced Crypto Fund</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Order Type</label>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-success" style="flex: 1;">Buy</button>
+                    <button class="btn btn-secondary" style="flex: 1;">Sell</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Amount (BTC)</label>
+                  <input type="number" placeholder="0.00" step="0.01">
+                </div>
+
+                <div class="form-group">
+                  <label>Estimated Total</label>
+                  <div style="padding: var(--space-3); background-color: var(--bg-secondary); border-radius: var(--radius-md); font-weight: var(--font-semibold);">
+                    €0.00
+                  </div>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;">Place Market Order</button>
+
+                <div style="margin-top: var(--space-4); padding: var(--space-3); background-color: var(--bg-secondary); border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--text-secondary);">
+                  <div>Commission: 0.25%</div>
+                  <div>Est. Fee: €0.00</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Positions -->
+            <div class="positions-panel">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold); margin-bottom: var(--space-4);">Active Orders</h3>
+              <div style="padding: var(--space-3); background-color: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                  <div>
+                    <div class="font-semibold">BTC/EUR Limit Buy</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">@ €29,800 • 0.5 BTC</div>
+                  </div>
+                  <button class="btn btn-sm btn-danger">Cancel</button>
+                </div>
+                <span class="badge badge-warning">Pending</span>
+              </div>
+
+              <div style="text-align: center; color: var(--text-tertiary); font-size: var(--text-sm);">
+                2 more orders...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

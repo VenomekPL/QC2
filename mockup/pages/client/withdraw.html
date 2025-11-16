@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdraw - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search transactions, addresses...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Withdraw</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Withdraw Crypto</h1>
+              <p class="page-subtitle">Send crypto to an external wallet</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2 mb-8">
+          <!-- Withdrawal Form -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Withdrawal Details</h2>
+            </div>
+
+            <form onsubmit="handleWithdraw(event)">
+              <div class="form-group">
+                <label>Select Asset</label>
+                <select>
+                  <option>Bitcoin (BTC)</option>
+                  <option>Ethereum (ETH)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Available Balance</label>
+                <div style="padding: var(--space-3); background-color: var(--bg-secondary); border-radius: var(--radius-md); font-weight: var(--font-semibold); font-size: var(--text-lg);">
+                  2.45 BTC (≈ €73,350.00)
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Recipient Address</label>
+                <input type="text" placeholder="Enter destination Bitcoin address" required>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                  Or select from <a href="security.html" class="text-link">whitelisted addresses</a>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Amount (BTC)</label>
+                <input type="number" placeholder="0.00" step="0.00000001" required>
+                <div style="display: flex; gap: var(--space-2); margin-top: var(--space-2);">
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='0.6125'">25%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='1.225'">50%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='1.8375'">75%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='2.45'">MAX</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Network Fee</label>
+                <select>
+                  <option>Fast (≈10 min) - 0.0001 BTC</option>
+                  <option selected>Standard (≈30 min) - 0.00005 BTC</option>
+                  <option>Economy (≈60 min) - 0.00003 BTC</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>2FA Code (Optional)</label>
+                <input type="text" placeholder="Enter 6-digit code">
+              </div>
+
+              <div class="alert alert-warning mb-6">
+                <strong>Security Notice:</strong> Withdrawals above €10,000 require additional approval and may take up to 24 hours.
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Withdrawal Request</button>
+            </form>
+          </div>
+
+          <!-- Withdrawal Information -->
+          <div>
+            <div class="card mb-6">
+              <div class="card-header">
+                <h2 class="card-title">Important Information</h2>
+              </div>
+
+              <ul style="list-style: disc; padding-left: var(--space-6); color: var(--text-secondary); line-height: 1.8;">
+                <li><strong>Minimum withdrawal:</strong> 0.001 BTC</li>
+                <li><strong>Processing time:</strong> 1-3 hours</li>
+                <li><strong>Daily limit:</strong> 10 BTC</li>
+                <li><strong>Security:</strong> All withdrawals require email confirmation</li>
+                <li><strong>Whitelisting:</strong> Add trusted addresses for faster processing</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Recent Withdrawals</h2>
+              </div>
+
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                  <span class="font-semibold">0.5 BTC</span>
+                  <span class="badge badge-success">Completed</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qxy2...jhx0wlh</div>
+                <div style="font-size: var(--text-xs); color: var(--text-tertiary); margin-top: var(--space-1);">3 days ago</div>
+              </div>
+
+              <div style="padding: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                  <span class="font-semibold">1.2 BTC</span>
+                  <span class="badge badge-success">Completed</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qab3...mno5pqr</div>
+                <div style="font-size: var(--text-xs); color: var(--text-tertiary); margin-top: var(--space-1);">1 week ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

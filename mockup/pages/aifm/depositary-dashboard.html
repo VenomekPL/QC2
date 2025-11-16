@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Depositary - QCrypto Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="../client/dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="../client/wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="../client/transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="../client/deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="../client/withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="../client/staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search transactions...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">6</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Depositary</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">Depositary</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Custody Overview</h1>
+              <p class="page-subtitle">Asset custody verification and regulatory oversight</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-4 mb-6">
+          <div class="card">
+            <div class="stat-card-label">Assets Under Custody</div>
+            <div class="stat-card-value">€285.4M</div>
+            <div class="stat-card-secondary">Across all funds</div>
+          </div>
+
+          <div class="card">
+            <div class="stat-card-label">Pending Authorizations</div>
+            <div class="stat-card-value">12</div>
+            <div class="stat-card-change">
+              <span>⏱️</span>
+              <span>Requires review</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="stat-card-label">Reconciliation Status</div>
+            <div class="stat-card-value">100%</div>
+            <div class="stat-card-change positive">
+              <span>✓</span>
+              <span>All matched</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="stat-card-label">Compliance Alerts</div>
+            <div class="stat-card-value">0</div>
+            <div class="stat-card-change positive">
+              <span>✓</span>
+              <span>All clear</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-2 mb-6">
+          <div class="card">
+            <h2 class="card-title">Pending Transaction Authorizations</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>TXN-2025-5678</code></td>
+                  <td>Withdrawal</td>
+                  <td>5.2 BTC</td>
+                  <td><button class="btn btn-sm btn-primary">Authorize</button></td>
+                </tr>
+                <tr>
+                  <td><code>TXN-2025-5679</code></td>
+                  <td>Transfer</td>
+                  <td>120 ETH</td>
+                  <td><button class="btn btn-sm btn-primary">Authorize</button></td>
+                </tr>
+                <tr>
+                  <td><code>TXN-2025-5680</code></td>
+                  <td>Withdrawal</td>
+                  <td>3.8 BTC</td>
+                  <td><button class="btn btn-sm btn-primary">Authorize</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title">Assets Under Custody by Fund</h2>
+            <div style="padding: var(--space-4);">
+              <div style="display: flex; justify-content: space-between; padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                <div>
+                  <div class="font-semibold">Bitcoin Growth Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">BGF-2024</div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="font-semibold">€82.5M</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">28.9%</div>
+                </div>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                <div>
+                  <div class="font-semibold">Ethereum Staking Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">ESF-2024</div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="font-semibold">€65.2M</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">22.8%</div>
+                </div>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div>
+                  <div class="font-semibold">Balanced Crypto Fund</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">BCF-2024</div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="font-semibold">€48.3M</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">16.9%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <strong>Depositary Dashboard</strong><br>
+          Verify asset custody, authorize transactions, perform reconciliations, and provide regulatory oversight. Read-only access to fund data with transaction authorization capabilities.
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

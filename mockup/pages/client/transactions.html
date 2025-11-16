@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search transactions, addresses...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Transactions</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Transaction History</h1>
+              <p class="page-subtitle">View all your crypto transactions</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-secondary">Export CSV</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-6">
+          <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap;">
+            <div>
+              <select style="padding: var(--space-2) var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-md);">
+                <option>All Types</option>
+                <option>Deposits</option>
+                <option>Withdrawals</option>
+                <option>Transfers</option>
+                <option>Staking</option>
+              </select>
+            </div>
+            <div>
+              <select style="padding: var(--space-2) var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-md);">
+                <option>All Assets</option>
+                <option>Bitcoin</option>
+                <option>Ethereum</option>
+              </select>
+            </div>
+            <div>
+              <select style="padding: var(--space-2) var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-md);">
+                <option>Last 30 days</option>
+                <option>Last 7 days</option>
+                <option>Last 90 days</option>
+                <option>All time</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <div class="card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Type</th>
+                <th>Asset</th>
+                <th>Amount</th>
+                <th>Value (EUR)</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div>Nov 13, 2025</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">14:32:18</div>
+                </td>
+                <td>
+                  <span style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span>⬇️</span>
+                    <span>Deposit</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="font-semibold">Bitcoin</span>
+                </td>
+                <td class="font-semibold">+0.5 BTC</td>
+                <td>€14,975.00</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Nov 13, 2025</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">09:15:42</div>
+                </td>
+                <td>
+                  <span style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span>⚡</span>
+                    <span>Staking Reward</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="font-semibold">Ethereum</span>
+                </td>
+                <td class="font-semibold">+0.0023 ETH</td>
+                <td>€6.46</td>
+                <td><span class="badge badge-info">Received</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Nov 12, 2025</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">16:45:33</div>
+                </td>
+                <td>
+                  <span style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span>⬆️</span>
+                    <span>Withdrawal</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="font-semibold">Ethereum</span>
+                </td>
+                <td class="font-semibold">-2.5 ETH</td>
+                <td>€7,017.50</td>
+                <td><span class="badge badge-warning">Pending</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Nov 10, 2025</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">11:22:15</div>
+                </td>
+                <td>
+                  <span style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span>⬇️</span>
+                    <span>Deposit</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="font-semibold">Ethereum</span>
+                </td>
+                <td class="font-semibold">+5.0 ETH</td>
+                <td>€14,035.00</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Nov 8, 2025</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">13:08:47</div>
+                </td>
+                <td>
+                  <span style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span>⬆️</span>
+                    <span>Withdrawal</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="font-semibold">Bitcoin</span>
+                </td>
+                <td class="font-semibold">-0.3 BTC</td>
+                <td>€8,985.00</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>Nov 5, 2025</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">10:55:23</div>
+                </td>
+                <td>
+                  <span style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span>⚡</span>
+                    <span>Staking Reward</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="font-semibold">Ethereum</span>
+                </td>
+                <td class="font-semibold">+0.0019 ETH</td>
+                <td>€5.33</td>
+                <td><span class="badge badge-info">Received</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-6); border-top: 1px solid var(--border-light);">
+            <div style="color: var(--text-secondary); font-size: var(--text-sm);">Showing 6 of 48 transactions</div>
+            <div style="display: flex; gap: var(--space-2);">
+              <button class="btn btn-sm btn-secondary" disabled>Previous</button>
+              <button class="btn btn-sm btn-secondary">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

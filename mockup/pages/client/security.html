@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Settings - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Security</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Security Settings</h1>
+              <p class="page-subtitle">Manage your account security and authentication</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Score -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h2 class="card-title" style="margin-bottom: var(--space-2);">Security Score</h2>
+              <p style="color: var(--text-secondary);">Your account security is strong</p>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 48px; font-weight: 700; color: var(--success);">85%</div>
+              <div style="color: var(--text-secondary); margin-top: var(--space-2);">Strong</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <!-- Two-Factor Authentication -->
+          <div class="card">
+            <div style="display: flex; justify-content: between; align-items: center; margin-bottom: var(--space-4);">
+              <div style="flex: 1;">
+                <h2 class="card-title" style="margin-bottom: var(--space-2);">Two-Factor Authentication</h2>
+                <p style="color: var(--text-secondary); font-size: var(--text-sm);">Add an extra layer of security to your account</p>
+              </div>
+              <span class="badge badge-success">Enabled</span>
+            </div>
+
+            <div style="padding: var(--space-4); background: var(--bg-tertiary); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+              <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <span style="font-size: 24px;">📱</span>
+                <div>
+                  <div class="font-semibold">Authenticator App</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Last used: 2 hours ago</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm">Reconfigure</button>
+            </div>
+
+            <div class="alert alert-info">
+              <strong>Backup codes:</strong> Make sure you've saved your backup recovery codes in a safe place.
+            </div>
+
+            <button class="btn btn-secondary btn-block" style="margin-top: var(--space-4);">View Backup Codes</button>
+          </div>
+
+          <!-- Password Management -->
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom: var(--space-4);">Password Management</h2>
+            
+            <form onsubmit="event.preventDefault(); showSuccessMessage('Password changed successfully');">
+              <div class="form-group">
+                <label class="form-label" for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="newPassword">New Password</label>
+                <input type="password" id="newPassword" class="form-input" minlength="8" required>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                  Must be at least 8 characters with uppercase, lowercase, and numbers
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                <input type="password" id="confirmPassword" class="form-input" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Change Password</button>
+            </form>
+
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-light);">
+              <div style="color: var(--text-secondary); font-size: var(--text-sm);">Last password change: Oct 15, 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Withdrawal Whitelist -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+            <div>
+              <h2 class="card-title" style="margin-bottom: var(--space-2);">Withdrawal Address Whitelist</h2>
+              <p style="color: var(--text-secondary); font-size: var(--text-sm);">Only allow withdrawals to pre-approved addresses</p>
+            </div>
+            <button class="btn btn-primary">Add Address</button>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Label</th>
+                <th>Address</th>
+                <th>Asset</th>
+                <th>Added</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-semibold">Personal Wallet</td>
+                <td>
+                  <code style="font-size: var(--text-sm);">bc1qxy2...kfjhx0wlh</code>
+                </td>
+                <td>Bitcoin</td>
+                <td>Nov 1, 2025</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">Edit</button>
+                  <button class="btn btn-sm btn-secondary">Remove</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Hardware Wallet</td>
+                <td>
+                  <code style="font-size: var(--text-sm);">0x742d3...89f4aB6</code>
+                </td>
+                <td>Ethereum</td>
+                <td>Oct 15, 2025</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">Edit</button>
+                  <button class="btn btn-sm btn-secondary">Remove</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-semibold">Exchange Wallet</td>
+                <td>
+                  <code style="font-size: var(--text-sm);">3FZbgi2...wpQGWC</code>
+                </td>
+                <td>Bitcoin</td>
+                <td>Sep 22, 2025</td>
+                <td><span class="badge badge-warning">Pending</span></td>
+                <td>
+                  <button class="btn btn-sm btn-secondary">Edit</button>
+                  <button class="btn btn-sm btn-secondary">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Active Sessions -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+            <div>
+              <h2 class="card-title" style="margin-bottom: var(--space-2);">Active Sessions</h2>
+              <p style="color: var(--text-secondary); font-size: var(--text-sm);">Manage devices and sessions with access to your account</p>
+            </div>
+            <button class="btn btn-secondary">Sign Out All</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="padding: var(--space-4); background: var(--bg-tertiary); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 32px;">💻</span>
+                <div>
+                  <div class="font-semibold">Windows Desktop - Chrome</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Warsaw, Poland • Active now</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">IP: 83.12.45.178</div>
+                </div>
+              </div>
+              <span class="badge badge-success">Current Session</span>
+            </div>
+
+            <div style="padding: var(--space-4); background: var(--bg-tertiary); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 32px;">📱</span>
+                <div>
+                  <div class="font-semibold">iPhone 15 Pro - Safari</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Warsaw, Poland • 3 hours ago</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">IP: 83.12.45.179</div>
+                </div>
+              </div>
+              <button class="btn btn-sm btn-secondary">Sign Out</button>
+            </div>
+
+            <div style="padding: var(--space-4); background: var(--bg-tertiary); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 32px;">💻</span>
+                <div>
+                  <div class="font-semibold">MacBook Pro - Safari</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Krakow, Poland • 2 days ago</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">IP: 195.149.88.42</div>
+                </div>
+              </div>
+              <button class="btn btn-sm btn-secondary">Sign Out</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="card">
+          <h2 class="card-title" style="margin-bottom: var(--space-4);">Recent Security Activity</h2>
+          
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3); border-bottom: 1px solid var(--border-light);">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 20px;">✅</span>
+                <div>
+                  <div class="font-semibold">Successful Login</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Windows Desktop - Chrome</div>
+                </div>
+              </div>
+              <div style="text-align: right; color: var(--text-secondary); font-size: var(--text-sm);">
+                <div>Today, 14:32</div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3); border-bottom: 1px solid var(--border-light);">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 20px;">🔑</span>
+                <div>
+                  <div class="font-semibold">Password Changed</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Security settings updated</div>
+                </div>
+              </div>
+              <div style="text-align: right; color: var(--text-secondary); font-size: var(--text-sm);">
+                <div>Oct 15, 2025</div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3); border-bottom: 1px solid var(--border-light);">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 20px;">📋</span>
+                <div>
+                  <div class="font-semibold">Withdrawal Address Added</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">New BTC address whitelisted</div>
+                </div>
+              </div>
+              <div style="text-align: right; color: var(--text-secondary); font-size: var(--text-sm);">
+                <div>Nov 1, 2025</div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-3);">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="font-size: 20px;">🔐</span>
+                <div>
+                  <div class="font-semibold">2FA Enabled</div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">Authenticator app configured</div>
+                </div>
+              </div>
+              <div style="text-align: right; color: var(--text-secondary); font-size: var(--text-sm);">
+                <div>Sep 10, 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

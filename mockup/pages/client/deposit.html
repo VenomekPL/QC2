@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search transactions, addresses...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Deposit</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Deposit Crypto</h1>
+              <p class="page-subtitle">Transfer crypto from an external wallet</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asset Selection -->
+        <div class="card mb-8">
+          <div class="card-header">
+            <h2 class="card-title">Select Asset</h2>
+          </div>
+          
+          <div class="grid-2">
+            <div style="padding: var(--space-6); border: 2px solid var(--color-primary); border-radius: var(--radius-lg); cursor: pointer; background-color: var(--color-primary-pale);">
+              <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4);">
+                <div style="width: 48px; height: 48px; background-color: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">₿</div>
+                <div>
+                  <h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold);">Bitcoin</h3>
+                  <div style="color: var(--text-secondary);">BTC</div>
+                </div>
+              </div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">Current Balance: 2.45 BTC</div>
+            </div>
+
+            <div style="padding: var(--space-6); border: 2px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer;" onclick="this.previousElementSibling.style.borderColor='var(--border-light)'; this.previousElementSibling.style.backgroundColor='white'; this.style.borderColor='var(--color-primary)'; this.style.backgroundColor='var(--color-primary-pale)';">
+              <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4);">
+                <div style="width: 48px; height: 48px; background-color: #627EEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Ξ</div>
+                <div>
+                  <h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold);">Ethereum</h3>
+                  <div style="color: var(--text-secondary);">ETH</div>
+                </div>
+              </div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">Current Balance: 18.7 ETH</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deposit Instructions -->
+        <div class="card mb-8">
+          <div class="card-header">
+            <h2 class="card-title">Your Deposit Address</h2>
+          </div>
+
+          <div class="alert alert-info mb-6">
+            Only send <strong>Bitcoin (BTC)</strong> to this address. Sending any other asset will result in permanent loss.
+          </div>
+
+          <div style="margin-bottom: var(--space-6);">
+            <label style="display: block; margin-bottom: var(--space-3); font-weight: var(--font-semibold);">Bitcoin Address</label>
+            <div style="display: flex; gap: var(--space-3);">
+              <input type="text" value="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" readonly style="flex: 1; font-family: monospace; background-color: var(--bg-secondary);">
+              <button class="btn btn-secondary" onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)">Copy</button>
+            </div>
+          </div>
+
+          <div style="text-align: center; padding: var(--space-6); background-color: var(--bg-secondary); border-radius: var(--radius-lg);">
+            <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-3);">QR Code</div>
+            <div style="width: 200px; height: 200px; background-color: white; margin: 0 auto; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+              [QR Code Image]
+            </div>
+          </div>
+        </div>
+
+        <!-- Deposit Information -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Important Information</h2>
+          </div>
+
+          <ul style="list-style: disc; padding-left: var(--space-6); color: var(--text-secondary); line-height: 1.8;">
+            <li>Minimum deposit: 0.001 BTC</li>
+            <li>Network confirmations required: 3 confirmations</li>
+            <li>Estimated arrival time: 30-60 minutes after confirmations</li>
+            <li>Network fee: Paid by sender</li>
+            <li>Your deposit will be credited automatically after blockchain confirmation</li>
+          </ul>
+
+          <div class="alert alert-warning mt-6">
+            <strong>Note:</strong> This address is unique to you. Do not share it publicly as it is linked to your account.
+          </div>
+
+          <div style="text-align: center; margin-top: var(--space-6);">
+            <button class="btn btn-primary" onclick="handleDeposit(event)">I've Sent the Funds</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

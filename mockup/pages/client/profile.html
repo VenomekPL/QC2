@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Settings - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Profile</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Profile Settings</h1>
+              <p class="page-subtitle">Manage your personal information and preferences</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <!-- Main Content Column -->
+          <div style="grid-column: span 2;">
+            <!-- Personal Information -->
+            <div class="card mb-6">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Personal Information</h2>
+              
+              <form onsubmit="event.preventDefault(); showSuccessMessage('Profile updated successfully');">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="form-group">
+                    <label class="form-label" for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-input" value="John" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-input" value="Doe" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="email">Email Address</label>
+                  <input type="email" id="email" class="form-input" value="john.doe@example.com" required>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                    <span class="badge badge-success" style="display: inline-block;">Verified</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone Number</label>
+                  <input type="tel" id="phone" class="form-input" value="+48 123 456 789" required>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                    <span class="badge badge-success" style="display: inline-block;">Verified</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="dateOfBirth">Date of Birth</label>
+                  <input type="date" id="dateOfBirth" class="form-input" value="1990-05-15" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="nationality">Nationality</label>
+                  <select id="nationality" class="form-input">
+                    <option>Poland</option>
+                    <option>Germany</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- Address Information -->
+            <div class="card mb-6">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Address Information</h2>
+              
+              <form onsubmit="event.preventDefault(); showSuccessMessage('Address updated successfully');">
+                <div class="form-group">
+                  <label class="form-label" for="address">Street Address</label>
+                  <input type="text" id="address" class="form-input" value="ul. Marszałkowska 123" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="form-group">
+                    <label class="form-label" for="city">City</label>
+                    <input type="text" id="city" class="form-input" value="Warsaw" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="postalCode">Postal Code</label>
+                    <input type="text" id="postalCode" class="form-input" value="00-001" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="country">Country</label>
+                  <select id="country" class="form-input">
+                    <option>Poland</option>
+                    <option>Germany</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Address</button>
+              </form>
+            </div>
+
+            <!-- Notification Preferences -->
+            <div class="card">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Notification Preferences</h2>
+              
+              <form onsubmit="event.preventDefault(); showSuccessMessage('Preferences updated successfully');">
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                  <div>
+                    <label class="checkbox-label">
+                      <input type="checkbox" checked>
+                      <span>Email notifications for deposits and withdrawals</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="checkbox-label">
+                      <input type="checkbox" checked>
+                      <span>Email notifications for staking rewards</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="checkbox-label">
+                      <input type="checkbox">
+                      <span>Marketing emails and promotional offers</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="checkbox-label">
+                      <input type="checkbox" checked>
+                      <span>SMS notifications for security alerts</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="checkbox-label">
+                      <input type="checkbox" checked>
+                      <span>Weekly portfolio summary reports</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="checkbox-label">
+                      <input type="checkbox">
+                      <span>Price alerts and market updates</span>
+                    </label>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: var(--space-6);">Save Preferences</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Sidebar Column -->
+          <div>
+            <!-- Profile Picture -->
+            <div class="card mb-6">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Profile Picture</h2>
+              
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="user-avatar" style="width: 120px; height: 120px; font-size: 48px; margin-bottom: var(--space-4);">
+                  JD
+                </div>
+                <button class="btn btn-secondary btn-sm" style="margin-bottom: var(--space-2);">Upload Photo</button>
+                <button class="btn btn-secondary btn-sm">Remove</button>
+              </div>
+            </div>
+
+            <!-- Verification Status -->
+            <div class="card mb-6">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Verification Status</h2>
+              
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--text-secondary);">Email</span>
+                  <span class="badge badge-success">Verified</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--text-secondary);">Phone</span>
+                  <span class="badge badge-success">Verified</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--text-secondary);">Identity (KYC)</span>
+                  <span class="badge badge-success">Verified</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--text-secondary);">Address (POA)</span>
+                  <span class="badge badge-success">Verified</span>
+                </div>
+              </div>
+
+              <div class="alert alert-success" style="margin-top: var(--space-4);">
+                <strong>Fully Verified</strong><br>
+                Your account has been fully verified. You have access to all features.
+              </div>
+            </div>
+
+            <!-- Account Limits -->
+            <div class="card mb-6">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Account Limits</h2>
+              
+              <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span style="color: var(--text-secondary); font-size: var(--text-sm);">Daily Withdrawal</span>
+                    <span class="font-semibold">€50,000</span>
+                  </div>
+                  <div style="height: 8px; background: var(--bg-tertiary); border-radius: var(--radius-full); overflow: hidden;">
+                    <div style="height: 100%; width: 35%; background: var(--primary);"></div>
+                  </div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary); margin-top: var(--space-1);">
+                    €17,500 used today
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span style="color: var(--text-secondary); font-size: var(--text-sm);">Monthly Deposit</span>
+                    <span class="font-semibold">€250,000</span>
+                  </div>
+                  <div style="height: 8px; background: var(--bg-tertiary); border-radius: var(--radius-full); overflow: hidden;">
+                    <div style="height: 100%; width: 52%; background: var(--success);"></div>
+                  </div>
+                  <div style="font-size: var(--text-sm); color: var(--text-tertiary); margin-top: var(--space-1);">
+                    €130,000 used this month
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-secondary btn-block" style="margin-top: var(--space-4);">Request Limit Increase</button>
+            </div>
+
+            <!-- Account Actions -->
+            <div class="card">
+              <h2 class="card-title" style="margin-bottom: var(--space-4);">Account Actions</h2>
+              
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <button class="btn btn-secondary btn-block">Download Account Data</button>
+                <button class="btn btn-secondary btn-block">Export Tax Report</button>
+                <button class="btn btn-secondary btn-block" style="color: var(--danger);">Close Account</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

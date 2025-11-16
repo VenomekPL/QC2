@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staking - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    .staking-card-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+    .staking-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .stake-panel {
+      display: none;
+      margin-top: var(--space-6);
+      padding: var(--space-6);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--border-light);
+    }
+    .stake-panel.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Staking</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Crypto Staking</h1>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ethereum Staking -->
+        <div class="card mb-6">
+          <div class="staking-card-header">
+            <div class="staking-icon" style="background-color: #627EEA;">Ξ</div>
+            <div>
+              <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Ethereum</h2>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">ETH • Proof of Stake</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 mb-6">
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Currently Staked</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">4.8 ETH</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">≈ €13,478.40</div>
+            </div>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Est. Annual Return</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--success);">4.2%</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">~0.202 ETH / year</div>
+            </div>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Rewards Earned</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">0.185 ETH</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">≈ €519.36</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-3);">
+            <button class="btn btn-primary" onclick="toggleStakePanel('eth')">⚡ Stake More ETH</button>
+            <button class="btn btn-secondary" onclick="initiateUnstake('eth')">⬇️ Unstake ETH</button>
+          </div>
+
+          <!-- Collapsible Stake Panel -->
+          <div id="eth-stake-panel" class="stake-panel">
+            <h3 style="font-weight: var(--font-semibold); margin-bottom: var(--space-4);">Stake Ethereum</h3>
+            <div class="alert alert-info mb-4">
+              <strong>Native ETH Staking:</strong> Earn rewards by participating in Ethereum's Proof-of-Stake consensus. Minimum 0.01 ETH for pooled staking. Standard validators require 32 ETH. Rewards: ~4% APY. Unstaking period: 1-5 days depending on network queue.
+            </div>
+            <form onsubmit="handleStaking(event, 'eth')">
+              <div class="form-group">
+                <label>Available Balance: <strong>18.7 ETH</strong> (Main Wallet)</label>
+              </div>
+              <div class="form-group">
+                <label for="eth-amount">Amount to Stake</label>
+                <input type="number" id="eth-amount" class="form-input" placeholder="0.00" step="0.01" min="0.01" max="18.7" required>
+              </div>
+              <div class="form-group">
+                <div style="display: flex; gap: var(--space-2);">
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('eth-amount').value=(18.7*0.25).toFixed(2)">25%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('eth-amount').value=(18.7*0.5).toFixed(2)">50%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('eth-amount').value=(18.7*0.75).toFixed(2)">75%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('eth-amount').value='18.70'">MAX</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" required>
+                  <span>I understand staked ETH is locked for 7 days minimum</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary">Confirm Staking</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Avalanche Staking -->
+        <div class="card mb-6">
+          <div class="staking-card-header">
+            <div class="staking-icon" style="background-color: #E84142;">A</div>
+            <div>
+              <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Avalanche</h2>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">AVAX • Proof of Stake</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 mb-6">
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Currently Staked</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">250 AVAX</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">≈ €10,625.00</div>
+            </div>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Est. Annual Return</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--success);">8.5%</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">~21.25 AVAX / year</div>
+            </div>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Rewards Earned</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">12.8 AVAX</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">≈ €544.00</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-3);">
+            <button class="btn btn-primary" onclick="toggleStakePanel('avax')">⚡ Stake More AVAX</button>
+            <button class="btn btn-secondary" onclick="initiateUnstake('avax')">⬇️ Unstake AVAX</button>
+          </div>
+
+          <!-- Collapsible Stake Panel -->
+          <div id="avax-stake-panel" class="stake-panel">
+            <h3 style="font-weight: var(--font-semibold); margin-bottom: var(--space-4);">Stake Avalanche</h3>
+            <div class="alert alert-info mb-4">
+              <strong>Delegated AVAX Staking:</strong> Delegate your AVAX to validators on the P-Chain. Minimum 25 AVAX. Choose staking period: 2 weeks to 1 year. Longer periods earn higher rewards (~8-10% APY). Unstaking returns funds after the chosen lock period ends.
+            </div>
+            <form onsubmit="handleStaking(event, 'avax')">
+              <div class="form-group">
+                <label>Available Balance: <strong>850 AVAX</strong> (Main Wallet)</label>
+              </div>
+              <div class="form-group">
+                <label for="avax-amount">Amount to Stake</label>
+                <input type="number" id="avax-amount" class="form-input" placeholder="0.00" step="1" min="25" max="850" required>
+              </div>
+              <div class="form-group">
+                <label for="avax-duration">Staking Duration</label>
+                <select id="avax-duration" class="form-input" required>
+                  <option value="">Select duration</option>
+                  <option value="14">2 Weeks (7.5% APY)</option>
+                  <option value="30">1 Month (8.0% APY)</option>
+                  <option value="90">3 Months (8.5% APY)</option>
+                  <option value="180">6 Months (9.0% APY)</option>
+                  <option value="365">1 Year (10% APY)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div style="display: flex; gap: var(--space-2);">
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('avax-amount').value=Math.floor(850*0.25)">25%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('avax-amount').value=Math.floor(850*0.5)">50%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('avax-amount').value=Math.floor(850*0.75)">75%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('avax-amount').value='850'">MAX</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" required>
+                  <span>I understand staked AVAX is locked for the selected duration</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary">Confirm Staking</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Polygon Staking -->
+        <div class="card mb-6">
+          <div class="staking-card-header">
+            <div class="staking-icon" style="background-color: #8247E5;">P</div>
+            <div>
+              <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Polygon</h2>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary);">MATIC • Proof of Stake</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 mb-6">
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Currently Staked</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">5,000 MATIC</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">≈ €4,400.00</div>
+            </div>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Est. Annual Return</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--success);">5.8%</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">~290 MATIC / year</div>
+            </div>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">Rewards Earned</div>
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">187.5 MATIC</div>
+              <div style="font-size: var(--text-sm); color: var(--text-tertiary);">≈ €165.00</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-3);">
+            <button class="btn btn-primary" onclick="toggleStakePanel('matic')">⚡ Stake More MATIC</button>
+            <button class="btn btn-secondary" onclick="initiateUnstake('matic')">⬇️ Unstake MATIC</button>
+          </div>
+
+          <!-- Collapsible Stake Panel -->
+          <div id="matic-stake-panel" class="stake-panel">
+            <h3 style="font-weight: var(--font-semibold); margin-bottom: var(--space-4);">Stake Polygon</h3>
+            <div class="alert alert-info mb-4">
+              <strong>Delegated MATIC Staking:</strong> Delegate your MATIC tokens to validators on Polygon PoS network. Minimum 1 MATIC. Earn ~5-6% APY. Checkpoint-based rewards (every ~30 minutes). Unstaking has an 80-checkpoint unbonding period (~3-4 days).
+            </div>
+            <form onsubmit="handleStaking(event, 'matic')">
+              <div class="form-group">
+                <label>Available Balance: <strong>13,625 MATIC</strong> (Main Wallet)</label>
+              </div>
+              <div class="form-group">
+                <label for="matic-amount">Amount to Stake</label>
+                <input type="number" id="matic-amount" class="form-input" placeholder="0.00" step="1" min="1" max="13625" required>
+              </div>
+              <div class="form-group">
+                <div style="display: flex; gap: var(--space-2);">
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('matic-amount').value=Math.floor(13625*0.25)">25%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('matic-amount').value=Math.floor(13625*0.5)">50%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('matic-amount').value=Math.floor(13625*0.75)">75%</button>
+                  <button type="button" class="btn btn-sm btn-secondary" style="flex: 1;" onclick="document.getElementById('matic-amount').value='13625'">MAX</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" required>
+                  <span>I understand unstaking MATIC requires 80-checkpoint unbonding period (~3-4 days)</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary">Confirm Staking</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Unstaking Warning Info -->
+        <div class="alert alert-warning">
+          <strong>⚠️ Important Unstaking Information</strong><br>
+          Each cryptocurrency has different unstaking requirements:
+          <ul style="margin-top: var(--space-2); padding-left: var(--space-5);">
+            <li><strong>Ethereum (ETH):</strong> 1-5 days depending on validator exit queue. No rewards during unstaking.</li>
+            <li><strong>Avalanche (AVAX):</strong> Immediate after lock period expires. Rewards stop at lock period end.</li>
+            <li><strong>Polygon (MATIC):</strong> 80 checkpoints (~3-4 days) unbonding period. No rewards during unbonding.</li>
+            <li>Unstaking cannot be cancelled once initiated</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+  <script>
+    function toggleStakePanel(token) {
+      const panel = document.getElementById(`${token}-stake-panel`);
+      // Close all other panels
+      document.querySelectorAll('.stake-panel').forEach(p => {
+        if (p.id !== `${token}-stake-panel`) {
+          p.classList.remove('active');
+        }
+      });
+      // Toggle current panel
+      panel.classList.toggle('active');
+    }
+
+    function handleStaking(event, token) {
+      event.preventDefault();
+      const tokenUpper = token.toUpperCase();
+      alert(`Staking ${tokenUpper} initiated! This is a mockup - no real transaction will occur.`);
+      // In production, this would call the staking API
+      return false;
+    }
+
+    function initiateUnstake(token) {
+      const tokenNames = {
+        'eth': 'Ethereum (ETH)',
+        'avax': 'Avalanche (AVAX)',
+        'matic': 'Polygon (MATIC)'
+      };
+      
+      const confirmed = confirm(`⚠️ UNSTAKING WARNING\n\nYou are about to unstake ${tokenNames[token]}.\n\nUnstaking will take 72 hours (3 days) to complete.\n\nDuring this time:\n• Your staked assets will NOT earn rewards\n• Assets remain locked until unstaking completes\n• Assets will be returned to your Main Wallet\n• This action CANNOT be cancelled\n\nDo you want to proceed with unstaking?`);
+      
+      if (confirmed) {
+        alert(`Unstaking request submitted for ${tokenNames[token]}.\n\nYour funds will be available in your Main Wallet in 72 hours.`);
+        // In production, this would call the unstaking API
+      }
+    }
+  </script>
+</body>
+</html>

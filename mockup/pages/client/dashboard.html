@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation (Loaded Dynamically) -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="breadcrumbs">
+            <div class="breadcrumb-item">
+              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">Dashboard</div>
+          </div>
+
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Dashboard</h1>
+            </div>
+            <div class="page-actions">
+              <a href="deposit.html" class="btn btn-secondary">Deposit</a>
+              <a href="withdraw.html" class="btn btn-primary">Withdraw</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid-4 mb-8">
+          <div class="stat-card">
+            <div class="stat-card-label">Total Balance</div>
+            <div class="stat-card-value">€187,456.75</div>
+            <div class="stat-card-change positive">
+              <span>▲</span>
+              <span>+2.5% from last month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-label">Fiat Balance</div>
+            <div class="stat-card-value">€0.00</div>
+            <div class="stat-card-secondary">EUR</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-label">Crypto Assets</div>
+            <div class="stat-card-value">€186,966.75</div>
+            <div class="stat-card-change positive">
+              <span>▲</span>
+              <span>+3.1% (24h)</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-label">Locked in Staking</div>
+            <div class="stat-card-value">€13,478.40</div>
+            <div class="stat-card-secondary">4.8 ETH Staking</div>
+          </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid-2 mb-8">
+          <!-- Portfolio Distribution -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Portfolio Distribution</h2>
+            </div>
+            <div style="height: 300px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
+              [Chart: Pie chart showing asset allocation]
+            </div>
+            <div style="margin-top: var(--space-4);">
+              <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <span style="width: 12px; height: 12px; background-color: #0066FF; border-radius: 2px;"></span>
+                  <span>Bitcoin (BTC)</span>
+                </div>
+                <span class="font-semibold">58.3%</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <span style="width: 12px; height: 12px; background-color: #00C853; border-radius: 2px;"></span>
+                  <span>Ethereum (ETH)</span>
+                </div>
+                <span class="font-semibold">41.7%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Recent Activity</h2>
+            </div>
+            <div>
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-2);">
+                  <div>
+                    <div class="font-semibold">Deposit Confirmed</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">Bitcoin</div>
+                  </div>
+                  <span class="badge badge-success">Completed</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-tertiary);">2 hours ago</div>
+              </div>
+
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-2);">
+                  <div>
+                    <div class="font-semibold">Staking Reward</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">Ethereum</div>
+                  </div>
+                  <span class="badge badge-info">Received</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-tertiary);">5 hours ago</div>
+              </div>
+
+              <div style="padding: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-2);">
+                  <div>
+                    <div class="font-semibold">Withdrawal Pending</div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary);">Ethereum</div>
+                  </div>
+                  <span class="badge badge-warning">Pending</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-tertiary);">1 day ago</div>
+              </div>
+            </div>
+            <div style="text-align: center; margin-top: var(--space-4);">
+              <a href="transactions.html" class="text-link">View all transactions →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Quick Actions</h2>
+          </div>
+          <div class="grid-4">
+            <a href="deposit.html" class="quick-action-card">
+              <div class="quick-action-icon" style="background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%);">⬇️</div>
+              <div class="quick-action-title">Deposit Crypto</div>
+              <div class="quick-action-desc">Add funds to wallet</div>
+            </a>
+
+            <a href="withdraw.html" class="quick-action-card">
+              <div class="quick-action-icon" style="background: linear-gradient(135deg, #00C853 0%, #00A644 100%);">⬆️</div>
+              <div class="quick-action-title">Withdraw Crypto</div>
+              <div class="quick-action-desc">Send to external wallet</div>
+            </a>
+
+            <a href="staking.html" class="quick-action-card">
+              <div class="quick-action-icon" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%);">⚡</div>
+              <div class="quick-action-title">Stake</div>
+              <div class="quick-action-desc">Earn rewards</div>
+            </a>
+
+            <a href="security.html" class="quick-action-card">
+              <div class="quick-action-icon" style="background: linear-gradient(135deg, #757575 0%, #616161 100%);">🔒</div>
+              <div class="quick-action-title">Security Settings</div>
+              <div class="quick-action-desc">Manage MFA & access</div>
+            </a>
+          </div>
+        </div>
+
+        <style>
+          .quick-action-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-6);
+            background-color: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          .quick-action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-primary);
+          }
+
+          .quick-action-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: var(--space-4);
+            box-shadow: var(--shadow-md);
+          }
+
+          .quick-action-title {
+            font-size: var(--text-base);
+            font-weight: var(--font-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+            text-align: center;
+          }
+
+          .quick-action-desc {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            text-align: center;
+          }
+        </style>
+      </div>
+    </main>
+  </div>  <script src="../../assets/js/nav-active.js"></script>
+
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>
