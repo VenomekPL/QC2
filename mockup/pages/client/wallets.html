@@ -32,6 +32,10 @@
         <span class="sidebar-nav-text">Transactions</span>
         <span class="sidebar-nav-badge">3</span>
       </a>
+      <a href="address-book.html" class="sidebar-nav-item" data-page="address-book">
+        <span class="sidebar-nav-icon">📖</span>
+        <span class="sidebar-nav-text">Address Book</span>
+      </a>
       <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
         <span class="sidebar-nav-icon">⬇️</span>
         <span class="sidebar-nav-text">Deposit</span>
@@ -126,62 +130,19 @@
 
       <!-- Page Content -->
       <div class="content-container">
-        <!-- Page Header -->
-        <div class="page-header">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item">
-              <a href="dashboard.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">Wallets</div>
-          </div>
-
-          <div class="page-header-top">
-            <div>
-              <h1 class="page-title">My Wallets</h1>
-            </div>
-          </div>
-        </div>
-
         <!-- Total Balance Card -->
         <div class="card mb-6">
-          <div style="text-align: center; padding: var(--space-6) var(--space-6) var(--space-4);">
-            <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2);">TOTAL PORTFOLIO VALUE</div>
-            <div style="font-size: var(--text-4xl); font-weight: var(--font-bold); margin-bottom: var(--space-2);">€187,456.75</div>
-            <div class="stat-card-change positive" style="justify-content: center;">
-              <span>▲</span>
-              <span>€4,320.15 (+2.36%) in the last 30 days</span>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-2); text-transform: uppercase; letter-spacing: 1px; font-weight: var(--font-bold);">Total Portfolio Value</div>
+              <div style="font-size: var(--text-4xl); font-weight: var(--font-bold); color: var(--text-primary);">€187,456.75</div>
             </div>
-          </div>
-          <!-- 30 Day Chart -->
-          <div style="padding: 0 var(--space-6) var(--space-6);">
-            <svg width="100%" height="120" style="border-radius: var(--radius-md);">
-              <!-- Gradient background -->
-              <defs>
-                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:rgba(0, 102, 255, 0.2);stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:rgba(0, 102, 255, 0);stop-opacity:1" />
-                </linearGradient>
-              </defs>
-              
-              <!-- Area fill under line -->
-              <path d="M 0 66 L 10 62 L 20 65 L 30 57 L 40 60 L 50 54 L 60 58 L 70 52 L 80 48 L 90 50 L 100 46 L 110 43 L 120 46 L 130 41 L 140 37 L 150 39 L 160 34 L 170 30 L 180 32 L 190 28 L 200 30 L 210 26 L 220 22 L 230 24 L 240 20 L 250 22 L 260 18 L 270 16 L 280 18 L 290 14 L 300 120 L 0 120 Z" 
-                    fill="url(#areaGradient)" />
-              
-              <!-- Line -->
-              <path d="M 0 66 L 10 62 L 20 65 L 30 57 L 40 60 L 50 54 L 60 58 L 70 52 L 80 48 L 90 50 L 100 46 L 110 43 L 120 46 L 130 41 L 140 37 L 150 39 L 160 34 L 170 30 L 180 32 L 190 28 L 200 30 L 210 26 L 220 22 L 230 24 L 240 20 L 250 22 L 260 18 L 270 16 L 280 18 L 290 14" 
-                    stroke="#0066FF" 
-                    stroke-width="3" 
-                    fill="none" 
-                    stroke-linecap="round"
-                    stroke-linejoin="round" />
-              
-              <!-- Data points -->
-              <circle cx="0" cy="66" r="4" fill="#0066FF" opacity="0.5" />
-              <circle cx="290" cy="14" r="5" fill="#0066FF" />
-            </svg>
-            <div style="display: flex; justify-content: space-between; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--text-tertiary);">
-              <span>30 days ago</span>
-              <span>Today</span>
+            <div class="text-right">
+              <div class="stat-card-change positive" style="font-size: var(--text-lg);">
+                <span>▲</span>
+                <span>+€4,320.15 (24h)</span>
+              </div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">+2.36% since yesterday</div>
             </div>
           </div>
         </div>
@@ -190,68 +151,69 @@
         <div class="card mb-6">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
             <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 56px; height: 56px; background-color: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold;">₿</div>
+              <div style="width: 56px; height: 56px; background-color: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold; box-shadow: 0 4px 10px rgba(247, 147, 26, 0.3);">₿</div>
               <div>
-                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Bitcoin</h2>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary);">BTC • €29,950 per coin</div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">Bitcoin</h2>
+                  <span class="badge badge-info">Native</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">BTC • €29,950 per coin</div>
               </div>
             </div>
             <div style="text-align: right;">
               <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">2.45 BTC</div>
               <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €73,377.50</div>
-              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-2);">
+              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-1);">
                 <span>▲</span>
                 <span>+4.2% (24h)</span>
               </div>
             </div>
           </div>
 
-          <!-- BTC Accounts -->
+          <!-- BTC Addresses -->
           <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
-              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Bitcoin Accounts</h3>
-              <button class="btn btn-sm btn-secondary" onclick="addAccount('btc')">+ Add Account</button>
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Bitcoin Addresses</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAddress('btc')">+ Add Address</button>
             </div>
 
-            <div id="btc-accounts">
-              <!-- Account 1 -->
-              <div class="account-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
-                  <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-                      <span class="badge badge-primary">Main</span>
-                      <span class="font-semibold">Main Wallet</span>
+            <div id="btc-addresses">
+              <!-- Address 0 -->
+              <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3);">
+                <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+                  <!-- Index -->
+                  <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#0</div>
+                  
+                  <!-- Address Info -->
+                  <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
-                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)">Copy</button>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                      <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)" title="Copy Address">📋</button>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
                     </div>
-                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">1.85 BTC <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €55,407.50</span></div>
                   </div>
+
+                  <!-- Balance -->
+                  <div style="text-align: right;">
+                    <div style="font-weight: var(--font-bold); color: var(--text-primary);">2.45 BTC</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €73,377.50</div>
+                  </div>
+
+                  <!-- Actions -->
                   <div style="display: flex; gap: var(--space-2);">
                     <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('btc', 'Main Wallet', 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh')">Deposit</button>
-                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('btc', 'Main Wallet', 1.85)">Withdraw</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('btc', 'Main Wallet', 2.45)">Withdraw</button>
                   </div>
                 </div>
-              </div>
-
-              <!-- Account 2 -->
-              <div class="account-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
-                  <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-                      <span class="font-semibold">Savings Account</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el</code>
-                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el', this)">Copy</button>
-                    </div>
-                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">0.60 BTC <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €17,970.00</span></div>
+                <!-- Hidden QR Code Area -->
+                <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                  <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" alt="QR Code">
                   </div>
-                  <div style="display: flex; gap: var(--space-2);">
-                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('btc', 'Savings Account', 'bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el')">Deposit</button>
-                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('btc', 'Savings Account', 0.60)">Withdraw</button>
-                  </div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit BTC</div>
                 </div>
               </div>
             </div>
@@ -262,70 +224,72 @@
         <div class="card mb-6">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
             <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 56px; height: 56px; background-color: #627EEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold;">Ξ</div>
+              <div style="width: 56px; height: 56px; background-color: #627EEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold; box-shadow: 0 4px 10px rgba(98, 126, 234, 0.3);">Ξ</div>
               <div>
-                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Ethereum</h2>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary);">ETH • €2,807 per coin</div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">Ethereum</h2>
+                  <span class="badge badge-info">Native</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">ETH • €2,807 per coin</div>
               </div>
             </div>
             <div style="text-align: right;">
-              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">23.5 ETH</div>
-              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €65,964.50</div>
-              <div class="stat-card-change negative" style="justify-content: flex-end; margin-top: var(--space-2);">
-                <span>▼</span>
-                <span>-1.3% (24h)</span>
+              <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">23.5 ETH</div>
+                <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €65,964.50</div>
+                <div class="stat-card-change negative" style="justify-content: flex-end; margin-top: var(--space-1);">
+                  <span>▼</span>
+                  <span>-1.3% (24h)</span>
+                </div>
+                <a href="staking.html" class="btn btn-xs mt-2" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white; border: none;">⚡ Stake ETH</a>
               </div>
             </div>
           </div>
 
-          <!-- ETH Accounts -->
+          <!-- ETH Addresses -->
           <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
-              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Ethereum Accounts</h3>
-              <button class="btn btn-sm btn-secondary" onclick="addAccount('eth')">+ Add Account</button>
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Ethereum Addresses</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAddress('eth')">+ Add Address</button>
             </div>
 
-            <div id="eth-accounts">
-              <!-- Account 1 -->
-              <div class="account-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
-                  <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-                      <span class="badge badge-primary">Main</span>
-                      <span class="font-semibold">Main Wallet</span>
+            <div id="eth-addresses">
+              <!-- Address 0 -->
+              <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3);">
+                <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+                  <!-- Index -->
+                  <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#0</div>
+                  
+                  <!-- Address Info -->
+                  <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</code>
-                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', this)">Copy</button>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                      <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</code>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', this)" title="Copy Address">📋</button>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
                     </div>
-                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">18.7 ETH <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €52,490.90</span></div>
                   </div>
+
+                  <!-- Balance -->
+                  <div style="text-align: right;">
+                    <div style="font-weight: var(--font-bold); color: var(--text-primary);">18.7 ETH</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €52,490.90</div>
+                  </div>
+
+                  <!-- Actions -->
                   <div style="display: flex; gap: var(--space-2);">
                     <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('eth', 'Main Wallet', '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb')">Deposit</button>
                     <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('eth', 'Main Wallet', 18.7)">Withdraw</button>
-                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white;" onclick="window.location.href='staking.html'">⚡ Stake</button>
                   </div>
                 </div>
-              </div>
-
-              <!-- Account 2 - Staking -->
-              <div class="account-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
-                  <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-                      <span class="badge badge-info">Staking</span>
-                      <span class="font-semibold">Staking Wallet</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063</code>
-                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', this)">Copy</button>
-                    </div>
-                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">4.8 ETH <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €13,473.60</span></div>
+                <!-- Hidden QR Code Area -->
+                <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                  <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb" alt="QR Code">
                   </div>
-                  <div style="display: flex; gap: var(--space-2);">
-                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('eth', 'Staking Wallet', '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063')">Deposit</button>
-                    <a href="staking.html" class="btn btn-sm btn-primary">Manage Staking</a>
-                  </div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit ETH</div>
                 </div>
               </div>
             </div>
@@ -336,49 +300,72 @@
         <div class="card mb-6">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
             <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 56px; height: 56px; background-color: #E84142; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">▲</div>
+              <div style="width: 56px; height: 56px; background-color: #E84142; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; box-shadow: 0 4px 10px rgba(232, 65, 66, 0.3);">▲</div>
               <div>
-                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Avalanche</h2>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary);">AVAX • €42.50 per coin</div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">Avalanche</h2>
+                  <span class="badge badge-info">Native</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">AVAX • €42.50 per coin</div>
               </div>
             </div>
             <div style="text-align: right;">
-              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">850 AVAX</div>
-              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €36,125.00</div>
-              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-2);">
-                <span>▲</span>
-                <span>+6.8% (24h)</span>
+              <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">850 AVAX</div>
+                <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €36,125.00</div>
+                <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-1);">
+                  <span>▲</span>
+                  <span>+6.8% (24h)</span>
+                </div>
+                <a href="staking.html" class="btn btn-xs mt-2" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white; border: none;">⚡ Stake AVAX</a>
               </div>
             </div>
           </div>
 
-          <!-- AVAX Accounts -->
+          <!-- AVAX Addresses -->
           <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
-              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Avalanche Accounts</h3>
-              <button class="btn btn-sm btn-secondary" onclick="addAccount('avax')">+ Add Account</button>
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Avalanche Addresses</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAddress('avax')">+ Add Address</button>
             </div>
 
-            <div id="avax-accounts">
-              <!-- Account 1 -->
-              <div class="account-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
-                  <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-                      <span class="badge badge-primary">Main</span>
-                      <span class="font-semibold">Main Wallet</span>
+            <div id="avax-addresses">
+              <!-- Address 0 -->
+              <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3);">
+                <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+                  <!-- Index -->
+                  <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#0</div>
+                  
+                  <!-- Address Info -->
+                  <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj</code>
-                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj', this)">Copy</button>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                      <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj</code>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj', this)" title="Copy Address">📋</button>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
                     </div>
-                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">850 AVAX <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €36,125.00</span></div>
                   </div>
+
+                  <!-- Balance -->
+                  <div style="text-align: right;">
+                    <div style="font-weight: var(--font-bold); color: var(--text-primary);">850 AVAX</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €36,125.00</div>
+                  </div>
+
+                  <!-- Actions -->
                   <div style="display: flex; gap: var(--space-2);">
                     <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('avax', 'Main Wallet', 'X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj')">Deposit</button>
                     <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('avax', 'Main Wallet', 850)">Withdraw</button>
-                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white;" onclick="window.location.href='staking.html'">⚡ Stake</button>
                   </div>
+                </div>
+                <!-- Hidden QR Code Area -->
+                <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                  <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj" alt="QR Code">
+                  </div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit AVAX</div>
                 </div>
               </div>
             </div>
@@ -389,130 +376,450 @@
         <div class="card mb-6">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
             <div style="display: flex; align-items: center; gap: var(--space-4);">
-              <div style="width: 56px; height: 56px; background-color: #8247E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">⬡</div>
+              <div style="width: 56px; height: 56px; background-color: #8247E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; box-shadow: 0 4px 10px rgba(130, 71, 229, 0.3);">⬡</div>
               <div>
-                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-semibold); margin-bottom: var(--space-1);">Polygon</h2>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary);">MATIC • €0.88 per coin</div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">Polygon</h2>
+                  <span class="badge badge-info">Native</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">POL • €0.88 per coin</div>
               </div>
             </div>
             <div style="text-align: right;">
-              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">13,625 MATIC</div>
-              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €11,990.00</div>
-              <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-2);">
-                <span>▲</span>
-                <span>+3.4% (24h)</span>
+              <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">13,625 POL</div>
+                <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €11,990.00</div>
+                <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-1);">
+                  <span>▲</span>
+                  <span>+3.4% (24h)</span>
+                </div>
+                <a href="staking.html" class="btn btn-xs mt-2" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white; border: none;">⚡ Stake POL</a>
               </div>
             </div>
           </div>
 
-          <!-- MATIC Accounts -->
+          <!-- POL Addresses -->
           <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
-              <h3 style="font-size: var(--text-lg); font-weight: var(--font-semibold);">Polygon Accounts</h3>
-              <button class="btn btn-sm btn-secondary" onclick="addAccount('matic')">+ Add Account</button>
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Polygon Addresses</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAddress('pol')">+ Add Address</button>
             </div>
 
-            <div id="matic-accounts">
-              <!-- Account 1 -->
-              <div class="account-item">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
-                  <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-                      <span class="badge badge-primary">Main</span>
-                      <span class="font-semibold">Main Wallet</span>
+            <div id="pol-addresses">
+              <!-- Address 0 -->
+              <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3);">
+                <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+                  <!-- Index -->
+                  <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#0</div>
+                  
+                  <!-- Address Info -->
+                  <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                      <code style="font-size: var(--text-sm); color: var(--text-secondary);">0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0</code>
-                      <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0', this)">Copy</button>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                      <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0</code>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0', this)" title="Copy Address">📋</button>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
                     </div>
-                    <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">13,625 MATIC <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €11,990.00</span></div>
                   </div>
+
+                  <!-- Balance -->
+                  <div style="text-align: right;">
+                    <div style="font-weight: var(--font-bold); color: var(--text-primary);">13,625 POL</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €11,990.00</div>
+                  </div>
+
+                  <!-- Actions -->
                   <div style="display: flex; gap: var(--space-2);">
-                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('matic', 'Main Wallet', '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0')">Deposit</button>
-                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('matic', 'Main Wallet', 13625)">Withdraw</button>
-                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%); color: white;" onclick="window.location.href='staking.html'">⚡ Stake</button>
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('pol', 'Main Wallet', '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('pol', 'Main Wallet', 13625)">Withdraw</button>
                   </div>
+                </div>
+                <!-- Hidden QR Code Area -->
+                <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                  <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0" alt="QR Code">
+                  </div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit POL</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Kula Section -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 56px; height: 56px; background-color: #FF007A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; box-shadow: 0 4px 10px rgba(255, 0, 122, 0.3);">K</div>
+              <div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">Kula</h2>
+                  <a href="https://snowtrace.io/token/0xKulaTokenAddress" target="_blank" class="badge badge-warning" title="View Contract on Snowtrace" style="text-decoration: none;">AVAX</a>
+                  <span class="badge badge-secondary">ERC20</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">KULA • €1.25 per token</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">5,000 KULA</div>
+                <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €6,250.00</div>
+                <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-1);">
+                  <span>▲</span>
+                  <span>+1.2% (24h)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kula Addresses -->
+          <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Kula Addresses</h3>
+              <button class="btn btn-sm btn-secondary" onclick="addAddress('kula')">+ Add Address</button>
+            </div>
+
+            <div id="kula-addresses">
+              <!-- Address 0 -->
+              <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3);">
+                <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+                  <!-- Index -->
+                  <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#0</div>
+                  
+                  <!-- Address Info -->
+                  <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                      <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0xKulaTokenAddressOnAvaxNetwork...</code>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('0xKulaTokenAddressOnAvaxNetwork...', this)" title="Copy Address">📋</button>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+                    </div>
+                  </div>
+
+                  <!-- Balance -->
+                  <div style="text-align: right;">
+                    <div style="font-weight: var(--font-bold); color: var(--text-primary);">5,000 KULA</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €6,250.00</div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('kula', 'Main Wallet', '0xKulaTokenAddressOnAvaxNetwork...')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('kula', 'Main Wallet', 5000)">Withdraw</button>
+                  </div>
+                </div>
+                <!-- Hidden QR Code Area -->
+                <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                  <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=0xKulaTokenAddressOnAvaxNetwork..." alt="QR Code">
+                  </div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit KULA</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- USDC Section -->
+        <div class="card mb-6">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <div style="width: 56px; height: 56px; background-color: #2775CA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; box-shadow: 0 4px 10px rgba(39, 117, 202, 0.3);">$</div>
+              <div>
+                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                  <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">USDC</h2>
+                  <a href="https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" target="_blank" class="badge badge-info" title="View Contract on Etherscan" style="text-decoration: none;">ETH</a>
+                  <a href="https://snowtrace.io/token/0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" target="_blank" class="badge badge-warning" title="View Contract on Snowtrace" style="text-decoration: none;">AVAX</a>
+                  <a href="https://polygonscan.com/token/0x3c499c542cff5e38fc109cd682a631445b679fc6" target="_blank" class="badge badge-success" title="View Contract on PolygonScan" style="text-decoration: none;">POL</a>
+                  <span class="badge badge-secondary">ERC20</span>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">USDC • €0.92 per token</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">10,000 USDC</div>
+                <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €9,200.00</div>
+                <div class="stat-card-change positive" style="justify-content: flex-end; margin-top: var(--space-1);">
+                  <span>▲</span>
+                  <span>+0.01% (24h)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- USDC Addresses -->
+          <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+              <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">USDC Addresses</h3>
+              <div style="display: flex; gap: var(--space-4); align-items: center;">
+                <select id="usdc-network-select" class="select-input">
+                  <option value="Ethereum">Ethereum (ERC20)</option>
+                  <option value="Avalanche">Avalanche (C-Chain)</option>
+                  <option value="Polygon">Polygon</option>
+                  <option value="Tron">Tron (TRC20)</option>
+                </select>
+                <button class="btn btn-sm btn-secondary" onclick="addAddress('usdc')">+ Add Address</button>
+              </div>
+            </div>
+
+            <div id="usdc-addresses">
+              <!-- Address 0 -->
+              <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3);">
+                <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+                  <!-- Index -->
+                  <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#0</div>
+                  
+                  <!-- Address Info -->
+                  <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="badge badge-info" style="margin-left: 8px;">Ethereum</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                      <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0xUSDCAddressOnMultipleNetworks...</code>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('0xUSDCAddressOnMultipleNetworks...', this)" title="Copy Address">📋</button>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+                    </div>
+                  </div>
+
+                  <!-- Balance -->
+                  <div style="text-align: right;">
+                    <div style="font-weight: var(--font-bold); color: var(--text-primary);">10,000 USDC</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €9,200.00</div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('usdc', 'Main Wallet', '0xUSDCAddressOnMultipleNetworks...', 'Ethereum')">Deposit</button>
+                    <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('usdc', 'Main Wallet', 10000)">Withdraw</button>
+                  </div>
+                </div>
+                <!-- Hidden QR Code Area -->
+                <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                  <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=0xUSDCAddressOnMultipleNetworks..." alt="QR Code">
+                  </div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit USDC</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add New Asset Card -->
+        <div class="card mb-6" style="border: 2px dashed var(--border-light); background: transparent; display: flex; align-items: center; justify-content: center; padding: var(--space-8); cursor: pointer; transition: all 0.2s ease;" onclick="openAssetModal()" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.background='rgba(67, 24, 255, 0.02)'" onmouseout="this.style.borderColor='var(--border-light)'; this.style.background='transparent'">
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; background: var(--color-success); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto var(--space-3); box-shadow: 0 4px 10px rgba(5, 205, 153, 0.3);">+</div>
+            <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold); color: var(--text-primary); margin-bottom: var(--space-1);">Add New Asset</h3>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 0;">Track a new coin or token in your portfolio</p>
+          </div>
+        </div>
       </div>
     </main>
-  </div>  <script src="../../assets/js/nav-active.js"></script>
+  </div>
+
+  <!-- Asset Selection Modal -->
+  <div id="assetModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); animation: slideUp 0.3s ease-out;">
+      <div style="padding: var(--space-6); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin: 0; font-size: var(--text-xl);">Select Asset to Track</h3>
+        <button onclick="closeAssetModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary);">&times;</button>
+      </div>
+      
+      <div style="padding: var(--space-4);">
+        <input type="text" placeholder="Search assets..." style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: var(--radius-md); margin-bottom: var(--space-4); background: var(--bg-input);">
+        
+        <div style="max-height: 400px; overflow-y: auto;">
+          <!-- BNB -->
+          <div class="asset-option" onclick="addNewAsset('bnb')" style="display: flex; align-items: center; padding: var(--space-3); border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s;">
+            <div style="width: 40px; height: 40px; background: #F3BA2F; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: var(--space-3);">B</div>
+            <div style="flex: 1;">
+              <div style="font-weight: bold; color: var(--text-primary);">Binance Coin</div>
+              <div style="font-size: var(--text-xs); color: var(--text-secondary);">BNB • Native</div>
+            </div>
+            <div style="display: flex; gap: 4px;">
+              <span class="badge badge-success">Native</span>
+            </div>
+          </div>
+
+          <!-- USDT -->
+          <div class="asset-option" onclick="addNewAsset('usdt')" style="display: flex; align-items: center; padding: var(--space-3); border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s; margin-top: var(--space-2);">
+            <div style="width: 40px; height: 40px; background: #26A17B; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: var(--space-3);">T</div>
+            <div style="flex: 1;">
+              <div style="font-weight: bold; color: var(--text-primary);">Tether</div>
+              <div style="font-size: var(--text-xs); color: var(--text-secondary);">USDT • Stablecoin</div>
+            </div>
+            <div style="display: flex; gap: 4px;">
+              <span class="badge badge-secondary">ERC20</span>
+              <span class="badge badge-secondary">TRC20</span>
+            </div>
+          </div>
+
+          <!-- SOL -->
+          <div class="asset-option" onclick="addNewAsset('sol')" style="display: flex; align-items: center; padding: var(--space-3); border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s; margin-top: var(--space-2);">
+            <div style="width: 40px; height: 40px; background: linear-gradient(45deg, #9945FF, #14F195); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: var(--space-3);">S</div>
+            <div style="flex: 1;">
+              <div style="font-weight: bold; color: var(--text-primary);">Solana</div>
+              <div style="font-size: var(--text-xs); color: var(--text-secondary);">SOL • Native</div>
+            </div>
+            <div style="display: flex; gap: 4px;">
+              <span class="badge badge-success">Native</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/nav-active.js"></script>
 
 
   
   <script src="../../assets/js/app.js"></script>
   <script>
-    // Account counters for each currency
-    let accountCounters = {
-      btc: 3,
-      eth: 3,
-      avax: 2,
-      matic: 2
+    // Account counters for each currency (Next available index)
+    let addressCounters = {
+      btc: 1,
+      eth: 2,
+      avax: 1,
+      pol: 1,
+      kula: 1,
+      usdc: 1
     };
 
-    // Add new account function
-    function addAccount(currency) {
-      const accountId = accountCounters[currency]++;
-      const currencyNames = {
+    // Fixed Mock Addresses
+    const mockAddresses = {
+      btc: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+      eth: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
+      avax: 'X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj',
+      pol: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+      kula: '0xKulaTokenAddressOnAvaxNetwork...',
+      usdc: '0xUSDCAddressOnMultipleNetworks...'
+    };
+
+    // Add new address function
+    function addAddress(currency) {
+      const index = addressCounters[currency]++;
+      const currencyInfo = {
         btc: { name: 'Bitcoin', symbol: 'BTC' },
         eth: { name: 'Ethereum', symbol: 'ETH' },
         avax: { name: 'Avalanche', symbol: 'AVAX' },
-        matic: { name: 'Polygon', symbol: 'MATIC' }
+        pol: { name: 'Polygon', symbol: 'POL' },
+        kula: { name: 'Kula', symbol: 'KULA' },
+        usdc: { name: 'USDC', symbol: 'USDC' }
       };
 
-      // Generate mock address
-      const addresses = {
-        btc: 'bc1q' + generateRandomString(39),
-        eth: '0x' + generateRandomString(40),
-        avax: 'X-avax' + generateRandomString(38),
-        matic: '0x' + generateRandomString(40)
-      };
+      let address = mockAddresses[currency];
+      let network = null;
+      let badgeHtml = '';
 
-      const container = document.getElementById(`${currency}-accounts`);
+      // Handle multi-chain logic for USDC
+      if (currency === 'usdc') {
+        const selector = document.getElementById('usdc-network-select');
+        if (selector) {
+            network = selector.value;
+        } else {
+            network = 'Ethereum';
+        }
+        
+        if (network === 'Tron') {
+            address = 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb'; // Mock Tron address
+        } else {
+            address = '0x' + Math.random().toString(16).substr(2, 40); // Random EVM address
+        }
+        
+        badgeHtml = `<span class="badge badge-info" style="margin-left: 8px;">${network}</span>`;
+      }
+
+      const container = document.getElementById(`${currency}-addresses`);
       const accountDiv = document.createElement('div');
       accountDiv.className = 'account-item';
+      accountDiv.style.cssText = 'background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-3); animation: fadeIn 0.3s ease-in-out;';
+      
       accountDiv.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-4); background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: var(--space-3); border: 2px solid var(--primary);">
-          <div style="flex: 1;">
-            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
-              <span class="badge badge-success">New</span>
-              <span class="font-semibold">Account ${accountId}</span>
+        <div style="display: grid; grid-template-columns: 40px 1fr auto auto; gap: var(--space-4); align-items: center;">
+          <!-- Index -->
+          <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#${index}</div>
+          
+          <!-- Address Info -->
+          <div>
+            <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+              <span class="font-bold" style="color: var(--text-primary);">Wallet ${index}</span>
+              ${badgeHtml}
+              <span class="badge badge-success" style="font-size: 9px;">New</span>
             </div>
-            <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-              <code style="font-size: var(--text-sm); color: var(--text-secondary);">${addresses[currency]}</code>
-              <button class="btn btn-sm btn-secondary" onclick="copyToClipboard('${addresses[currency]}', this)">Copy</button>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">${address}</code>
+              <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('${address}', this)" title="Copy Address">📋</button>
+              <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
             </div>
-            <div style="font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--primary);">0.00 ${currencyNames[currency].symbol} <span style="color: var(--text-secondary); font-size: var(--text-sm); font-weight: normal;">≈ €0.00</span></div>
           </div>
+
+          <!-- Balance -->
+          <div style="text-align: right;">
+            <div style="font-weight: var(--font-bold); color: var(--text-primary);">0.00 ${currencyInfo[currency].symbol}</div>
+            <div style="font-size: var(--text-xs); color: var(--text-secondary);">≈ €0.00</div>
+          </div>
+
+          <!-- Actions -->
           <div style="display: flex; gap: var(--space-2);">
-            <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('${currency}', 'Account ${accountId}', '${addresses[currency]}')">Deposit</button>
-            <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('${currency}', 'Account ${accountId}', 0)">Withdraw</button>
+            <button class="btn btn-sm btn-secondary" onclick="initiateDeposit('${currency}', 'Wallet ${index}', '${address}', '${network || ''}')">Deposit</button>
+            <button class="btn btn-sm btn-primary" onclick="initiateWithdraw('${currency}', 'Wallet ${index}', 0)">Withdraw</button>
           </div>
+        </div>
+        <!-- Hidden QR Code Area -->
+        <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+          <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${address}" alt="QR Code">
+          </div>
+          <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit ${currencyInfo[currency].symbol}</div>
         </div>
       `;
 
       container.appendChild(accountDiv);
-      showSuccessMessage(`New ${currencyNames[currency].name} account created! Address: ${addresses[currency].substring(0, 20)}...`);
+      
+      // Scroll to new element
+      accountDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Generate random string for addresses
-    function generateRandomString(length) {
-      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    // Toggle QR Code
+    function toggleQR(btn) {
+      const row = btn.closest('.account-item');
+      const qrArea = row.querySelector('.qr-code-area');
+      if (qrArea.style.display === 'none') {
+        qrArea.style.display = 'block';
+        btn.classList.add('active');
+        btn.style.color = 'var(--color-primary)';
+        btn.style.borderColor = 'var(--color-primary)';
+      } else {
+        qrArea.style.display = 'none';
+        btn.classList.remove('active');
+        btn.style.color = '';
+        btn.style.borderColor = '';
       }
-      return result;
     }
 
     // Initiate deposit
-    function initiateDeposit(currency, accountName, address) {
+    function initiateDeposit(currency, accountName, address, network = null) {
+      let networkWarning = '';
+      if (network) {
+        networkWarning = `<div style="background: #fff3cd; color: #856404; padding: 8px; border-radius: 4px; margin-bottom: 1rem; font-size: 0.9rem; border: 1px solid #ffeeba;">
+          ⚠️ Ensure you are sending funds via the <strong>${network}</strong> network.
+        </div>`;
+      }
+
       showSuccessModal(
         'Deposit to ' + accountName,
-        `Send ${currency.toUpperCase()} to this address:<br><br><code style="word-break: break-all;">${address}</code><br><br>Your funds will be credited after network confirmation.`
+        `${networkWarning}
+         <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+           <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${address}" alt="QR Code" style="border: 1px solid #eee; padding: 4px; border-radius: 4px;">
+         </div>
+         Send ${currency.toUpperCase()} to this address:<br><br><code style="word-break: break-all;">${address}</code><br><br>Your funds will be credited after network confirmation.`
       );
     }
 
@@ -523,6 +830,138 @@
         return;
       }
       window.location.href = `withdraw.html?asset=${currency}&account=${encodeURIComponent(accountName)}&balance=${balance}`;
+    }
+    
+    // Add simple fade-in animation style
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .asset-option:hover {
+        background-color: var(--bg-hover);
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Asset Modal Functions
+    function openAssetModal() {
+      document.getElementById('assetModal').style.display = 'flex';
+    }
+
+    function closeAssetModal() {
+      document.getElementById('assetModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('assetModal').addEventListener('click', function(e) {
+      if (e.target === this) closeAssetModal();
+    });
+
+    // Add New Asset Logic
+    function addNewAsset(assetId) {
+      const assetData = {
+        bnb: {
+          name: 'Binance Coin',
+          symbol: 'BNB',
+          color: '#F3BA2F',
+          price: '€215.50',
+          icon: 'B',
+          tags: [
+            { text: 'Native', type: 'success' }
+          ]
+        },
+        usdt: {
+          name: 'Tether',
+          symbol: 'USDT',
+          color: '#26A17B',
+          price: '€0.92',
+          icon: 'T',
+          tags: [
+            { text: 'ERC20', type: 'secondary', link: 'https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7' },
+            { text: 'TRC20', type: 'secondary', link: 'https://tronscan.org/#/token20/TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' }
+          ]
+        },
+        sol: {
+          name: 'Solana',
+          symbol: 'SOL',
+          color: '#9945FF',
+          price: '€18.40',
+          icon: 'S',
+          tags: [
+            { text: 'Native', type: 'success' }
+          ]
+        }
+      };
+
+      const data = assetData[assetId];
+      if (!data) return;
+
+      // Initialize counter for new asset
+      if (!addressCounters[assetId]) addressCounters[assetId] = 1;
+      if (!mockAddresses[assetId]) mockAddresses[assetId] = '0xNewAssetAddress...';
+
+      // Create new card HTML
+      const newCard = document.createElement('div');
+      newCard.className = 'card mb-6';
+      newCard.style.animation = 'fadeIn 0.5s ease-out';
+      
+      // Generate tags HTML
+      const tagsHtml = data.tags.map(tag => {
+        if (tag.link) {
+          return `<a href="${tag.link}" target="_blank" class="badge badge-${tag.type}" title="View Contract" style="text-decoration: none;">${tag.text}</a>`;
+        }
+        return `<span class="badge badge-${tag.type}">${tag.text}</span>`;
+      }).join('\n');
+
+      newCard.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <div style="width: 56px; height: 56px; background-color: ${data.color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; box-shadow: 0 4px 10px ${data.color}4d;">${data.icon}</div>
+            <div>
+              <div style="display: flex; align-items: center; gap: var(--space-2);">
+                <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin-bottom: 0;">${data.name}</h2>
+                ${tagsHtml}
+              </div>
+              <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">${data.symbol} • ${data.price} per coin</div>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div style="display: flex; flex-direction: column; align-items: flex-end;">
+              <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">0.00 ${data.symbol}</div>
+              <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €0.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Addresses -->
+        <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+            <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">${data.name} Addresses</h3>
+            <button class="btn btn-sm btn-secondary" onclick="addAddress('${assetId}')">+ Add Address</button>
+          </div>
+          <div id="${assetId}-addresses">
+            <!-- No addresses initially -->
+            <div style="text-align: center; padding: var(--space-4); color: var(--text-secondary); font-style: italic;">
+              No addresses generated yet. Click "+ Add Address" to start.
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Insert before the "Add New Asset" card
+      const addCard = document.querySelector('.card[onclick="openAssetModal()"]');
+      addCard.parentNode.insertBefore(newCard, addCard);
+
+      closeAssetModal();
+      
+      // Scroll to new card
+      newCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   </script>
 </body>

@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -31,6 +32,10 @@
         <span class="sidebar-nav-icon">📝</span>
         <span class="sidebar-nav-text">Transactions</span>
         <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="address-book.html" class="sidebar-nav-item" data-page="address-book">
+        <span class="sidebar-nav-icon">📖</span>
+        <span class="sidebar-nav-text">Address Book</span>
       </a>
       <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
         <span class="sidebar-nav-icon">⬇️</span>
@@ -126,30 +131,10 @@
 
       <!-- Page Content -->
       <div class="content-container">
-        <!-- Page Header -->
-        <div class="page-header">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item">
-              <a href="dashboard.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">Dashboard</div>
-          </div>
-
-          <div class="page-header-top">
-            <div>
-              <h1 class="page-title">Dashboard</h1>
-            </div>
-            <div class="page-actions">
-              <a href="deposit.html" class="btn btn-secondary">Deposit</a>
-              <a href="withdraw.html" class="btn btn-primary">Withdraw</a>
-            </div>
-          </div>
-        </div>
-
         <!-- Stats Grid -->
         <div class="grid-4 mb-8">
           <div class="stat-card">
-            <div class="stat-card-label">Total Balance</div>
+            <div class="stat-card-label">Total Portfolio</div>
             <div class="stat-card-value">€187,456.75</div>
             <div class="stat-card-change positive">
               <span>▲</span>
@@ -159,8 +144,8 @@
 
           <div class="stat-card">
             <div class="stat-card-label">Fiat Balance</div>
-            <div class="stat-card-value">€0.00</div>
-            <div class="stat-card-secondary">EUR</div>
+            <div class="stat-card-value" style="color: var(--danger);">-€329,456.83</div>
+            <div class="stat-card-secondary" style="font-size: 0.75rem; margin-top: 4px;">Limit: €5,000,000.00</div>
           </div>
 
           <div class="stat-card">
@@ -179,30 +164,76 @@
           </div>
         </div>
 
+        <!-- Total Balance Graph -->
+        <div class="card mb-8">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="card-title">Total Balance History</h2>
+            <div class="time-filters">
+              <button class="btn btn-xs btn-outline-secondary">7D</button>
+              <button class="btn btn-xs btn-primary">30D</button>
+              <button class="btn btn-xs btn-outline-secondary">90D</button>
+              <button class="btn btn-xs btn-outline-secondary">YTD</button>
+            </div>
+          </div>
+          <div style="height: 300px; width: 100%;">
+            <canvas id="balanceChart"></canvas>
+          </div>
+        </div>
+
         <!-- Main Content Grid -->
         <div class="grid-2 mb-8">
           <!-- Portfolio Distribution -->
           <div class="card">
             <div class="card-header">
-              <h2 class="card-title">Portfolio Distribution</h2>
+              <h2 class="card-title">Crypto Portfolio Distribution</h2>
             </div>
-            <div style="height: 300px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
-              [Chart: Pie chart showing asset allocation]
+            <div style="height: 300px; display: flex; align-items: center; justify-content: center;">
+              <canvas id="portfolioChart"></canvas>
             </div>
             <div style="margin-top: var(--space-4);">
-              <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
-                <div style="display: flex; align-items: center; gap: var(--space-2);">
-                  <span style="width: 12px; height: 12px; background-color: #0066FF; border-radius: 2px;"></span>
-                  <span>Bitcoin (BTC)</span>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span style="width: 12px; height: 12px; background-color: #F7931A; border-radius: 2px;"></span>
+                    <span>BTC</span>
+                  </div>
+                  <span class="font-semibold">45%</span>
                 </div>
-                <span class="font-semibold">58.3%</span>
-              </div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
-                <div style="display: flex; align-items: center; gap: var(--space-2);">
-                  <span style="width: 12px; height: 12px; background-color: #00C853; border-radius: 2px;"></span>
-                  <span>Ethereum (ETH)</span>
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span style="width: 12px; height: 12px; background-color: #627EEA; border-radius: 2px;"></span>
+                    <span>ETH</span>
+                  </div>
+                  <span class="font-semibold">25%</span>
                 </div>
-                <span class="font-semibold">41.7%</span>
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span style="width: 12px; height: 12px; background-color: #E84142; border-radius: 2px;"></span>
+                    <span>AVAX</span>
+                  </div>
+                  <span class="font-semibold">10%</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span style="width: 12px; height: 12px; background-color: #8247E5; border-radius: 2px;"></span>
+                    <span>POL</span>
+                  </div>
+                  <span class="font-semibold">10%</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span style="width: 12px; height: 12px; background-color: #2775CA; border-radius: 2px;"></span>
+                    <span>USDC</span>
+                  </div>
+                  <span class="font-semibold">5%</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; align-items: center; gap: var(--space-2);">
+                    <span style="width: 12px; height: 12px; background-color: #00D1FF; border-radius: 2px;"></span>
+                    <span>KULA</span>
+                  </div>
+                  <span class="font-semibold">5%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -258,28 +289,32 @@
             <h2 class="card-title">Quick Actions</h2>
           </div>
           <div class="grid-4">
-            <a href="deposit.html" class="quick-action-card">
-              <div class="quick-action-icon" style="background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%);">⬇️</div>
-              <div class="quick-action-title">Deposit Crypto</div>
-              <div class="quick-action-desc">Add funds to wallet</div>
+            <a href="wallets.html" class="quick-action-card">
+              <div class="quick-action-content">
+                <div class="quick-action-title">Wallets</div>
+                <div class="quick-action-desc">Manage assets</div>
+              </div>
             </a>
 
-            <a href="withdraw.html" class="quick-action-card">
-              <div class="quick-action-icon" style="background: linear-gradient(135deg, #00C853 0%, #00A644 100%);">⬆️</div>
-              <div class="quick-action-title">Withdraw Crypto</div>
-              <div class="quick-action-desc">Send to external wallet</div>
+            <a href="trading.html" class="quick-action-card">
+              <div class="quick-action-content">
+                <div class="quick-action-title">Trading</div>
+                <div class="quick-action-desc">Buy & Sell</div>
+              </div>
+            </a>
+
+            <a href="settlement.html" class="quick-action-card">
+              <div class="quick-action-content">
+                <div class="quick-action-title">Settle</div>
+                <div class="quick-action-desc">Clear fiat balance</div>
+              </div>
             </a>
 
             <a href="staking.html" class="quick-action-card">
-              <div class="quick-action-icon" style="background: linear-gradient(135deg, #FFA726 0%, #FF8A00 100%);">⚡</div>
-              <div class="quick-action-title">Stake</div>
-              <div class="quick-action-desc">Earn rewards</div>
-            </a>
-
-            <a href="security.html" class="quick-action-card">
-              <div class="quick-action-icon" style="background: linear-gradient(135deg, #757575 0%, #616161 100%);">🔒</div>
-              <div class="quick-action-title">Security Settings</div>
-              <div class="quick-action-desc">Manage MFA & access</div>
+              <div class="quick-action-content">
+                <div class="quick-action-title">Stake</div>
+                <div class="quick-action-desc">Earn rewards</div>
+              </div>
             </a>
           </div>
         </div>
@@ -287,47 +322,56 @@
         <style>
           .quick-action-card {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: var(--space-6);
+            justify-content: center;
+            padding: var(--space-4);
             background-color: var(--bg-primary);
-            border: 2px solid var(--border-light);
+            border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
             transition: all var(--transition-fast);
             text-decoration: none;
             cursor: pointer;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .quick-action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
           }
 
           .quick-action-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: transparent;
           }
 
-          .quick-action-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: var(--space-4);
-            box-shadow: var(--shadow-md);
+          .quick-action-card:hover::before {
+            opacity: 1;
+          }
+
+          .quick-action-content {
+            text-align: center;
           }
 
           .quick-action-title {
-            font-size: var(--text-base);
+            font-size: var(--text-lg);
             font-weight: var(--font-semibold);
             color: var(--text-primary);
-            margin-bottom: var(--space-2);
-            text-align: center;
+            margin-bottom: var(--space-1);
           }
 
           .quick-action-desc {
             font-size: var(--text-sm);
             color: var(--text-secondary);
-            text-align: center;
           }
         </style>
       </div>
@@ -335,5 +379,213 @@
   </div>  <script src="../../assets/js/nav-active.js"></script>
 
   <script src="../../assets/js/app.js"></script>
+
+  <script>
+    // Chart.js Implementation
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // --- Total Balance Line Chart ---
+      const balanceCtx = document.getElementById('balanceChart').getContext('2d');
+      let balanceChart;
+
+      // Helper to generate data with specific volatility
+      function generateData(days) {
+        const labels = [];
+        const dataPoints = [];
+        let currentValue = 180000; // Starting base value
+        
+        // We want the *end* value to be around the current portfolio value (~187k)
+        // So we'll generate backwards or just generate and then scale? 
+        // Let's generate forward from a start date.
+        
+        // To make it look realistic ending at ~187k, let's work backwards from today
+        let value = 187456.75;
+
+        for (let i = 0; i < days; i++) {
+          const date = new Date();
+          date.setDate(date.getDate() - i);
+          labels.unshift(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+          
+          dataPoints.unshift(value);
+
+          // Reverse calculation for previous day: 
+          // value = prevValue * (1 + change)  =>  prevValue = value / (1 + change)
+          // Change between -0.1% (-0.001) and +0.3% (+0.003)
+          const change = (Math.random() * 0.004) - 0.001; 
+          value = value / (1 + change);
+        }
+        
+        return { labels, dataPoints };
+      }
+
+      function initChart(days) {
+        const data = generateData(days);
+
+        if (balanceChart) {
+          balanceChart.destroy();
+        }
+
+        // Create gradient
+        const gradient = balanceCtx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(67, 24, 255, 0.2)'); // Brand Primary with opacity
+        gradient.addColorStop(1, 'rgba(67, 24, 255, 0)');
+
+        balanceChart = new Chart(balanceCtx, {
+          type: 'line',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'Total Balance (EUR)',
+              data: data.dataPoints,
+              borderColor: '#4318FF', // Brand Primary
+              backgroundColor: gradient,
+              borderWidth: 3,
+              fill: true,
+              tension: 0.4, // Smooth curves
+              pointRadius: 0,
+              pointHoverRadius: 6,
+              pointHoverBackgroundColor: '#4318FF',
+              pointHoverBorderColor: '#fff',
+              pointHoverBorderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false,
+                backgroundColor: '#1B2559',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 12,
+                cornerRadius: 8,
+                displayColors: false,
+                callbacks: {
+                  label: function(context) {
+                    return '€' + context.parsed.y.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  maxTicksLimit: 8,
+                  color: '#A3AED0', // Secondary Text
+                  font: {
+                    family: "'DM Sans', sans-serif",
+                    size: 12
+                  }
+                }
+              },
+              y: {
+                grid: {
+                  display: true,
+                  drawBorder: false,
+                  color: '#E0E5F2', // Light Border
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  color: '#A3AED0', // Secondary Text
+                  font: {
+                    family: "'DM Sans', sans-serif",
+                    size: 12
+                  },
+                  callback: function(value) {
+                    return '€' + (value / 1000).toFixed(0) + 'k';
+                  }
+                }
+              }
+            },
+            interaction: {
+              mode: 'nearest',
+              axis: 'x',
+              intersect: false
+            }
+          }
+        });
+      }
+
+      // Initialize with 30 days
+      initChart(30);
+
+      // Time Filter Logic
+      const buttons = document.querySelectorAll('.time-filters button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Update active state
+          buttons.forEach(b => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline-secondary');
+          });
+          e.target.classList.remove('btn-outline-secondary');
+          e.target.classList.add('btn-primary');
+
+          // Update Chart
+          const timeText = e.target.innerText;
+          let days = 30;
+          if (timeText === '7D') days = 7;
+          if (timeText === '30D') days = 30;
+          if (timeText === '90D') days = 90;
+          if (timeText === 'YTD') days = 180; // Approx YTD for mockup
+          
+          initChart(days);
+        });
+      });
+
+
+      // --- Portfolio Distribution Pie Chart ---
+      const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
+      
+      new Chart(portfolioCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Bitcoin (BTC)', 'Ethereum (ETH)', 'Avalanche (AVAX)', 'Polygon (POL)', 'USDC', 'Kula (KULA)'],
+          datasets: [{
+            data: [45, 25, 10, 10, 5, 5],
+            backgroundColor: [
+              '#F7931A', // BTC
+              '#627EEA', // ETH
+              '#E84142', // AVAX
+              '#8247E5', // POL
+              '#2775CA', // USDC
+              '#00D1FF'  // KULA
+            ],
+            borderWidth: 0,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '75%', // Thinner ring
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: '#1B2559',
+              padding: 12,
+              cornerRadius: 8,
+              callbacks: {
+                label: function(context) {
+                  return context.label + ': ' + context.parsed + '%';
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

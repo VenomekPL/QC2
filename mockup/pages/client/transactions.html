@@ -32,6 +32,10 @@
         <span class="sidebar-nav-text">Transactions</span>
         <span class="sidebar-nav-badge">3</span>
       </a>
+      <a href="address-book.html" class="sidebar-nav-item" data-page="address-book">
+        <span class="sidebar-nav-icon">📖</span>
+        <span class="sidebar-nav-text">Address Book</span>
+      </a>
       <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
         <span class="sidebar-nav-icon">⬇️</span>
         <span class="sidebar-nav-text">Deposit</span>
@@ -130,51 +134,63 @@
 
       <!-- Page Content -->
       <div class="content-container">
-        <!-- Page Header -->
-        <div class="page-header">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item">
-              <a href="dashboard.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">Transactions</div>
-          </div>
-
-          <div class="page-header-top">
-            <div>
-              <h1 class="page-title">Transaction History</h1>
-              <p class="page-subtitle">View all your crypto transactions</p>
-            </div>
-            <div class="page-actions">
-              <button class="btn btn-secondary">Export CSV</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Filters -->
+        <!-- Advanced Filters -->
         <div class="card mb-6">
-          <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            <!-- Search -->
+            <div style="grid-column: 1 / -1;">
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Search</label>
+              <div style="position: relative;">
+                <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">🔍</span>
+                <input type="text" placeholder="Search by Transaction Hash, Address, or Note..." style="padding-left: 36px; width: 100%; box-sizing: border-box; padding-top: 8px; padding-bottom: 8px; border: 1px solid var(--border-light); border-radius: var(--radius-md);">
+              </div>
+            </div>
+
+            <!-- Date Range -->
+            <div style="grid-column: span 2;">
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Date Range</label>
+              <div style="display: flex; gap: var(--space-2);">
+                <input type="date" class="select-input" style="width: 100%;">
+                <input type="date" class="select-input" style="width: 100%;">
+              </div>
+            </div>
+
+            <!-- Transaction Type -->
             <div>
-              <select style="padding: var(--space-2) var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-md);">
-                <option>All Types</option>
-                <option>Deposits</option>
-                <option>Withdrawals</option>
-                <option>Transfers</option>
-                <option>Staking</option>
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Type</label>
+              <select class="select-input" style="width: 100%;" id="type-filter" onchange="filterTransactions()">
+                <option value="all">All Types</option>
+                <option value="deposit">⬇️ Deposit</option>
+                <option value="withdrawal">⬆️ Withdrawal</option>
+                <option value="trade">🔄 Trade / Swap</option>
+                <option value="staking-action">⚡ Staking / Unstaking</option>
+                <option value="staking-reward">🎁 Staking Reward</option>
+                <option value="fee">⛽ Network Fee</option>
+                <option value="commission">🏦 Platform Commission</option>
               </select>
             </div>
+
+            <!-- Asset -->
             <div>
-              <select style="padding: var(--space-2) var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-md);">
-                <option>All Assets</option>
-                <option>Bitcoin</option>
-                <option>Ethereum</option>
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Asset</label>
+              <select class="select-input" style="width: 100%;">
+                <option value="all">All Assets</option>
+                <option value="btc">Bitcoin (BTC)</option>
+                <option value="eth">Ethereum (ETH)</option>
+                <option value="usdc">USDC</option>
+                <option value="avax">Avalanche (AVAX)</option>
+                <option value="pol">Polygon (POL)</option>
               </select>
             </div>
+
+            <!-- Status -->
             <div>
-              <select style="padding: var(--space-2) var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-md);">
-                <option>Last 30 days</option>
-                <option>Last 7 days</option>
-                <option>Last 90 days</option>
-                <option>All time</option>
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Status</label>
+              <select class="select-input" style="width: 100%;">
+                <option value="all">All Statuses</option>
+                <option value="completed">✅ Completed</option>
+                <option value="pending">⏳ Pending</option>
+                <option value="failed">❌ Failed</option>
               </select>
             </div>
           </div>
@@ -182,155 +198,227 @@
 
         <!-- Transactions Table -->
         <div class="card">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Date & Time</th>
-                <th>Type</th>
-                <th>Asset</th>
-                <th>Amount</th>
-                <th>Value (EUR)</th>
-                <th>Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div>Nov 13, 2025</div>
-                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">14:32:18</div>
-                </td>
-                <td>
-                  <span style="display: flex; align-items: center; gap: var(--space-2);">
-                    <span>⬇️</span>
-                    <span>Deposit</span>
-                  </span>
-                </td>
-                <td>
-                  <span class="font-semibold">Bitcoin</span>
-                </td>
-                <td class="font-semibold">+0.5 BTC</td>
-                <td>€14,975.00</td>
-                <td><span class="badge badge-success">Completed</span></td>
-                <td>
-                  <button class="btn btn-sm btn-secondary">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div>Nov 13, 2025</div>
-                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">09:15:42</div>
-                </td>
-                <td>
-                  <span style="display: flex; align-items: center; gap: var(--space-2);">
-                    <span>⚡</span>
-                    <span>Staking Reward</span>
-                  </span>
-                </td>
-                <td>
-                  <span class="font-semibold">Ethereum</span>
-                </td>
-                <td class="font-semibold">+0.0023 ETH</td>
-                <td>€6.46</td>
-                <td><span class="badge badge-info">Received</span></td>
-                <td>
-                  <button class="btn btn-sm btn-secondary">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div>Nov 12, 2025</div>
-                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">16:45:33</div>
-                </td>
-                <td>
-                  <span style="display: flex; align-items: center; gap: var(--space-2);">
-                    <span>⬆️</span>
-                    <span>Withdrawal</span>
-                  </span>
-                </td>
-                <td>
-                  <span class="font-semibold">Ethereum</span>
-                </td>
-                <td class="font-semibold">-2.5 ETH</td>
-                <td>€7,017.50</td>
-                <td><span class="badge badge-warning">Pending</span></td>
-                <td>
-                  <button class="btn btn-sm btn-secondary">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div>Nov 10, 2025</div>
-                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">11:22:15</div>
-                </td>
-                <td>
-                  <span style="display: flex; align-items: center; gap: var(--space-2);">
-                    <span>⬇️</span>
-                    <span>Deposit</span>
-                  </span>
-                </td>
-                <td>
-                  <span class="font-semibold">Ethereum</span>
-                </td>
-                <td class="font-semibold">+5.0 ETH</td>
-                <td>€14,035.00</td>
-                <td><span class="badge badge-success">Completed</span></td>
-                <td>
-                  <button class="btn btn-sm btn-secondary">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div>Nov 8, 2025</div>
-                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">13:08:47</div>
-                </td>
-                <td>
-                  <span style="display: flex; align-items: center; gap: var(--space-2);">
-                    <span>⬆️</span>
-                    <span>Withdrawal</span>
-                  </span>
-                </td>
-                <td>
-                  <span class="font-semibold">Bitcoin</span>
-                </td>
-                <td class="font-semibold">-0.3 BTC</td>
-                <td>€8,985.00</td>
-                <td><span class="badge badge-success">Completed</span></td>
-                <td>
-                  <button class="btn btn-sm btn-secondary">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div>Nov 5, 2025</div>
-                  <div style="font-size: var(--text-sm); color: var(--text-tertiary);">10:55:23</div>
-                </td>
-                <td>
-                  <span style="display: flex; align-items: center; gap: var(--space-2);">
-                    <span>⚡</span>
-                    <span>Staking Reward</span>
-                  </span>
-                </td>
-                <td>
-                  <span class="font-semibold">Ethereum</span>
-                </td>
-                <td class="font-semibold">+0.0019 ETH</td>
-                <td>€5.33</td>
-                <td><span class="badge badge-info">Received</span></td>
-                <td>
-                  <button class="btn btn-sm btn-secondary">View</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div style="overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-light); text-align: left;">
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Date & Time</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Type</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Asset</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; text-align: right;">Amount</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; text-align: right;">Value (EUR)</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; text-align: right;">Fee</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Tx Hash</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-list">
+                <!-- Row 1: Staking Reward -->
+                <tr data-type="staking-reward" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 19, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">08:30:00</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-success" style="background: rgba(5, 205, 153, 0.1); color: var(--color-success);">🎁 Staking Reward</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #627EEA; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">Ξ</div>
+                      <span>ETH</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--color-success); font-weight: bold;">+0.045 ETH</td>
+                  <td style="padding: var(--space-4); text-align: right;">€126.30</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-tertiary);">-</td>
+                  <td style="padding: var(--space-4);">
+                    <a href="#" style="font-family: monospace; font-size: var(--text-xs);">0x7a...9f2</a>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Completed</span></td>
+                </tr>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-6); border-top: 1px solid var(--border-light);">
-            <div style="color: var(--text-secondary); font-size: var(--text-sm);">Showing 6 of 48 transactions</div>
-            <div style="display: flex; gap: var(--space-2);">
-              <button class="btn btn-sm btn-secondary" disabled>Previous</button>
-              <button class="btn btn-sm btn-secondary">Next</button>
-            </div>
+                <!-- New Row: Staked (Locking) -->
+                <tr data-type="staking-action" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 18, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">16:45:00</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-warning" style="background: rgba(255, 181, 71, 0.1); color: var(--color-warning);">⚡ Staked</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #627EEA; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">Ξ</div>
+                      <span>ETH</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-primary); font-weight: bold;">-5.00 ETH</td>
+                  <td style="padding: var(--space-4); text-align: right;">€14,033.00</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-secondary);">0.002 ETH</td>
+                  <td style="padding: var(--space-4);">
+                    <a href="#" style="font-family: monospace; font-size: var(--text-xs);">0x8b...1c4</a>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Active</span></td>
+                </tr>
+
+                <!-- New Row: Unstaked (Unlocking) -->
+                <tr data-type="staking-action" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 18, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">10:15:00</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-info" style="background: rgba(17, 205, 239, 0.1); color: var(--color-info);">⚡ Unstaked</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #8247E5; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">⬡</div>
+                      <span>POL</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--color-success); font-weight: bold;">+1,000 POL</td>
+                  <td style="padding: var(--space-4); text-align: right;">€880.00</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-tertiary);">-</td>
+                  <td style="padding: var(--space-4);">
+                    <a href="#" style="font-family: monospace; font-size: var(--text-xs);">0x3d...7e9</a>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Completed</span></td>
+                </tr>
+
+                <!-- Row 2: Trade (Swap) -->
+                <tr data-type="trade" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 18, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">14:15:22</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-info" style="background: rgba(17, 205, 239, 0.1); color: var(--color-info);">🔄 Trade</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #2775CA; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">$</div>
+                      <span>USDC</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; font-weight: bold;">2,000 USDC</td>
+                  <td style="padding: var(--space-4); text-align: right;">€1,840.00</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-secondary);">€2.50</td>
+                  <td style="padding: var(--space-4);">
+                    <span style="color: var(--text-tertiary); font-size: var(--text-xs);">Internal</span>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Completed</span></td>
+                </tr>
+
+                <!-- Row 3: Platform Commission -->
+                <tr data-type="commission" style="border-bottom: 1px solid var(--border-light); background: rgba(245, 54, 92, 0.02);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 18, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">14:15:22</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-danger" style="background: rgba(245, 54, 92, 0.1); color: var(--color-danger);">🏦 Commission</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #2775CA; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">$</div>
+                      <span>USDC</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--color-danger); font-weight: bold;">-10.00 USDC</td>
+                  <td style="padding: var(--space-4); text-align: right;">€9.20</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-tertiary);">-</td>
+                  <td style="padding: var(--space-4);">
+                    <span style="color: var(--text-tertiary); font-size: var(--text-xs);">Ref: #TR-992</span>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Paid</span></td>
+                </tr>
+
+                <!-- Row 4: Withdrawal -->
+                <tr data-type="withdrawal" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 15, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">09:45:10</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-warning" style="background: rgba(255, 181, 71, 0.1); color: var(--color-warning);">⬆️ Withdrawal</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #F7931A; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">₿</div>
+                      <span>BTC</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-primary); font-weight: bold;">-0.15 BTC</td>
+                  <td style="padding: var(--space-4); text-align: right;">€4,492.50</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-secondary);">0.0005 BTC</td>
+                  <td style="padding: var(--space-4);">
+                    <a href="#" style="font-family: monospace; font-size: var(--text-xs);">3a1...8c9</a>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Completed</span></td>
+                </tr>
+
+                <!-- Row 5: Network Fee (Gas) -->
+                <tr data-type="fee" style="border-bottom: 1px solid var(--border-light); background: rgba(0,0,0,0.01);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 15, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">09:45:10</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-secondary" style="background: var(--bg-hover); color: var(--text-secondary);">⛽ Network Fee</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #F7931A; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">₿</div>
+                      <span>BTC</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-secondary);">-0.0005 BTC</td>
+                  <td style="padding: var(--space-4); text-align: right;">€14.97</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-tertiary);">-</td>
+                  <td style="padding: var(--space-4);">
+                    <span style="color: var(--text-tertiary); font-size: var(--text-xs);">Gas</span>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Paid</span></td>
+                </tr>
+
+                <!-- Row 6: Deposit -->
+                <tr data-type="deposit" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium);">Nov 10, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">18:20:05</div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <span class="badge badge-success" style="background: rgba(5, 205, 153, 0.1); color: var(--color-success);">⬇️ Deposit</span>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 24px; height: 24px; background: #8247E5; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">⬡</div>
+                      <span>POL</span>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--color-success); font-weight: bold;">+5,000 POL</td>
+                  <td style="padding: var(--space-4); text-align: right;">€4,400.00</td>
+                  <td style="padding: var(--space-4); text-align: right; color: var(--text-tertiary);">-</td>
+                  <td style="padding: var(--space-4);">
+                    <a href="#" style="font-family: monospace; font-size: var(--text-xs);">0x9b...2e1</a>
+                  </td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Completed</span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+
+          <!-- Infinite Scroll Loader -->
+          <div id="loading-indicator" style="display: none; padding: var(--space-6); text-align: center; color: var(--text-secondary);">
+            <div style="display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(0,0,0,0.1); border-radius: 50%; border-top-color: var(--color-primary); animation: spin 1s ease-in-out infinite;"></div>
+            <div style="margin-top: var(--space-2); font-size: var(--text-sm);">Loading more transactions...</div>
+          </div>
+          
+          <style>
+            @keyframes spin {
+              to { transform: rotate(360deg); }
+            }
+          </style>
         </div>
       </div>
     </main>
@@ -339,5 +427,80 @@
 
   
   <script src="../../assets/js/app.js"></script>
+  <script>
+    function exportReport(type) {
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '⏳ Generating...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        showSuccessMessage(`Your ${type.toUpperCase()} report has been generated and downloaded.`);
+      }, 1500);
+    }
+
+    function filterTransactions() {
+      const type = document.getElementById('type-filter').value;
+      const rows = document.querySelectorAll('#transactions-list tr');
+      
+      rows.forEach(row => {
+        if (type === 'all' || row.getAttribute('data-type') === type) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Infinite Scroll Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const tableBody = document.getElementById('transactions-list');
+      const loadingIndicator = document.getElementById('loading-indicator');
+      let isLoading = false;
+
+      // Initial set of rows to clone
+      const initialRows = Array.from(tableBody.querySelectorAll('tr'));
+
+      const loadMoreTransactions = () => {
+        if (isLoading) return;
+        isLoading = true;
+        loadingIndicator.style.display = 'block';
+
+        // Simulate network delay
+        setTimeout(() => {
+          // Clone the initial rows and append them
+          initialRows.forEach(row => {
+            const clone = row.cloneNode(true);
+            tableBody.appendChild(clone);
+          });
+
+          isLoading = false;
+          loadingIndicator.style.display = 'none';
+
+          // If content is still shorter than viewport, load more immediately
+          checkScroll();
+        }, 800); 
+      };
+
+      const checkScroll = () => {
+        // Use document.documentElement.scrollHeight for total page height
+        // Use window.innerHeight + window.scrollY for current bottom position
+        const totalHeight = document.documentElement.scrollHeight;
+        const currentBottom = window.innerHeight + window.scrollY;
+
+        // Trigger if we are near the bottom (within 100px) OR if content is too short
+        if (currentBottom >= totalHeight - 100) {
+          loadMoreTransactions();
+        }
+      };
+
+      window.addEventListener('scroll', checkScroll);
+      
+      // Initial check to fill the page if it's empty or short
+      checkScroll();
+    });
+  </script>
 </body>
 </html>

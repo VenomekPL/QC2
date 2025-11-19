@@ -32,6 +32,10 @@
         <span class="sidebar-nav-text">Transactions</span>
         <span class="sidebar-nav-badge">3</span>
       </a>
+      <a href="address-book.html" class="sidebar-nav-item" data-page="address-book">
+        <span class="sidebar-nav-icon">📖</span>
+        <span class="sidebar-nav-text">Address Book</span>
+      </a>
       <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
         <span class="sidebar-nav-icon">⬇️</span>
         <span class="sidebar-nav-text">Deposit</span>
@@ -130,127 +134,173 @@
 
       <!-- Page Content -->
       <div class="content-container">
-        <!-- Page Header -->
-        <div class="page-header">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item">
-              <a href="dashboard.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">Withdraw</div>
-          </div>
-
-          <div class="page-header-top">
-            <div>
-              <h1 class="page-title">Withdraw Crypto</h1>
-              <p class="page-subtitle">Send crypto to an external wallet</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-2 mb-8">
-          <!-- Withdrawal Form -->
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Withdrawal Details</h2>
-            </div>
-
-            <form onsubmit="handleWithdraw(event)">
-              <div class="form-group">
-                <label>Select Asset</label>
-                <select>
-                  <option>Bitcoin (BTC)</option>
-                  <option>Ethereum (ETH)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Available Balance</label>
-                <div style="padding: var(--space-3); background-color: var(--bg-secondary); border-radius: var(--radius-md); font-weight: var(--font-semibold); font-size: var(--text-lg);">
-                  2.45 BTC (≈ €73,350.00)
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Recipient Address</label>
-                <input type="text" placeholder="Enter destination Bitcoin address" required>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-2);">
-                  Or select from <a href="security.html" class="text-link">whitelisted addresses</a>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Amount (BTC)</label>
-                <input type="number" placeholder="0.00" step="0.00000001" required>
-                <div style="display: flex; gap: var(--space-2); margin-top: var(--space-2);">
-                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='0.6125'">25%</button>
-                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='1.225'">50%</button>
-                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='1.8375'">75%</button>
-                  <button type="button" class="btn btn-sm btn-secondary" onclick="this.closest('form').querySelector('input[type=number]').value='2.45'">MAX</button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Network Fee</label>
-                <select>
-                  <option>Fast (≈10 min) - 0.0001 BTC</option>
-                  <option selected>Standard (≈30 min) - 0.00005 BTC</option>
-                  <option>Economy (≈60 min) - 0.00003 BTC</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>2FA Code (Optional)</label>
-                <input type="text" placeholder="Enter 6-digit code">
-              </div>
-
-              <div class="alert alert-warning mb-6">
-                <strong>Security Notice:</strong> Withdrawals above €10,000 require additional approval and may take up to 24 hours.
-              </div>
-
-              <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Withdrawal Request</button>
-            </form>
-          </div>
-
-          <!-- Withdrawal Information -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-6);">
+          
+          <!-- Main Withdrawal Flow -->
           <div>
-            <div class="card mb-6">
-              <div class="card-header">
-                <h2 class="card-title">Important Information</h2>
+            <!-- Step 1: Select Asset -->
+            <div id="step-asset-selection" class="card mb-8">
+              <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="card-title">1. Select Asset</h2>
+                <div style="position: relative; width: 250px;">
+                  <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">🔍</span>
+                  <input type="text" id="asset-search" placeholder="Search..." style="width: 100%; padding: 8px 8px 8px 32px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" onkeyup="filterAssets()">
+                </div>
               </div>
-
-              <ul style="list-style: disc; padding-left: var(--space-6); color: var(--text-secondary); line-height: 1.8;">
-                <li><strong>Minimum withdrawal:</strong> 0.001 BTC</li>
-                <li><strong>Processing time:</strong> 1-3 hours</li>
-                <li><strong>Daily limit:</strong> 10 BTC</li>
-                <li><strong>Security:</strong> All withdrawals require email confirmation</li>
-                <li><strong>Whitelisting:</strong> Add trusted addresses for faster processing</li>
-              </ul>
+              
+              <div id="asset-grid" class="grid-3" style="margin-top: var(--space-4);">
+                <!-- Assets injected by JS -->
+              </div>
             </div>
 
+            <!-- Step 2: Select Network -->
+            <div id="step-network-selection" class="card mb-8" style="display: none;">
+              <div class="card-header">
+                <button class="btn btn-sm btn-secondary" onclick="resetToAssetSelection()" style="margin-bottom: var(--space-4);">← Back</button>
+                <h2 class="card-title">2. Select Network</h2>
+              </div>
+              <div id="network-grid" class="grid-2" style="margin-top: var(--space-4);">
+                <!-- Networks injected by JS -->
+              </div>
+            </div>
+
+            <!-- Step 3: Withdrawal Details -->
+            <div id="step-withdraw-details" class="card mb-8" style="display: none;">
+              <div class="card-header">
+                <button class="btn btn-sm btn-secondary" onclick="backToPreviousStep()" style="margin-bottom: var(--space-4);">← Back</button>
+                <h2 class="card-title">3. Withdrawal Details</h2>
+              </div>
+
+              <div class="alert alert-info mb-6">
+                You are withdrawing <strong id="wd-asset-symbol">ASSET</strong> on the <strong id="wd-network-name">NETWORK</strong> network.
+              </div>
+
+              <form onsubmit="handleWithdraw(event)">
+                <!-- Address Input -->
+                <div class="form-group">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <label>Recipient Address</label>
+                    <a href="address-book.html" class="text-link" style="font-size: var(--text-xs);">Manage Address Book</a>
+                  </div>
+                  
+                  <select id="wd-address-select" class="form-input" required>
+                    <option value="" disabled selected>Select a whitelisted address...</option>
+                    <!-- Options injected by JS based on network -->
+                  </select>
+                  
+                  <div style="margin-top: var(--space-2); font-size: var(--text-xs); color: var(--text-secondary);">
+                    Only addresses whitelisted for <strong id="wd-network-hint">Network</strong> are available.
+                  </div>
+                </div>
+
+                <!-- Amount Input -->
+                <div class="form-group">
+                  <label>Amount</label>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                    <span style="font-size: var(--text-xs); color: var(--text-secondary);">Available: <span id="wd-balance">0.00</span> <span class="wd-ticker">BTC</span></span>
+                  </div>
+                  <div style="position: relative;">
+                    <input type="number" id="wd-amount" placeholder="0.00" step="any" required oninput="calculateTotal()">
+                    <button type="button" class="btn btn-sm btn-secondary" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%);" onclick="setMaxAmount()">MAX</button>
+                  </div>
+                </div>
+
+                <!-- Summary -->
+                <div style="background: var(--bg-secondary); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-6);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span style="color: var(--text-secondary);">Withdrawal Fee (0.2%)</span>
+                    <span>≈ €<span id="wd-fee-eur">0.00</span></span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-weight: var(--font-bold); border-top: 1px solid var(--border-light); padding-top: var(--space-2);">
+                    <span>Total Deduction</span>
+                    <span><span id="wd-total">0.00</span> <span class="wd-ticker">BTC</span></span>
+                  </div>
+                </div>
+
+                <!-- 2FA -->
+                <div class="form-group">
+                  <label>2FA Code</label>
+                  <input type="text" placeholder="Enter 6-digit Google Authenticator code" required pattern="[0-9]{6}" maxlength="6">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Withdrawal</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Sidebar: Recent Withdrawals -->
+          <div>
             <div class="card">
               <div class="card-header">
                 <h2 class="card-title">Recent Withdrawals</h2>
               </div>
 
-              <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
-                  <span class="font-semibold">0.5 BTC</span>
-                  <span class="badge badge-success">Completed</span>
+              <div id="recent-withdrawals-list">
+                <!-- Pending Item with Timer -->
+                <div class="withdrawal-item pending" id="pending-tx-1" style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span class="font-semibold">150.00 USDC</span>
+                    <span class="badge badge-warning">Pending</span>
+                  </div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">0x483...921a</div>
+                  
+                  <!-- Cancellation Area -->
+                  <div class="cancellation-area" style="margin-top: var(--space-3); background: #FFF4E5; padding: var(--space-2); border-radius: var(--radius-sm); text-align: center;">
+                    <div style="font-size: var(--text-xs); color: #B45309; margin-bottom: var(--space-1);">Cancel within <span id="countdown-timer">59</span>s</div>
+                    <button class="btn btn-sm btn-danger" onclick="cancelWithdrawal('pending-tx-1')" style="width: 100%; font-size: 12px; padding: 4px;">Cancel Request</button>
+                  </div>
                 </div>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qxy2...jhx0wlh</div>
-                <div style="font-size: var(--text-xs); color: var(--text-tertiary); margin-top: var(--space-1);">3 days ago</div>
+
+                <!-- Completed Items -->
+                <div style="padding: var(--space-4); border-bottom: 1px solid var(--border-light);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span class="font-semibold">0.5 BTC</span>
+                    <span class="badge badge-success">Completed</span>
+                  </div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qxy2...jhx0wlh</div>
+                  <div style="font-size: var(--text-xs); color: var(--text-tertiary); margin-top: var(--space-1);">3 days ago</div>
+                </div>
+
+                <div style="padding: var(--space-4);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <span class="font-semibold">1.2 ETH</span>
+                    <span class="badge badge-success">Completed</span>
+                  </div>
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary);">0x71C...8976F</div>
+                  <div style="font-size: var(--text-xs); color: var(--text-tertiary); margin-top: var(--space-1);">1 week ago</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-6">
+              <div class="card-header">
+                <h2 class="card-title">Withdrawal Limits</h2>
+              </div>
+              
+              <!-- Daily Limit -->
+              <div style="margin-bottom: var(--space-4);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2); font-size: var(--text-sm);">
+                  <span style="color: var(--text-secondary);">Daily Limit</span>
+                  <span style="font-weight: var(--font-medium);">€150,000 / €1,000,000</span>
+                </div>
+                <div class="progress-bar" style="height: 6px; background: var(--bg-secondary); border-radius: 3px; overflow: hidden;">
+                  <div style="width: 15%; height: 100%; background: var(--color-primary);"></div>
+                </div>
               </div>
 
-              <div style="padding: var(--space-4);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
-                  <span class="font-semibold">1.2 BTC</span>
-                  <span class="badge badge-success">Completed</span>
+              <!-- Monthly Limit -->
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2); font-size: var(--text-sm);">
+                  <span style="color: var(--text-secondary);">Monthly Limit</span>
+                  <span style="font-weight: var(--font-medium);">€2,450,000 / €10,000,000</span>
                 </div>
-                <div style="font-size: var(--text-sm); color: var(--text-secondary);">bc1qab3...mno5pqr</div>
-                <div style="font-size: var(--text-xs); color: var(--text-tertiary); margin-top: var(--space-1);">1 week ago</div>
+                <div class="progress-bar" style="height: 6px; background: var(--bg-secondary); border-radius: 3px; overflow: hidden;">
+                  <div style="width: 24.5%; height: 100%; background: var(--color-success);"></div>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </main>
@@ -259,5 +309,189 @@
 
   
   <script src="../../assets/js/app.js"></script>
+  <script>
+    // Asset Data (Shared structure with Deposit)
+    const assets = [
+      { id: 'btc', name: 'Bitcoin', symbol: 'BTC', icon: '₿', color: '#F7931A', balance: 2.45, priceEur: 30000, networks: ['Bitcoin'] },
+      { id: 'eth', name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', color: '#627EEA', balance: 18.7, priceEur: 1800, networks: ['Ethereum (ERC20)', 'Arbitrum', 'Optimism'] },
+      { id: 'usdc', name: 'USDC', symbol: 'USDC', icon: '$', color: '#2775CA', balance: 5430.20, priceEur: 0.92, networks: ['Ethereum (ERC20)', 'Solana', 'Polygon', 'Avalanche C-Chain'] },
+      { id: 'usdt', name: 'Tether', symbol: 'USDT', icon: 'T', color: '#26A17B', balance: 1200.00, priceEur: 0.92, networks: ['Ethereum (ERC20)', 'Tron (TRC20)', 'BSC (BEP20)'] },
+      { id: 'sol', name: 'Solana', symbol: 'SOL', icon: 'S', color: '#00FFA3', balance: 145.5, priceEur: 20, networks: ['Solana'] },
+      { id: 'avax', name: 'Avalanche', symbol: 'AVAX', icon: 'A', color: '#E84142', balance: 0, priceEur: 15, networks: ['Avalanche C-Chain'] },
+      { id: 'pol', name: 'Polygon', symbol: 'POL', icon: 'P', color: '#8247E5', balance: 500, priceEur: 0.6, networks: ['Polygon'] }
+    ];
+
+    // Mock Address Book
+    const addressBook = [
+      { label: 'My Ledger', network: 'Bitcoin', address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh' },
+      { label: 'Metamask Main', network: 'Ethereum (ERC20)', address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F' },
+      { label: 'Binance Deposit', network: 'Solana', address: 'HN7cABqLq46Es1jh92dQQisAq662SmxELLLsHHe4YWrH' },
+      { label: 'Trust Wallet', network: 'Ethereum (ERC20)', address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97' }
+    ];
+
+    let selectedAsset = null;
+    let selectedNetwork = null;
+    let countdownInterval;
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAssets(assets);
+      startCountdown();
+    });
+
+    function renderAssets(assetList) {
+      const grid = document.getElementById('asset-grid');
+      grid.innerHTML = assetList.map(asset => `
+        <div class="asset-card" onclick="selectAsset('${asset.id}')" style="padding: var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: var(--space-4);">
+          <div style="width: 40px; height: 40px; background-color: ${asset.color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">${asset.icon}</div>
+          <div>
+            <div style="font-weight: var(--font-bold); color: var(--text-primary);">${asset.name}</div>
+            <div style="font-size: var(--text-xs); color: var(--text-secondary);">${asset.balance} ${asset.symbol}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterAssets() {
+      const query = document.getElementById('asset-search').value.toLowerCase();
+      const filtered = assets.filter(a => a.name.toLowerCase().includes(query) || a.symbol.toLowerCase().includes(query));
+      renderAssets(filtered);
+    }
+
+    function selectAsset(assetId) {
+      selectedAsset = assets.find(a => a.id === assetId);
+      document.getElementById('step-asset-selection').style.display = 'none';
+
+      if (selectedAsset.networks.length > 1) {
+        renderNetworks();
+        document.getElementById('step-network-selection').style.display = 'block';
+      } else {
+        selectNetwork(selectedAsset.networks[0]);
+      }
+    }
+
+    function renderNetworks() {
+      const grid = document.getElementById('network-grid');
+      grid.innerHTML = selectedAsset.networks.map(net => `
+        <div class="network-card" onclick="selectNetwork('${net}')" style="padding: var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.2s;">
+          <div style="font-weight: var(--font-bold); margin-bottom: var(--space-2);">${net}</div>
+          <div style="font-size: var(--text-xs); color: var(--text-secondary);">Fee: 0.2%</div>
+        </div>
+      `).join('');
+    }
+
+    function selectNetwork(networkName) {
+      selectedNetwork = networkName;
+      document.getElementById('step-network-selection').style.display = 'none';
+      document.getElementById('step-asset-selection').style.display = 'none';
+      showWithdrawDetails();
+    }
+
+    function showWithdrawDetails() {
+      const container = document.getElementById('step-withdraw-details');
+      
+      document.getElementById('wd-asset-symbol').textContent = selectedAsset.symbol;
+      document.getElementById('wd-network-name').textContent = selectedNetwork;
+      document.getElementById('wd-network-hint').textContent = selectedNetwork;
+      document.getElementById('wd-balance').textContent = selectedAsset.balance;
+      document.querySelectorAll('.wd-ticker').forEach(el => el.textContent = selectedAsset.symbol);
+      
+      // Populate Address Dropdown
+      const select = document.getElementById('wd-address-select');
+      const validAddresses = addressBook.filter(a => a.network === selectedNetwork);
+      
+      if (validAddresses.length > 0) {
+        select.innerHTML = '<option value="" disabled selected>Select a whitelisted address...</option>' + 
+          validAddresses.map(a => `<option value="${a.address}">${a.label} (${a.address.substring(0,6)}...)</option>`).join('');
+      } else {
+        select.innerHTML = '<option value="" disabled selected>No addresses found for this network</option>';
+      }
+
+      container.style.display = 'block';
+    }
+
+    function calculateTotal() {
+      const amount = parseFloat(document.getElementById('wd-amount').value) || 0;
+      
+      // Fee Calculation: 0.2% of Value in EUR
+      const valueInEur = amount * selectedAsset.priceEur;
+      const feeInEur = valueInEur * 0.002;
+      
+      // Convert Fee back to Asset for Total Deduction (Optional, usually fee is deducted from amount or added on top)
+      // Assuming fee is deducted from balance separately or included in amount. 
+      // Let's display Fee in EUR as requested.
+      
+      document.getElementById('wd-fee-eur').textContent = feeInEur.toFixed(2);
+      document.getElementById('wd-total').textContent = amount.toFixed(6); // Total deduction from balance is just amount + fee (if fee is in crypto)
+      // If fee is in EUR, it might be deducted from EUR balance or converted. 
+      // For simplicity here, we just show the fee in EUR and the total crypto amount to send.
+    }
+
+    function setMaxAmount() {
+      document.getElementById('wd-amount').value = selectedAsset.balance.toFixed(6);
+      calculateTotal();
+    }
+
+    function resetToAssetSelection() {
+      selectedAsset = null;
+      selectedNetwork = null;
+      document.getElementById('step-withdraw-details').style.display = 'none';
+      document.getElementById('step-network-selection').style.display = 'none';
+      document.getElementById('step-asset-selection').style.display = 'block';
+      document.getElementById('wd-amount').value = '';
+      document.getElementById('wd-address-select').selectedIndex = 0;
+    }
+
+    function backToPreviousStep() {
+      document.getElementById('step-withdraw-details').style.display = 'none';
+      if (selectedAsset.networks.length > 1) {
+        document.getElementById('step-network-selection').style.display = 'block';
+      } else {
+        document.getElementById('step-asset-selection').style.display = 'block';
+      }
+    }
+
+    function handleWithdraw(e) {
+      e.preventDefault();
+      alert('Withdrawal request submitted! Check your email for confirmation.');
+    }
+
+    // Countdown Logic for Cancellation
+    function startCountdown() {
+      let seconds = 59;
+      const timerEl = document.getElementById('countdown-timer');
+      const container = document.querySelector('.cancellation-area');
+      
+      if (!timerEl) return;
+
+      countdownInterval = setInterval(() => {
+        seconds--;
+        timerEl.textContent = seconds;
+        
+        if (seconds <= 0) {
+          clearInterval(countdownInterval);
+          container.innerHTML = ''; // Remove cancel button
+          document.querySelector('#pending-tx-1 .badge').className = 'badge badge-info';
+          document.querySelector('#pending-tx-1 .badge').textContent = 'Processing';
+        }
+      }, 1000);
+    }
+
+    function cancelWithdrawal(id) {
+      clearInterval(countdownInterval);
+      const el = document.getElementById(id);
+      
+      // Update UI to show Cancelled state
+      const badge = el.querySelector('.badge');
+      badge.className = 'badge badge-danger';
+      badge.textContent = 'Cancelled';
+      
+      // Remove cancellation area
+      const cancelArea = el.querySelector('.cancellation-area');
+      if (cancelArea) cancelArea.remove();
+      
+      alert('Withdrawal cancelled successfully.');
+    }
+  </script>
 </body>
 </html>

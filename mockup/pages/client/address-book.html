@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Address Book - QCrypto Client Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">QCrypto</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Client</div>
+      <a href="dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+        <span class="sidebar-nav-icon">📊</span>
+        <span class="sidebar-nav-text">Dashboard</span>
+      </a>
+      <a href="wallets.html" class="sidebar-nav-item" data-page="wallets">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Wallets</span>
+      </a>
+      <a href="transactions.html" class="sidebar-nav-item" data-page="transactions">
+        <span class="sidebar-nav-icon">📝</span>
+        <span class="sidebar-nav-text">Transactions</span>
+        <span class="sidebar-nav-badge">3</span>
+      </a>
+      <a href="address-book.html" class="sidebar-nav-item" data-page="address-book">
+        <span class="sidebar-nav-icon">📖</span>
+        <span class="sidebar-nav-text">Address Book</span>
+      </a>
+      <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
+        <span class="sidebar-nav-icon">⬇️</span>
+        <span class="sidebar-nav-text">Deposit</span>
+      </a>
+      <a href="withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+        <span class="sidebar-nav-icon">⬆️</span>
+        <span class="sidebar-nav-text">Withdraw</span>
+      </a>
+      <a href="staking.html" class="sidebar-nav-item" data-page="staking">
+        <span class="sidebar-nav-icon">⚡</span>
+        <span class="sidebar-nav-text">Staking</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">AIFM</div>
+      <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">AIFM Dashboard</span>
+      </a>
+      <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+        <span class="sidebar-nav-icon">💼</span>
+        <span class="sidebar-nav-text">Fund Manager</span>
+      </a>
+      <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+        <span class="sidebar-nav-icon">💹</span>
+        <span class="sidebar-nav-text">Trader</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Operations</div>
+      <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+        <span class="sidebar-nav-icon">📋</span>
+        <span class="sidebar-nav-text">Middle Office</span>
+      </a>
+      <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+        <span class="sidebar-nav-icon">🏦</span>
+        <span class="sidebar-nav-text">Depositary</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Admin</div>
+      <a href="../admin/q-admin-dashboard.html" class="sidebar-nav-item" data-page="q-admin-dashboard">
+        <span class="sidebar-nav-icon">⚙️</span>
+        <span class="sidebar-nav-text">Q-Admin</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <div class="sidebar-nav-section-title">Settings</div>
+      <a href="security.html" class="sidebar-nav-item" data-page="security">
+        <span class="sidebar-nav-icon">🔒</span>
+        <span class="sidebar-nav-text">Security</span>
+      </a>
+      <a href="profile.html" class="sidebar-nav-item" data-page="profile">
+        <span class="sidebar-nav-icon">👤</span>
+        <span class="sidebar-nav-text">Profile</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search addresses...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">5</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Retail Client</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        
+        <!-- Controls -->
+        <div class="card mb-6">
+          <div class="card-header" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+            <h2 class="card-title">Address Book</h2>
+            <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+              <input type="text" id="tag-filter" placeholder="Filter by tag..." class="form-input" style="width: 200px; padding: 6px 12px;" onkeyup="applyFilters()">
+              <select id="network-filter" class="form-input" style="width: auto; padding: 6px 12px;" onchange="applyFilters()">
+                <option value="all">All Networks</option>
+                <option value="Bitcoin">Bitcoin</option>
+                <option value="Ethereum">Ethereum</option>
+                <option value="Solana">Solana</option>
+              </select>
+              <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ Add New Address</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address Grid -->
+        <div id="address-grid" class="grid-3">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Address Modal -->
+  <div id="add-address-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="card" style="width: 500px; max-width: 90%; max-height: 90vh; overflow-y: auto;">
+      <div class="card-header">
+        <h2 class="card-title">Add New Address</h2>
+        <button onclick="closeModal()" style="background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+      </div>
+      
+      <form onsubmit="handleSaveAddress(event)">
+        <div class="mb-4">
+          <label class="d-block mb-2 font-medium">Label</label>
+          <input type="text" id="new-label" required placeholder="e.g. My Ledger Nano" class="form-input">
+        </div>
+        
+        <div class="mb-4">
+          <label class="d-block mb-2 font-medium">Network</label>
+          <select id="new-network" class="form-input" required>
+             <option value="" disabled selected>Select Network</option>
+             <option value="Bitcoin">Bitcoin</option>
+             <option value="Ethereum">Ethereum</option>
+             <option value="Solana">Solana</option>
+             <option value="Polygon">Polygon</option>
+          </select>
+        </div>
+        
+        <div class="mb-4">
+          <label class="d-block mb-2 font-medium">Address</label>
+          <input type="text" id="new-address" required placeholder="Enter wallet address" class="form-input">
+        </div>
+        
+        <div class="mb-6">
+          <label class="d-block mb-2 font-medium">Tags</label>
+          <input type="text" id="new-tags" placeholder="e.g. personal, cold storage (comma separated)" class="form-input">
+          <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: 4px;">Separate multiple tags with commas</div>
+        </div>
+        
+        <div style="display: flex; justify-content: flex-end; gap: var(--space-3);">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Address</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../assets/js/nav-active.js"></script>
+
+
+  
+  <script src="../../assets/js/app.js"></script>
+  <script>
+    // Mock Data
+    let addresses = [
+      { id: 1, label: 'My Ledger Nano', network: 'Bitcoin', address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', status: 'Active', tags: ['cold storage', 'personal'] },
+      { id: 2, label: 'Metamask Main', network: 'Ethereum', address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', status: 'Active', tags: ['defi', 'hot wallet'] },
+      { id: 3, label: 'Binance Deposit', network: 'Solana', address: 'HN7cABqLq46Es1jh92dQQisAq662SmxELLLsHHe4YWrH', status: 'Pending', tags: ['exchange'] },
+      { id: 4, label: 'Trust Wallet', network: 'Ethereum', address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97', status: 'Active', tags: ['mobile'] }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAddresses(addresses);
+    });
+
+    function renderAddresses(list) {
+      const grid = document.getElementById('address-grid');
+      
+      if (list.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">No addresses found matching your filters.</div>';
+        return;
+      }
+
+      grid.innerHTML = list.map(addr => `
+        <div class="card" style="display: flex; flex-direction: column; height: 100%;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4);">
+            <div>
+              <div style="font-weight: var(--font-bold); font-size: var(--text-lg); color: var(--text-primary);">${addr.label}</div>
+              <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: 4px;">${addr.network}</div>
+            </div>
+            <span class="badge badge-${addr.status === 'Active' ? 'success' : 'warning'}">${addr.status}</span>
+          </div>
+          
+          <div style="background: var(--bg-body); padding: var(--space-3); border-radius: var(--radius-sm); margin-bottom: var(--space-4); word-break: break-all; font-family: monospace; font-size: var(--text-xs); color: var(--text-secondary);">
+            ${addr.address}
+          </div>
+
+          <div style="margin-bottom: var(--space-4); display: flex; flex-wrap: wrap; gap: 4px;">
+            ${addr.tags.map(tag => `<span class="badge badge-info" style="font-weight: normal; opacity: 0.8;">#${tag.trim()}</span>`).join('')}
+          </div>
+
+          <div style="margin-top: auto; display: flex; gap: var(--space-2); border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+            <button class="btn btn-sm btn-secondary" style="flex: 1;" onclick="editAddress(${addr.id})">Edit</button>
+            <button class="btn btn-sm btn-outline-secondary" style="flex: 1; color: var(--color-danger); border-color: var(--border-light);" onclick="deleteAddress(${addr.id})">Remove</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function applyFilters() {
+      const network = document.getElementById('network-filter').value;
+      const tagQuery = document.getElementById('tag-filter').value.toLowerCase();
+      
+      let filtered = addresses;
+
+      if (network !== 'all') {
+        filtered = filtered.filter(a => a.network === network);
+      }
+
+      if (tagQuery) {
+        filtered = filtered.filter(a => a.tags.some(t => t.toLowerCase().includes(tagQuery)));
+      }
+
+      renderAddresses(filtered);
+    }
+
+    function openAddModal() {
+      document.getElementById('add-address-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('add-address-modal').style.display = 'none';
+      // Reset form
+      document.getElementById('new-label').value = '';
+      document.getElementById('new-network').selectedIndex = 0;
+      document.getElementById('new-address').value = '';
+      document.getElementById('new-tags').value = '';
+    }
+
+    function handleSaveAddress(e) {
+      e.preventDefault();
+      
+      const label = document.getElementById('new-label').value;
+      const network = document.getElementById('new-network').value;
+      const address = document.getElementById('new-address').value;
+      const tagsStr = document.getElementById('new-tags').value;
+      
+      const tags = tagsStr.split(',').map(t => t.trim()).filter(t => t.length > 0);
+
+      const newId = addresses.length > 0 ? Math.max(...addresses.map(a => a.id)) + 1 : 1;
+
+      const newAddr = {
+        id: newId,
+        label,
+        network,
+        address,
+        status: 'Active', // Default to active for mock
+        tags
+      };
+
+      addresses.push(newAddr);
+      applyFilters(); // Re-render with filters applied
+      closeModal();
+      
+      // Show success feedback (optional)
+      // alert('Address added successfully!');
+    }
+
+    function editAddress(id) {
+      alert('Edit functionality would open the modal pre-filled for ID: ' + id);
+    }
+
+    function deleteAddress(id) {
+      if(confirm('Are you sure you want to remove this address?')) {
+        addresses = addresses.filter(a => a.id !== id);
+        applyFilters();
+      }
+    }
+  </script>
+</body>
+</html>

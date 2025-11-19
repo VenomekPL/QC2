@@ -32,6 +32,10 @@
         <span class="sidebar-nav-text">Transactions</span>
         <span class="sidebar-nav-badge">3</span>
       </a>
+      <a href="address-book.html" class="sidebar-nav-item" data-page="address-book">
+        <span class="sidebar-nav-icon">📖</span>
+        <span class="sidebar-nav-text">Address Book</span>
+      </a>
       <a href="deposit.html" class="sidebar-nav-item" data-page="deposit">
         <span class="sidebar-nav-icon">⬇️</span>
         <span class="sidebar-nav-text">Deposit</span>
@@ -130,100 +134,81 @@
 
       <!-- Page Content -->
       <div class="content-container">
-        <!-- Page Header -->
-        <div class="page-header">
-          <div class="breadcrumbs">
-            <div class="breadcrumb-item">
-              <a href="dashboard.html" class="breadcrumb-link">Home</a>
+        <!-- Step 1: Select Asset -->
+        <div id="step-asset-selection" class="card mb-8">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="card-title">1. Select Asset</h2>
+            <div style="position: relative; width: 300px;">
+              <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">🔍</span>
+              <input type="text" id="asset-search" placeholder="Search by name or symbol..." style="width: 100%; padding: 10px 10px 10px 36px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" onkeyup="filterAssets()">
             </div>
-            <div class="breadcrumb-item">Deposit</div>
-          </div>
-
-          <div class="page-header-top">
-            <div>
-              <h1 class="page-title">Deposit Crypto</h1>
-              <p class="page-subtitle">Transfer crypto from an external wallet</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Asset Selection -->
-        <div class="card mb-8">
-          <div class="card-header">
-            <h2 class="card-title">Select Asset</h2>
           </div>
           
-          <div class="grid-2">
-            <div style="padding: var(--space-6); border: 2px solid var(--color-primary); border-radius: var(--radius-lg); cursor: pointer; background-color: var(--color-primary-pale);">
-              <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4);">
-                <div style="width: 48px; height: 48px; background-color: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">₿</div>
-                <div>
-                  <h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold);">Bitcoin</h3>
-                  <div style="color: var(--text-secondary);">BTC</div>
-                </div>
-              </div>
-              <div style="font-size: var(--text-sm); color: var(--text-secondary);">Current Balance: 2.45 BTC</div>
-            </div>
-
-            <div style="padding: var(--space-6); border: 2px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer;" onclick="this.previousElementSibling.style.borderColor='var(--border-light)'; this.previousElementSibling.style.backgroundColor='white'; this.style.borderColor='var(--color-primary)'; this.style.backgroundColor='var(--color-primary-pale)';">
-              <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4);">
-                <div style="width: 48px; height: 48px; background-color: #627EEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Ξ</div>
-                <div>
-                  <h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold);">Ethereum</h3>
-                  <div style="color: var(--text-secondary);">ETH</div>
-                </div>
-              </div>
-              <div style="font-size: var(--text-sm); color: var(--text-secondary);">Current Balance: 18.7 ETH</div>
-            </div>
+          <div id="asset-grid" class="grid-3" style="margin-top: var(--space-4);">
+            <!-- Assets will be injected here by JS -->
           </div>
         </div>
 
-        <!-- Deposit Instructions -->
-        <div class="card mb-8">
+        <!-- Step 2: Select Network (Hidden by default) -->
+        <div id="step-network-selection" class="card mb-8" style="display: none;">
           <div class="card-header">
-            <h2 class="card-title">Your Deposit Address</h2>
+            <button class="btn btn-sm btn-secondary" onclick="resetToAssetSelection()" style="margin-bottom: var(--space-4);">← Back to Assets</button>
+            <h2 class="card-title">2. Select Network</h2>
+            <p class="text-secondary" style="margin-top: var(--space-2);">Please ensure you select the correct network. Sending funds to the wrong network may result in loss.</p>
           </div>
-
-          <div class="alert alert-info mb-6">
-            Only send <strong>Bitcoin (BTC)</strong> to this address. Sending any other asset will result in permanent loss.
-          </div>
-
-          <div style="margin-bottom: var(--space-6);">
-            <label style="display: block; margin-bottom: var(--space-3); font-weight: var(--font-semibold);">Bitcoin Address</label>
-            <div style="display: flex; gap: var(--space-3);">
-              <input type="text" value="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" readonly style="flex: 1; font-family: monospace; background-color: var(--bg-secondary);">
-              <button class="btn btn-secondary" onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)">Copy</button>
-            </div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-6); background-color: var(--bg-secondary); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-3);">QR Code</div>
-            <div style="width: 200px; height: 200px; background-color: white; margin: 0 auto; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary);">
-              [QR Code Image]
-            </div>
+          
+          <div id="network-grid" class="grid-2" style="margin-top: var(--space-4);">
+            <!-- Networks will be injected here by JS -->
           </div>
         </div>
 
-        <!-- Deposit Information -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Important Information</h2>
-          </div>
+        <!-- Step 3: Deposit Details (Hidden by default) -->
+        <div id="step-deposit-details" style="display: none;">
+          <div class="card mb-8">
+            <div class="card-header">
+              <button class="btn btn-sm btn-secondary" onclick="backToPreviousStep()" style="margin-bottom: var(--space-4);">← Back</button>
+              <h2 class="card-title">3. Deposit Details</h2>
+            </div>
 
-          <ul style="list-style: disc; padding-left: var(--space-6); color: var(--text-secondary); line-height: 1.8;">
-            <li>Minimum deposit: 0.001 BTC</li>
-            <li>Network confirmations required: 3 confirmations</li>
-            <li>Estimated arrival time: 30-60 minutes after confirmations</li>
-            <li>Network fee: Paid by sender</li>
-            <li>Your deposit will be credited automatically after blockchain confirmation</li>
-          </ul>
+            <div style="display: flex; gap: var(--space-8); flex-wrap: wrap;">
+              <!-- QR Code Section -->
+              <div style="flex: 0 0 250px; text-align: center;">
+                <div style="background: white; padding: var(--space-4); border-radius: var(--radius-lg); border: 1px solid var(--border-light); display: inline-block;">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" alt="QR Code" style="width: 200px; height: 200px; display: block;">
+                </div>
+                <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-secondary);">Scan to Deposit</p>
+              </div>
 
-          <div class="alert alert-warning mt-6">
-            <strong>Note:</strong> This address is unique to you. Do not share it publicly as it is linked to your account.
-          </div>
+              <!-- Address Details -->
+              <div style="flex: 1; min-width: 300px;">
+                <div class="alert alert-warning mb-6">
+                  Send only <strong id="selected-asset-symbol">ASSET</strong> to this address on the <strong id="selected-network-name">NETWORK</strong> network.
+                </div>
 
-          <div style="text-align: center; margin-top: var(--space-6);">
-            <button class="btn btn-primary" onclick="handleDeposit(event)">I've Sent the Funds</button>
+                <div style="margin-bottom: var(--space-6);">
+                  <label style="display: block; margin-bottom: var(--space-2); font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--text-secondary);">Deposit Address</label>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <div style="flex: 1; background: var(--bg-secondary); padding: var(--space-3); border-radius: var(--radius-md); font-family: monospace; word-break: break-all;" id="deposit-address">
+                      0x...
+                    </div>
+                    <button class="btn btn-secondary" onclick="copyAddress()">
+                      <span>📋</span> Copy
+                    </button>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div>
+                    <label style="display: block; margin-bottom: var(--space-1); font-size: var(--text-xs); font-weight: var(--font-bold); color: var(--text-secondary);">Minimum Deposit</label>
+                    <div style="font-weight: var(--font-medium);">0.0001 <span class="asset-ticker">BTC</span></div>
+                  </div>
+                  <div>
+                    <label style="display: block; margin-bottom: var(--space-1); font-size: var(--text-xs); font-weight: var(--font-bold); color: var(--text-secondary);">Expected Arrival</label>
+                    <div style="font-weight: var(--font-medium);">~15 mins (3 confirmations)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -233,5 +218,132 @@
 
   
   <script src="../../assets/js/app.js"></script>
+  <script>
+    // Asset Data
+    const assets = [
+      { id: 'btc', name: 'Bitcoin', symbol: 'BTC', icon: '₿', color: '#F7931A', networks: ['Bitcoin'] },
+      { id: 'eth', name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', color: '#627EEA', networks: ['Ethereum (ERC20)', 'Arbitrum', 'Optimism'] },
+      { id: 'usdc', name: 'USDC', symbol: 'USDC', icon: '$', color: '#2775CA', networks: ['Ethereum (ERC20)', 'Solana', 'Polygon', 'Avalanche C-Chain'] },
+      { id: 'usdt', name: 'Tether', symbol: 'USDT', icon: 'T', color: '#26A17B', networks: ['Ethereum (ERC20)', 'Tron (TRC20)', 'BSC (BEP20)'] },
+      { id: 'sol', name: 'Solana', symbol: 'SOL', icon: 'S', color: '#00FFA3', networks: ['Solana'] },
+      { id: 'avax', name: 'Avalanche', symbol: 'AVAX', icon: 'A', color: '#E84142', networks: ['Avalanche C-Chain'] },
+      { id: 'pol', name: 'Polygon', symbol: 'POL', icon: 'P', color: '#8247E5', networks: ['Polygon'] }
+    ];
+
+    let selectedAsset = null;
+    let selectedNetwork = null;
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAssets(assets);
+    });
+
+    function renderAssets(assetList) {
+      const grid = document.getElementById('asset-grid');
+      grid.innerHTML = assetList.map(asset => `
+        <div class="asset-card" onclick="selectAsset('${asset.id}')" style="padding: var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: var(--space-4);">
+          <div style="width: 40px; height: 40px; background-color: ${asset.color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">${asset.icon}</div>
+          <div>
+            <div style="font-weight: var(--font-bold); color: var(--text-primary);">${asset.name}</div>
+            <div style="font-size: var(--text-xs); color: var(--text-secondary);">${asset.symbol}</div>
+          </div>
+          <div style="margin-left: auto;">
+            ${asset.networks.length > 1 ? `<span class="badge badge-secondary" style="font-size: 10px;">${asset.networks.length} Networks</span>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterAssets() {
+      const query = document.getElementById('asset-search').value.toLowerCase();
+      const filtered = assets.filter(a => a.name.toLowerCase().includes(query) || a.symbol.toLowerCase().includes(query));
+      renderAssets(filtered);
+    }
+
+    function selectAsset(assetId) {
+      selectedAsset = assets.find(a => a.id === assetId);
+      
+      // Hide Asset Selection
+      document.getElementById('step-asset-selection').style.display = 'none';
+
+      if (selectedAsset.networks.length > 1) {
+        // Show Network Selection
+        renderNetworks();
+        document.getElementById('step-network-selection').style.display = 'block';
+      } else {
+        // Skip to Details (Single Network)
+        selectNetwork(selectedAsset.networks[0]);
+      }
+    }
+
+    function renderNetworks() {
+      const grid = document.getElementById('network-grid');
+      grid.innerHTML = selectedAsset.networks.map(net => `
+        <div class="network-card" onclick="selectNetwork('${net}')" style="padding: var(--space-4); border: 1px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.2s;">
+          <div style="font-weight: var(--font-bold); margin-bottom: var(--space-2);">${net}</div>
+          <div style="font-size: var(--text-xs); color: var(--text-secondary);">Average arrival: ~5 mins</div>
+        </div>
+      `).join('');
+    }
+
+    function selectNetwork(networkName) {
+      selectedNetwork = networkName;
+      
+      // Hide previous steps
+      document.getElementById('step-network-selection').style.display = 'none';
+      document.getElementById('step-asset-selection').style.display = 'none';
+
+      // Show Details
+      showDepositDetails();
+    }
+
+    function showDepositDetails() {
+      const container = document.getElementById('step-deposit-details');
+      
+      // Update UI
+      document.getElementById('selected-asset-symbol').textContent = selectedAsset.symbol;
+      document.getElementById('selected-network-name').textContent = selectedNetwork;
+      
+      // Mock Address Generation
+      const mockAddress = generateMockAddress(selectedAsset.symbol, selectedNetwork);
+      document.getElementById('deposit-address').textContent = mockAddress;
+      
+      // Update Tickers
+      document.querySelectorAll('.asset-ticker').forEach(el => el.textContent = selectedAsset.symbol);
+
+      container.style.display = 'block';
+    }
+
+    function generateMockAddress(symbol, network) {
+      if (symbol === 'BTC') return 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh';
+      if (symbol === 'SOL') return 'HN7cABqLq46Es1jh92dQQisAq662SmxELLLsHHe4YWrH';
+      if (network.includes('Tron')) return 'T9yD14Nj9j7xAB4dbGeiX9h8zzCyrLO8';
+      return '0x71C7656EC7ab88b098defB751B7401B5f6d8976F';
+    }
+
+    function resetToAssetSelection() {
+      selectedAsset = null;
+      selectedNetwork = null;
+      document.getElementById('step-deposit-details').style.display = 'none';
+      document.getElementById('step-network-selection').style.display = 'none';
+      document.getElementById('step-asset-selection').style.display = 'block';
+    }
+
+    function backToPreviousStep() {
+      document.getElementById('step-deposit-details').style.display = 'none';
+      if (selectedAsset.networks.length > 1) {
+        document.getElementById('step-network-selection').style.display = 'block';
+      } else {
+        document.getElementById('step-asset-selection').style.display = 'block';
+      }
+    }
+
+    function copyAddress() {
+      const address = document.getElementById('deposit-address').textContent.trim();
+      navigator.clipboard.writeText(address).then(() => {
+        showSuccessMessage('Address copied to clipboard!');
+      });
+    }
+  </script>
 </body>
 </html>
