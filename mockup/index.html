@@ -17,17 +17,23 @@
 
     .landing-header {
       padding: var(--space-6) var(--space-8);
-      background-color: var(--bg-primary);
+      background-color: var(--bg-card);
       box-shadow: var(--shadow-sm);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo {
       font-size: var(--text-2xl);
       font-weight: var(--font-bold);
-      color: var(--color-primary);
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
     }
 
     .landing-nav {
@@ -39,7 +45,7 @@
     .landing-nav a {
       color: var(--text-secondary);
       font-weight: var(--font-medium);
-      transition: color var(--transition-fast);
+      transition: color var(--transition);
     }
 
     .landing-nav a:hover {
@@ -51,26 +57,37 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: var(--space-16) var(--space-8);
-      color: var(--text-inverse);
+      background: var(--brand-primary);
+      background-image: radial-gradient(circle at 100% 0%, #4318FF 0%, var(--brand-primary) 50%);
+      padding: var(--space-12) var(--space-8);
+      color: var(--text-white);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-content {
       max-width: 800px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-title {
-      font-size: var(--text-4xl);
+      font-size: 48px;
+      font-weight: var(--font-bold);
       margin-bottom: var(--space-6);
-      line-height: 1.2;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
-      font-size: var(--text-xl);
+      font-size: var(--text-lg);
       margin-bottom: var(--space-8);
       opacity: 0.9;
+      font-weight: var(--font-regular);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .hero-buttons {
@@ -80,8 +97,8 @@
     }
 
     .features-section {
-      padding: var(--space-16) var(--space-8);
-      background-color: var(--bg-primary);
+      padding: var(--space-12) var(--space-8);
+      background-color: var(--bg-body);
     }
 
     .features-container {
