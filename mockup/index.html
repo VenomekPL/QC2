@@ -78,6 +78,7 @@
       margin-bottom: var(--space-6);
       line-height: 1.1;
       letter-spacing: -0.02em;
+      color: var(--text-white);
     }
 
     .hero-subtitle {
@@ -88,12 +89,25 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      color: var(--text-white);
     }
 
     .hero-buttons {
       display: flex;
       gap: var(--space-4);
       justify-content: center;
+    }
+    
+    .btn-outline-white {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      color: var(--text-white);
+    }
+    
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-white);
+      color: var(--text-white);
     }
 
     .features-section {
@@ -175,7 +189,7 @@
       <nav class="landing-nav">
         <a href="#features">Features</a>
         <a href="#about">About</a>
-        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+        <a href="login.html" class="btn btn-outline-secondary btn-sm">Login</a>
         <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
       </nav>
     </header>
@@ -189,7 +203,7 @@
         </p>
         <div class="hero-buttons">
           <a href="register.html" class="btn btn-primary btn-lg">Start Your Journey</a>
-          <a href="#features" class="btn btn-outline btn-lg" style="border-color: white; color: white;">Learn More</a>
+          <a href="#features" class="btn btn-outline-white btn-lg">Learn More</a>
         </div>
       </div>
     </section>
