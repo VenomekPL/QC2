@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Clients - QCrypto Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+      <div class="sidebar-logo">
+        <span class="sidebar-logo-text">QCrypto</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Client</div>
+          <a href="../client/dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+            <span class="sidebar-nav-icon">📊</span>
+            <span class="sidebar-nav-text">Dashboard</span>
+          </a>
+          <a href="../client/wallets.html" class="sidebar-nav-item" data-page="wallets">
+            <span class="sidebar-nav-icon">💼</span>
+            <span class="sidebar-nav-text">Wallets</span>
+          </a>
+          <a href="../client/transactions.html" class="sidebar-nav-item" data-page="transactions">
+            <span class="sidebar-nav-icon">📝</span>
+            <span class="sidebar-nav-text">Transactions</span>
+            <span class="sidebar-nav-badge">3</span>
+          </a>
+          <a href="../client/address-book.html" class="sidebar-nav-item" data-page="address-book">
+            <span class="sidebar-nav-icon">📖</span>
+            <span class="sidebar-nav-text">Address Book</span>
+          </a>
+          <a href="../client/deposit.html" class="sidebar-nav-item" data-page="deposit">
+            <span class="sidebar-nav-icon">⬇️</span>
+            <span class="sidebar-nav-text">Deposit</span>
+          </a>
+          <a href="../client/withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+            <span class="sidebar-nav-icon">⬆️</span>
+            <span class="sidebar-nav-text">Withdraw</span>
+          </a>
+          <a href="../client/staking.html" class="sidebar-nav-item" data-page="staking">
+            <span class="sidebar-nav-icon">⚡</span>
+            <span class="sidebar-nav-text">Staking</span>
+          </a>
+          <a href="../client/settlement.html" class="sidebar-nav-item" data-page="settlement">
+            <span class="sidebar-nav-icon">🏛️</span>
+            <span class="sidebar-nav-text">Settlement</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Admin</div>
+          <a href="admin-overview.html" class="sidebar-nav-item" data-page="admin-overview">
+            <span class="sidebar-nav-icon">📊</span>
+            <span class="sidebar-nav-text">Overview</span>
+          </a>
+          <a href="admin-clients.html" class="sidebar-nav-item active" data-page="admin-clients">
+            <span class="sidebar-nav-icon">👥</span>
+            <span class="sidebar-nav-text">Clients</span>
+          </a>
+          <a href="admin-users.html" class="sidebar-nav-item" data-page="admin-users">
+            <span class="sidebar-nav-icon">👤</span>
+            <span class="sidebar-nav-text">Users</span>
+          </a>
+          <a href="admin-crypto.html" class="sidebar-nav-item" data-page="admin-crypto">
+            <span class="sidebar-nav-icon">🪙</span>
+            <span class="sidebar-nav-text">Crypto</span>
+          </a>
+          <a href="admin-settlement.html" class="sidebar-nav-item" data-page="admin-settlement">
+            <span class="sidebar-nav-icon">🏛️</span>
+            <span class="sidebar-nav-text">Settlement</span>
+          </a>
+          <a href="admin-compliance.html" class="sidebar-nav-item" data-page="admin-compliance">
+            <span class="sidebar-nav-icon">📜</span>
+            <span class="sidebar-nav-text">Compliance</span>
+          </a>
+          <a href="admin-administration.html" class="sidebar-nav-item" data-page="admin-administration">
+            <span class="sidebar-nav-icon">⚙️</span>
+            <span class="sidebar-nav-text">Administration</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">AIFM</div>
+          <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+            <span class="sidebar-nav-icon">🏦</span>
+            <span class="sidebar-nav-text">AIFM Dashboard</span>
+          </a>
+          <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+            <span class="sidebar-nav-icon">💼</span>
+            <span class="sidebar-nav-text">Fund Manager</span>
+          </a>
+          <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+            <span class="sidebar-nav-icon">💹</span>
+            <span class="sidebar-nav-text">Trader</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Operations</div>
+          <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+            <span class="sidebar-nav-icon">📋</span>
+            <span class="sidebar-nav-text">Middle Office</span>
+          </a>
+          <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+            <span class="sidebar-nav-icon">🏦</span>
+            <span class="sidebar-nav-text">Depositary</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Settings</div>
+          <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
+            <span class="sidebar-nav-icon">🔒</span>
+            <span class="sidebar-nav-text">Security</span>
+          </a>
+          <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
+            <span class="sidebar-nav-icon">👤</span>
+            <span class="sidebar-nav-text">Profile</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">2</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">AD</div>
+            <div class="user-info">
+              <div class="user-name">Admin User</div>
+              <div class="user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Client Management</h1>
+            <p class="page-subtitle">Manage corporate clients, KYB status, and onboarding.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openNewClientModal()">
+            <span class="btn-icon">➕</span> New Corporate Client
+          </button>
+        </div>
+
+        <!-- Client Stats -->
+        <div class="grid-4 mb-6">
+          <div class="stat-card">
+            <div class="stat-card-label">Total Clients</div>
+            <div class="stat-card-value">142</div>
+            <div class="stat-card-change positive"><span>▲</span><span>12 this month</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Pending KYB</div>
+            <div class="stat-card-value">8</div>
+            <div class="stat-card-change warning"><span>●</span><span>Action Required</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Pending UBOs</div>
+            <div class="stat-card-value">15</div>
+            <div class="text-secondary text-sm mt-1">Waiting for docs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Rejected</div>
+            <div class="stat-card-value">3</div>
+            <div class="text-secondary text-sm mt-1">Last 30 days</div>
+          </div>
+        </div>
+
+        <!-- Clients Table -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Corporate Clients</h2>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline">Filter</button>
+              <button class="btn btn-sm btn-outline">Export</button>
+            </div>
+          </div>
+          <div class="table-container" style="overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-light); text-align: left;">
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Company Name</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Type</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Country</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Reg. Number</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">KYB Status</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">UBOs / Directors</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div class="font-semibold">Alpha Capital Ltd</div>
+                    <div class="text-xs text-secondary">Added: Nov 20, 2025</div>
+                  </td>
+                  <td style="padding: var(--space-4);">LTD</td>
+                  <td style="padding: var(--space-4);">🇬🇧 UK</td>
+                  <td style="padding: var(--space-4);">12345678</td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-warning">In Progress</span></td>
+                  <td style="padding: var(--space-4);">
+                    <div class="text-xs">
+                      <div>UBOs: <span class="text-success">1/2 Verified</span></div>
+                      <div>Dirs: <span class="text-success">2/2 Verified</span></div>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <button class="btn btn-sm btn-outline" onclick="openClientDetails('Alpha Capital Ltd')">Manage</button>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div class="font-semibold">BlueSky Ventures GmbH</div>
+                    <div class="text-xs text-secondary">Added: Nov 15, 2025</div>
+                  </td>
+                  <td style="padding: var(--space-4);">GmbH</td>
+                  <td style="padding: var(--space-4);">🇩🇪 Germany</td>
+                  <td style="padding: var(--space-4);">HRB 98765</td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Verified</span></td>
+                  <td style="padding: var(--space-4);">
+                    <div class="text-xs">
+                      <div>UBOs: <span class="text-success">1/1 Verified</span></div>
+                      <div>Dirs: <span class="text-success">1/1 Verified</span></div>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <button class="btn btn-sm btn-outline" onclick="openClientDetails('BlueSky Ventures GmbH')">Manage</button>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div class="font-semibold">Quantum Trading PLC</div>
+                    <div class="text-xs text-secondary">Added: Nov 22, 2025</div>
+                  </td>
+                  <td style="padding: var(--space-4);">PLC</td>
+                  <td style="padding: var(--space-4);">🇪🇪 Estonia</td>
+                  <td style="padding: var(--space-4);">11223344</td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-danger">Action Needed</span></td>
+                  <td style="padding: var(--space-4);">
+                    <div class="text-xs">
+                      <div>UBOs: <span class="text-danger">0/3 Verified</span></div>
+                      <div>Dirs: <span class="text-warning">1/2 Pending</span></div>
+                    </div>
+                  </td>
+                  <td style="padding: var(--space-4);">
+                    <button class="btn btn-sm btn-outline" onclick="openClientDetails('Quantum Trading PLC')">Manage</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Client Modal -->
+  <div id="new-client-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Onboard New Corporate Client</h3>
+        <button class="btn-icon" onclick="closeNewClientModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Step Indicator -->
+        <div class="steps mb-6" style="display: flex; gap: 1rem; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+          <div id="step-indicator-1" class="step active" style="font-weight: bold; color: var(--brand-primary);">1. Company Profile</div>
+          <div id="step-indicator-2" class="step text-secondary">2. Key People</div>
+          <div id="step-indicator-3" class="step text-secondary">3. Review & Invite</div>
+        </div>
+
+        <form id="new-client-form">
+          
+          <!-- STEP 1: Company Profile -->
+          <div id="step-1" class="step-content">
+            <div class="grid-2 gap-4 mb-4">
+              <div class="form-group">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-input" placeholder="e.g. Acme Corp">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Company Type</label>
+                <select class="form-input" id="company-type-select" onchange="toggleOtherType()">
+                  <option value="LTD">Limited Liability Company (LTD)</option>
+                  <option value="PLC">Public Limited Company (PLC)</option>
+                  <option value="GmbH">GmbH</option>
+                  <option value="OU">OÜ</option>
+                  <option value="Other">Other</option>
+                </select>
+                <input type="text" id="company-type-other" class="form-input mt-2" placeholder="Specify Company Type" style="display: none;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Registration Number</label>
+                <input type="text" class="form-input" placeholder="Registration ID">
+              </div>
+              <div class="form-group">
+                <label class="form-label">VAT / TIN ID</label>
+                <input type="text" class="form-input" placeholder="Tax Identification Number">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Country of Incorporation</label>
+                <select class="form-input">
+                  <option>United Kingdom</option>
+                  <option>Germany</option>
+                  <option>Estonia</option>
+                  <option>Switzerland</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group mb-4">
+              <label class="form-label">Registered Address</label>
+              <input type="text" class="form-input mb-2" placeholder="Street Address">
+              <div class="grid-2 gap-4">
+                <input type="text" class="form-input" placeholder="City">
+                <input type="text" class="form-input" placeholder="Postal Code">
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: Key People -->
+          <div id="step-2" class="step-content" style="display: none;">
+            <div class="section-title mb-4">Key People</div>
+            
+            <!-- UBO Section -->
+            <div class="mb-6 p-4 bg-secondary rounded">
+              <div class="flex justify-between items-center mb-3">
+                <h4 class="font-semibold">Ultimate Beneficial Owners (UBOs)</h4>
+                <button type="button" class="btn btn-sm btn-outline" onclick="addPersonRow('ubo-list')">+ Add UBO</button>
+              </div>
+              <div id="ubo-list" class="space-y-3">
+                <!-- Dynamic Rows will go here -->
+                <div class="grid-3 gap-2 items-center person-row" data-type="UBO">
+                  <input type="text" class="form-input person-name" placeholder="Full Name">
+                  <input type="email" class="form-input person-email" placeholder="Email Address">
+                  <input type="text" class="form-input person-role" placeholder="% Ownership">
+                </div>
+              </div>
+              <p class="text-xs text-secondary mt-2">We will send a KYC verification link to these emails.</p>
+            </div>
+
+            <!-- Directors Section -->
+            <div class="mb-6 p-4 bg-secondary rounded">
+              <div class="flex justify-between items-center mb-3">
+                <h4 class="font-semibold">Directors</h4>
+                <button type="button" class="btn btn-sm btn-outline" onclick="addPersonRow('director-list')">+ Add Director</button>
+              </div>
+              <div id="director-list" class="space-y-3">
+                <div class="grid-3 gap-2 items-center person-row" data-type="Director">
+                  <input type="text" class="form-input person-name" placeholder="Full Name">
+                  <input type="email" class="form-input person-email" placeholder="Email Address">
+                  <input type="text" class="form-input person-role" placeholder="Title (e.g. CEO)">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Review & Invite -->
+          <div id="step-3" class="step-content" style="display: none;">
+            <div class="section-title mb-4">Review & Send Invites</div>
+            <p class="text-secondary mb-4">Review the list of people to onboard. Select the actions to perform for each person.</p>
+            
+            <div id="review-list" class="space-y-4">
+              <!-- Dynamic Review Items -->
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btn-back" onclick="prevStep()" style="display: none;">Back</button>
+        <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Next</button>
+        <button class="btn btn-primary" id="btn-submit" onclick="submitNewClient()" style="display: none;">Create & Send Invites</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Details Drawer (Mockup) -->
+  <div id="client-details-drawer" class="modal-overlay" style="display: none; justify-content: flex-end;">
+    <div class="modal-container" style="height: 100vh; width: 600px; margin: 0; border-radius: 0; max-height: none; overflow-y: auto;">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="drawer-client-name">Client Name</h3>
+          <span class="badge badge-warning mt-1">KYB In Progress</span>
+        </div>
+        <button class="btn-icon" onclick="closeClientDetails()">✕</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- KYB Status Section -->
+        <div class="card mb-6">
+          <div class="card-header">
+            <h4 class="card-title">Company Verification (KYB)</h4>
+            <span class="badge badge-outline">SumSub</span>
+          </div>
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-2">
+              <span>Registry Check</span>
+              <span class="text-success font-semibold">✓ Passed</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span>AML Screening</span>
+              <span class="text-success font-semibold">✓ Passed</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span>Document Review</span>
+              <span class="text-warning font-semibold">⟳ Pending</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- People Verification Section -->
+        <div class="section-title mb-4">Key People Verification</div>
+        
+        <div class="space-y-4">
+          <!-- Person 1 -->
+          <div class="card p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="font-semibold">John Doe</div>
+                <div class="text-sm text-secondary">UBO (45%)</div>
+                <div class="text-xs text-secondary">john.doe@example.com</div>
+              </div>
+              <span class="badge badge-success">Verified</span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-light flex gap-2">
+              <button class="btn btn-xs btn-outline">View Report</button>
+            </div>
+          </div>
+
+          <!-- Person 2 -->
+          <div class="card p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="font-semibold">Jane Smith</div>
+                <div class="text-sm text-secondary">Director</div>
+                <div class="text-xs text-secondary">jane.smith@example.com</div>
+              </div>
+              <span class="badge badge-warning">Pending</span>
+            </div>
+            <div class="mt-3 pt-3 border-t border-light flex gap-2">
+              <button class="btn btn-xs btn-primary">Resend Invite</button>
+              <button class="btn btn-xs btn-outline">Copy Link</button>
+            </div>
+          </div>
+
+           <!-- Person 3 -->
+           <div class="card p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="font-semibold">Robert Brown</div>
+                <div class="text-sm text-secondary">UBO (20%)</div>
+                <div class="text-xs text-secondary">robert.b@example.com</div>
+              </div>
+              <span class="badge badge-danger">Rejected</span>
+            </div>
+            <div class="mt-2 text-xs text-danger bg-danger-light p-2 rounded">
+              Document unreadable. Please resubmit ID.
+            </div>
+            <div class="mt-3 pt-3 border-t border-light flex gap-2">
+              <button class="btn btn-xs btn-primary">Request Resubmission</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger btn-outline">Suspend Client</button>
+        <button class="btn btn-primary" onclick="closeClientDetails()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      margin: 0;
+    }
+    .modal-body {
+      padding: var(--space-6);
+      flex: 1;
+    }
+    .modal-footer {
+      padding: var(--space-4) var(--space-6);
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+    }
+    .bg-secondary { background-color: var(--bg-secondary); }
+    .rounded { border-radius: var(--radius-md); }
+    .flex { display: flex; }
+    .justify-between { justify-content: space-between; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .space-y-3 > * + * { margin-top: var(--space-3); }
+    .space-y-4 > * + * { margin-top: var(--space-4); }
+    .mt-1 { margin-top: var(--space-1); }
+    .mt-2 { margin-top: var(--space-2); }
+    .mt-3 { margin-top: var(--space-3); }
+    .pt-3 { padding-top: var(--space-3); }
+    .border-t { border-top-width: 1px; border-style: solid; }
+    .border-light { border-color: var(--border-light); }
+    .bg-danger-light { background-color: rgba(232, 65, 66, 0.1); }
+    .cursor-pointer { cursor: pointer; }
+    .gap-2 { gap: var(--space-2); }
+  </style>
+
+  <script>
+    let currentStep = 1;
+
+    function openNewClientModal() {
+      document.getElementById('new-client-modal').style.display = 'flex';
+      currentStep = 1;
+      showStep(1);
+    }
+
+    function closeNewClientModal() {
+      document.getElementById('new-client-modal').style.display = 'none';
+    }
+
+    function toggleOtherType() {
+      const select = document.getElementById('company-type-select');
+      const otherInput = document.getElementById('company-type-other');
+      if (select.value === 'Other') {
+        otherInput.style.display = 'block';
+      } else {
+        otherInput.style.display = 'none';
+      }
+    }
+
+    function showStep(step) {
+      // Hide all steps
+      document.querySelectorAll('.step-content').forEach(el => el.style.display = 'none');
+      // Show current step
+      document.getElementById(`step-${step}`).style.display = 'block';
+      
+      // Update indicators
+      document.querySelectorAll('.step').forEach((el, index) => {
+        if (index + 1 === step) {
+          el.classList.add('active');
+          el.style.fontWeight = 'bold';
+          el.style.color = 'var(--brand-primary)';
+        } else {
+          el.classList.remove('active');
+          el.style.fontWeight = 'normal';
+          el.style.color = 'var(--text-secondary)';
+        }
+      });
+
+      // Update buttons
+      const btnBack = document.getElementById('btn-back');
+      const btnNext = document.getElementById('btn-next');
+      const btnSubmit = document.getElementById('btn-submit');
+
+      if (step === 1) {
+        btnBack.style.display = 'none';
+        btnNext.style.display = 'block';
+        btnSubmit.style.display = 'none';
+      } else if (step === 2) {
+        btnBack.style.display = 'block';
+        btnNext.style.display = 'block';
+        btnSubmit.style.display = 'none';
+      } else if (step === 3) {
+        btnBack.style.display = 'block';
+        btnNext.style.display = 'none';
+        btnSubmit.style.display = 'block';
+        renderReviewStep();
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < 3) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    function addPersonRow(listId) {
+      const list = document.getElementById(listId);
+      const newRow = document.createElement('div');
+      newRow.className = 'grid-3 gap-2 items-center person-row';
+      
+      const type = listId === 'ubo-list' ? 'UBO' : 'Director';
+      newRow.setAttribute('data-type', type);
+      
+      const placeholder3 = listId === 'ubo-list' ? '% Ownership' : 'Title (e.g. CEO)';
+      
+      newRow.innerHTML = `
+        <input type="text" class="form-input person-name" placeholder="Full Name">
+        <input type="email" class="form-input person-email" placeholder="Email Address">
+        <input type="text" class="form-input person-role" placeholder="${placeholder3}">
+      `;
+      list.appendChild(newRow);
+    }
+
+    function renderReviewStep() {
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+      
+      const persons = document.querySelectorAll('.person-row');
+      
+      if (persons.length === 0) {
+        list.innerHTML = '<div class="text-secondary italic">No key people added.</div>';
+        return;
+      }
+
+      persons.forEach((row, index) => {
+        const name = row.querySelector('.person-name').value || 'Unknown Name';
+        const email = row.querySelector('.person-email').value || 'No Email';
+        const role = row.querySelector('.person-role').value || '-';
+        const type = row.getAttribute('data-type');
+        
+        // Get initials
+        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+        const item = document.createElement('div');
+        item.className = 'p-4 mb-3 rounded';
+        item.style.border = '1px solid var(--border-light)';
+        item.style.backgroundColor = 'var(--bg-card)';
+        
+        item.innerHTML = `
+          <div class="flex items-start gap-3 mb-3">
+            <div style="width: 36px; height: 36px; background: var(--bg-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: var(--text-primary);">
+              ${initials}
+            </div>
+            <div>
+              <div class="font-semibold text-sm" style="color: var(--text-primary);">${name}</div>
+              <div class="text-xs text-secondary" style="margin-top: 2px;">${type} • ${role}</div>
+              <div class="text-xs text-secondary">${email}</div>
+            </div>
+          </div>
+          <div class="grid-2 gap-4 border-t border-light pt-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked style="accent-color: var(--brand-primary);">
+              <span class="text-sm">KYC verification</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" checked style="accent-color: var(--brand-primary);">
+              <span class="text-sm">Create account</span>
+            </label>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function submitNewClient() {
+      // Mock submission
+      const btn = document.getElementById('btn-submit');
+      const originalText = btn.innerText;
+      btn.innerText = 'Sending Invites...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        alert('Client created successfully! Invites have been sent.');
+        btn.innerText = originalText;
+        btn.disabled = false;
+        closeNewClientModal();
+      }, 1500);
+    }
+
+    function openClientDetails(name) {
+      document.getElementById('drawer-client-name').innerText = name;
+      document.getElementById('client-details-drawer').style.display = 'flex';
+    }
+
+    function closeClientDetails() {
+      document.getElementById('client-details-drawer').style.display = 'none';
+    }
+  </script>
+
+  <script src="../../assets/js/nav-active.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Users - QCrypto Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    /* Custom Styles for User Management */
+    .user-card { transition: all 0.2s ease; }
+    .user-card:hover { box-shadow: var(--shadow-md); }
+    .user-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .user-details { border-top: 1px solid var(--border-light); margin-top: var(--space-4); padding-top: var(--space-4); display: none; }
+    .user-details.active { display: block; animation: slideDown 0.3s ease-out; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    /* Green for Active/Unlocked */
+    input:checked + .slider { background-color: #2dce89; }
+    /* Red for Locked */
+    input:not(:checked) + .slider { background-color: #f5365c; }
+    input:checked + .slider:before { transform: translateX(20px); }
+    
+    .btn-unlink { border: 1px solid #f5365c !important; color: #f5365c !important; transition: all 0.2s; }
+    .btn-unlink:hover { background-color: #f5365c !important; color: white !important; }
+    
+    .text-success { color: #2dce89; }
+    .text-danger { color: #f5365c; }
+    .permission-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-3); }
+    .permission-item { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--text-secondary); cursor: pointer; }
+    .permission-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--brand-primary); }
+    .company-block { background-color: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--space-4); margin-bottom: var(--space-4); border: 1px solid var(--border-light); }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+    .modal-container { background: var(--bg-card); border-radius: var(--radius-lg); width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; }
+    .modal-header { padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
+    .modal-title { font-size: var(--text-lg); font-weight: var(--font-bold); margin: 0; }
+    .modal-body { padding: var(--space-6); flex: 1; }
+    .modal-footer { padding: var(--space-4) var(--space-6); border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; gap: var(--space-3); }
+    .bg-secondary-light { background-color: #f8f9fe; }
+    .rounded-full { border-radius: 9999px; }
+    .w-8 { width: 2rem; }
+    .h-8 { height: 2rem; }
+    .flex { display: flex; }
+    .flex-1 { flex: 1; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .justify-end { justify-content: flex-end; }
+    .items-center { align-items: center; }
+    .gap-2 { gap: var(--space-2); }
+    .gap-3 { gap: var(--space-3); }
+    .gap-4 { gap: var(--space-4); }
+    .p-3 { padding: var(--space-3); }
+    .p-4 { padding: var(--space-4); }
+    .p-6 { padding: var(--space-6); }
+    .py-1 { padding-top: var(--space-1); padding-bottom: var(--space-1); }
+    .py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+    .pb-6 { padding-bottom: var(--space-6); }
+    .mb-1 { margin-bottom: var(--space-1); }
+    .mb-2 { margin-bottom: var(--space-2); }
+    .mb-3 { margin-bottom: var(--space-3); }
+    .mb-4 { margin-bottom: var(--space-4); }
+    .mb-6 { margin-bottom: var(--space-6); }
+    .mt-4 { margin-top: var(--space-4); }
+    .mt-6 { margin-top: var(--space-6); }
+    .ml-4 { margin-left: var(--space-4); }
+    .mr-4 { margin-right: var(--space-4); }
+    .border-b { border-bottom-width: 1px; border-style: solid; }
+    .border-light { border-color: var(--border-light); }
+    .border-dashed { border-style: dashed; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .text-white { color: white; }
+    .bg-primary { background-color: var(--brand-primary); }
+    .bg-warning { background-color: #F7931A; }
+    .bg-white { background-color: white; }
+    .w-full { width: 100%; }
+    .block { display: block; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+      <div class="sidebar-logo">
+        <span class="sidebar-logo-text">QCrypto</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Client</div>
+          <a href="../client/dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+            <span class="sidebar-nav-icon">📊</span>
+            <span class="sidebar-nav-text">Dashboard</span>
+          </a>
+          <a href="../client/wallets.html" class="sidebar-nav-item" data-page="wallets">
+            <span class="sidebar-nav-icon">💼</span>
+            <span class="sidebar-nav-text">Wallets</span>
+          </a>
+          <a href="../client/transactions.html" class="sidebar-nav-item" data-page="transactions">
+            <span class="sidebar-nav-icon">📝</span>
+            <span class="sidebar-nav-text">Transactions</span>
+            <span class="sidebar-nav-badge">3</span>
+          </a>
+          <a href="../client/address-book.html" class="sidebar-nav-item" data-page="address-book">
+            <span class="sidebar-nav-icon">📖</span>
+            <span class="sidebar-nav-text">Address Book</span>
+          </a>
+          <a href="../client/deposit.html" class="sidebar-nav-item" data-page="deposit">
+            <span class="sidebar-nav-icon">⬇️</span>
+            <span class="sidebar-nav-text">Deposit</span>
+          </a>
+          <a href="../client/withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+            <span class="sidebar-nav-icon">⬆️</span>
+            <span class="sidebar-nav-text">Withdraw</span>
+          </a>
+          <a href="../client/staking.html" class="sidebar-nav-item" data-page="staking">
+            <span class="sidebar-nav-icon">⚡</span>
+            <span class="sidebar-nav-text">Staking</span>
+          </a>
+          <a href="../client/settlement.html" class="sidebar-nav-item" data-page="settlement">
+            <span class="sidebar-nav-icon">🏛️</span>
+            <span class="sidebar-nav-text">Settlement</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Admin</div>
+          <a href="admin-overview.html" class="sidebar-nav-item" data-page="admin-overview">
+            <span class="sidebar-nav-icon">📊</span>
+            <span class="sidebar-nav-text">Overview</span>
+          </a>
+          <a href="admin-clients.html" class="sidebar-nav-item" data-page="admin-clients">
+            <span class="sidebar-nav-icon">👥</span>
+            <span class="sidebar-nav-text">Clients</span>
+          </a>
+          <a href="admin-users.html" class="sidebar-nav-item active" data-page="admin-users">
+            <span class="sidebar-nav-icon">👤</span>
+            <span class="sidebar-nav-text">Users</span>
+          </a>
+          <a href="admin-crypto.html" class="sidebar-nav-item" data-page="admin-crypto">
+            <span class="sidebar-nav-icon">🪙</span>
+            <span class="sidebar-nav-text">Crypto</span>
+          </a>
+          <a href="admin-settlement.html" class="sidebar-nav-item" data-page="admin-settlement">
+            <span class="sidebar-nav-icon">🏛️</span>
+            <span class="sidebar-nav-text">Settlement</span>
+          </a>
+          <a href="admin-compliance.html" class="sidebar-nav-item" data-page="admin-compliance">
+            <span class="sidebar-nav-icon">📜</span>
+            <span class="sidebar-nav-text">Compliance</span>
+          </a>
+          <a href="admin-administration.html" class="sidebar-nav-item" data-page="admin-administration">
+            <span class="sidebar-nav-icon">⚙️</span>
+            <span class="sidebar-nav-text">Administration</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">AIFM</div>
+          <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+            <span class="sidebar-nav-icon">🏦</span>
+            <span class="sidebar-nav-text">AIFM Dashboard</span>
+          </a>
+          <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+            <span class="sidebar-nav-icon">💼</span>
+            <span class="sidebar-nav-text">Fund Manager</span>
+          </a>
+          <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+            <span class="sidebar-nav-icon">💹</span>
+            <span class="sidebar-nav-text">Trader</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Operations</div>
+          <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+            <span class="sidebar-nav-icon">📋</span>
+            <span class="sidebar-nav-text">Middle Office</span>
+          </a>
+          <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+            <span class="sidebar-nav-icon">🏦</span>
+            <span class="sidebar-nav-text">Depositary</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Settings</div>
+          <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
+            <span class="sidebar-nav-icon">🔒</span>
+            <span class="sidebar-nav-text">Security</span>
+          </a>
+          <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
+            <span class="sidebar-nav-icon">👤</span>
+            <span class="sidebar-nav-text">Profile</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <!-- Search moved to filters area -->
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">2</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">AD</div>
+            <div class="user-info">
+              <div class="user-name">Admin User</div>
+              <div class="user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">User Management</h1>
+            <p class="page-subtitle">Manage users, security settings, and corporate access privileges.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openNewUserModal()">
+            <span class="btn-icon">➕</span> Invite New User
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-6 p-4">
+          <div class="flex items-center gap-4">
+            <div class="flex-1">
+              <label class="text-xs text-secondary uppercase font-bold mb-1 block">Search Users</label>
+              <div class="search-bar w-full" style="background: var(--bg-secondary); border: 1px solid var(--border-light); height: 42px;">
+                <span class="search-icon">🔍</span>
+                <input type="search" class="search-input" placeholder="Search by name or email..." style="width: 100%; background: transparent;">
+              </div>
+            </div>
+            <div class="flex-1">
+              <label class="text-xs text-secondary uppercase font-bold mb-1 block">Filter by Company</label>
+              <select class="form-input">
+                <option value="all">All Companies</option>
+                <option value="alpha">Alpha Capital Ltd</option>
+                <option value="beta">Beta Trading PLC</option>
+                <option value="gamma">Gamma Ventures</option>
+              </select>
+            </div>
+            <div class="flex-1">
+              <label class="text-xs text-secondary uppercase font-bold mb-1 block">Status</label>
+              <select class="form-input">
+                <option value="all">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="locked">Locked</option>
+                <option value="pending">Pending Invite</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users List (Accordion Style) -->
+        <div class="users-list space-y-4">
+          
+          <!-- User 1: John Doe -->
+          <div class="card user-card" id="user-1">
+            <div class="user-header p-4" onclick="toggleUser('user-1')">
+              <div class="flex items-center gap-4 flex-1">
+                <div class="user-avatar" style="width: 48px; height: 48px; font-size: 18px;">JD</div>
+                <div>
+                  <div class="font-bold text-lg">John Doe</div>
+                  <div class="text-secondary text-sm">john.doe@example.com</div>
+                </div>
+                <span class="badge badge-success ml-4">Active</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right mr-4">
+                  <div class="text-xs text-secondary uppercase">Linked Companies</div>
+                  <div class="font-semibold">2 Companies</div>
+                </div>
+                <button class="btn btn-sm btn-outline">Manage ▾</button>
+              </div>
+            </div>
+
+            <div class="user-details p-6 bg-secondary-light">
+              <!-- User Security Actions -->
+              <div class="flex justify-between items-center mb-6 pb-6 border-b border-light">
+                <div class="flex gap-4 items-center">
+                  <button class="btn btn-sm btn-outline">Reset Password</button>
+                  <button class="btn btn-sm btn-outline">Reset 2FA</button>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="font-semibold text-sm">Account Status:</span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked id="status-toggle-user-1" onchange="toggleAccountStatus('user-1')">
+                    <span class="slider"></span>
+                  </label>
+                  <span class="text-sm text-success font-bold" id="status-label-user-1">(Unlocked)</span>
+                </div>
+              </div>
+
+              <!-- Linked Companies Section -->
+              <h3 class="text-lg font-bold mb-4">Corporate Access & Privileges</h3>
+              
+              <!-- Company 1: Alpha Capital -->
+              <div class="company-block">
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xs">AC</div>
+                    <h4 class="font-bold text-md">Alpha Capital Ltd</h4>
+                  </div>
+                  <button class="btn btn-sm btn-unlink btn-outline">Unlink Company</button>
+                </div>
+
+                <div class="permission-grid">
+                  <label class="permission-item"><input type="checkbox" checked> View Fiat Balance</label>
+                  <label class="permission-item"><input type="checkbox" checked> View Settlement Info</label>
+                  <label class="permission-item"><input type="checkbox" checked> View Wallets</label>
+                  <label class="permission-item"><input type="checkbox" checked> Create New Wallets</label>
+                  <label class="permission-item"><input type="checkbox" checked> View Staking</label>
+                  <label class="permission-item"><input type="checkbox" checked> Stake Assets</label>
+                  <label class="permission-item"><input type="checkbox" checked> Manage Address Book</label>
+                  <label class="permission-item"><input type="checkbox" checked> Access Deposits</label>
+                  <label class="permission-item"><input type="checkbox" checked> Access Withdrawals</label>
+                  <label class="permission-item" onclick="toggleTradingLimit('user-1-alpha')">
+                    <input type="checkbox" checked id="check-trade-user-1-alpha"> Trade Assets
+                  </label>
+                </div>
+
+                <!-- Trading Limits (Conditional) -->
+                <div id="trade-limits-user-1-alpha" class="mt-4 p-3 bg-white rounded border border-light" style="display: block;">
+                  <div class="text-xs font-bold uppercase text-secondary mb-2">Trading Limits</div>
+                  <div class="flex gap-4">
+                    <div class="flex-1">
+                      <label class="text-xs text-secondary block mb-1">Daily Limit (€)</label>
+                      <input type="number" class="form-input py-1" value="50000">
+                    </div>
+                    <div class="flex-1">
+                      <label class="text-xs text-secondary block mb-1">Monthly Limit (€)</label>
+                      <input type="number" class="form-input py-1" value="500000">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Company 2: Beta Trading -->
+              <div class="company-block">
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-warning rounded-full flex items-center justify-center text-white font-bold text-xs">BT</div>
+                    <h4 class="font-bold text-md">Beta Trading PLC</h4>
+                  </div>
+                  <button class="btn btn-sm btn-unlink btn-outline">Unlink Company</button>
+                </div>
+
+                <div class="permission-grid">
+                  <label class="permission-item"><input type="checkbox" checked> View Fiat Balance</label>
+                  <label class="permission-item"><input type="checkbox"> View Settlement Info</label>
+                  <label class="permission-item"><input type="checkbox" checked> View Wallets</label>
+                  <label class="permission-item"><input type="checkbox"> Create New Wallets</label>
+                  <label class="permission-item"><input type="checkbox"> View Staking</label>
+                  <label class="permission-item"><input type="checkbox"> Stake Assets</label>
+                  <label class="permission-item"><input type="checkbox"> Manage Address Book</label>
+                  <label class="permission-item"><input type="checkbox"> Access Deposits</label>
+                  <label class="permission-item"><input type="checkbox"> Access Withdrawals</label>
+                  <label class="permission-item" onclick="toggleTradingLimit('user-1-beta')">
+                    <input type="checkbox" id="check-trade-user-1-beta"> Trade Assets
+                  </label>
+                </div>
+
+                <!-- Trading Limits (Hidden) -->
+                <div id="trade-limits-user-1-beta" class="mt-4 p-3 bg-white rounded border border-light" style="display: none;">
+                  <div class="text-xs font-bold uppercase text-secondary mb-2">Trading Limits</div>
+                  <div class="flex gap-4">
+                    <div class="flex-1">
+                      <label class="text-xs text-secondary block mb-1">Daily Limit (€)</label>
+                      <input type="number" class="form-input py-1" value="0">
+                    </div>
+                    <div class="flex-1">
+                      <label class="text-xs text-secondary block mb-1">Monthly Limit (€)</label>
+                      <input type="number" class="form-input py-1" value="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-outline w-full border-dashed" onclick="openLinkCompanyModal()">+ Link Another Company</button>
+              
+              <div class="mt-6 flex justify-end">
+                <button class="btn btn-primary" onclick="saveChanges('user-1')">Save Changes</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- User 2: Jane Smith -->
+          <div class="card user-card" id="user-2">
+            <div class="user-header p-4" onclick="toggleUser('user-2')">
+              <div class="flex items-center gap-4 flex-1">
+                <div class="user-avatar" style="width: 48px; height: 48px; font-size: 18px; background-color: #8247E5;">JS</div>
+                <div>
+                  <div class="font-bold text-lg">Jane Smith</div>
+                  <div class="text-secondary text-sm">jane.smith@example.com</div>
+                </div>
+                <span class="badge badge-success ml-4">Active</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right mr-4">
+                  <div class="text-xs text-secondary uppercase">Linked Companies</div>
+                  <div class="font-semibold">1 Company</div>
+                </div>
+                <button class="btn btn-sm btn-outline">Manage ▾</button>
+              </div>
+            </div>
+
+            <div class="user-details p-6 bg-secondary-light">
+              <div class="flex justify-between items-center mb-6 pb-6 border-b border-light">
+                <div class="flex gap-4 items-center">
+                  <button class="btn btn-sm btn-outline">Reset Password</button>
+                  <button class="btn btn-sm btn-outline">Reset 2FA</button>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="font-semibold text-sm">Account Status:</span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked id="status-toggle-user-2" onchange="toggleAccountStatus('user-2')">
+                    <span class="slider"></span>
+                  </label>
+                  <span class="text-sm text-success font-bold" id="status-label-user-2">(Unlocked)</span>
+                </div>
+              </div>
+
+              <h3 class="text-lg font-bold mb-4">Corporate Access & Privileges</h3>
+              
+              <div class="company-block">
+                <div class="flex justify-between items-center mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xs">AC</div>
+                    <h4 class="font-bold text-md">Alpha Capital Ltd</h4>
+                  </div>
+                  <button class="btn btn-sm btn-unlink btn-outline">Unlink Company</button>
+                </div>
+
+                <div class="permission-grid">
+                  <label class="permission-item"><input type="checkbox" checked> View Fiat Balance</label>
+                  <label class="permission-item"><input type="checkbox" checked> View Settlement Info</label>
+                  <label class="permission-item"><input type="checkbox" checked> View Wallets</label>
+                  <label class="permission-item"><input type="checkbox"> Create New Wallets</label>
+                  <label class="permission-item"><input type="checkbox"> View Staking</label>
+                  <label class="permission-item"><input type="checkbox"> Stake Assets</label>
+                  <label class="permission-item"><input type="checkbox"> Manage Address Book</label>
+                  <label class="permission-item"><input type="checkbox"> Access Deposits</label>
+                  <label class="permission-item"><input type="checkbox"> Access Withdrawals</label>
+                  <label class="permission-item" onclick="toggleTradingLimit('user-2-alpha')">
+                    <input type="checkbox" id="check-trade-user-2-alpha"> Trade Assets
+                  </label>
+                </div>
+                
+                <div id="trade-limits-user-2-alpha" class="mt-4 p-3 bg-white rounded border border-light" style="display: none;">
+                  <div class="text-xs font-bold uppercase text-secondary mb-2">Trading Limits</div>
+                  <div class="flex gap-4">
+                    <div class="flex-1">
+                      <label class="text-xs text-secondary block mb-1">Daily Limit (€)</label>
+                      <input type="number" class="form-input py-1" value="0">
+                    </div>
+                    <div class="flex-1">
+                      <label class="text-xs text-secondary block mb-1">Monthly Limit (€)</label>
+                      <input type="number" class="form-input py-1" value="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-outline w-full border-dashed" onclick="openLinkCompanyModal()">+ Link Another Company</button>
+              
+              <div class="mt-6 flex justify-end">
+                <button class="btn btn-primary" onclick="saveChanges('user-2')">Save Changes</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- User 3: Robert Brown (Locked) -->
+          <div class="card user-card" id="user-3">
+            <div class="user-header p-4" onclick="toggleUser('user-3')">
+              <div class="flex items-center gap-4 flex-1">
+                <div class="user-avatar" style="width: 48px; height: 48px; font-size: 18px; background-color: #F5365C;">RB</div>
+                <div>
+                  <div class="font-bold text-lg">Robert Brown</div>
+                  <div class="text-secondary text-sm">robert.b@example.com</div>
+                </div>
+                <span class="badge badge-danger ml-4">Locked</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right mr-4">
+                  <div class="text-xs text-secondary uppercase">Linked Companies</div>
+                  <div class="font-semibold">0 Companies</div>
+                </div>
+                <button class="btn btn-sm btn-outline">Manage ▾</button>
+              </div>
+            </div>
+
+            <div class="user-details p-6 bg-secondary-light">
+              <div class="flex justify-between items-center mb-6 pb-6 border-b border-light">
+                <div class="flex gap-4 items-center">
+                  <button class="btn btn-sm btn-outline">Reset Password</button>
+                  <button class="btn btn-sm btn-outline">Reset 2FA</button>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="font-semibold text-sm">Account Status:</span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="status-toggle-user-3" onchange="toggleAccountStatus('user-3')">
+                    <span class="slider"></span>
+                  </label>
+                  <span class="text-sm text-danger font-bold" id="status-label-user-3">(Locked)</span>
+                </div>
+              </div>
+
+              <h3 class="text-lg font-bold mb-4">Corporate Access & Privileges</h3>
+              <div class="text-center py-8 text-secondary">
+                No companies linked to this user yet.
+              </div>
+              <button class="btn btn-outline w-full border-dashed" onclick="openLinkCompanyModal()">+ Link Company</button>
+              
+              <div class="mt-6 flex justify-end">
+                <button class="btn btn-primary" onclick="saveChanges('user-3')">Save Changes</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New User Modal -->
+  <div id="new-user-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-container" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Invite New User</h3>
+        <button class="btn-icon" onclick="closeNewUserModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary mb-4">Send an invitation link to a new user. They will complete their profile upon registration.</p>
+        <form id="new-user-form">
+          <div class="form-group mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="e.g. John">
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="e.g. Doe">
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="john.doe@example.com">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeNewUserModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitNewUser()">Send Invite</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link Company Modal -->
+  <div id="link-company-modal" class="modal-overlay" style="display: none; z-index: 1100;">
+    <div class="modal-container" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Link User to Company</h3>
+        <button class="btn-icon" onclick="closeLinkCompanyModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group mb-4">
+          <label class="form-label">Select Company</label>
+          <select class="form-input">
+            <option>Select a company...</option>
+            <option>Alpha Capital Ltd</option>
+            <option>BlueSky Ventures GmbH</option>
+            <option>Quantum Trading PLC</option>
+          </select>
+        </div>
+        
+        <div class="form-group mb-4">
+          <label class="form-label mb-2">Initial Permissions</label>
+          <div class="permission-grid">
+            <label class="permission-item"><input type="checkbox"> View Fiat Balance</label>
+            <label class="permission-item"><input type="checkbox"> View Settlement Info</label>
+            <label class="permission-item"><input type="checkbox"> View Wallets</label>
+            <label class="permission-item"><input type="checkbox"> Create New Wallets</label>
+            <label class="permission-item"><input type="checkbox"> View Staking</label>
+            <label class="permission-item"><input type="checkbox"> Stake Assets</label>
+            <label class="permission-item"><input type="checkbox"> Manage Address Book</label>
+            <label class="permission-item"><input type="checkbox"> Access Deposits</label>
+            <label class="permission-item"><input type="checkbox"> Access Withdrawals</label>
+            <label class="permission-item"><input type="checkbox"> Trade Assets</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeLinkCompanyModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmLinkCompany()">Link Company</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleUser(userId) {
+      const details = document.querySelector(`#${userId} .user-details`);
+      const wasActive = details.classList.contains('active');
+      
+      if (!wasActive) {
+        details.classList.add('active');
+      } else {
+        details.classList.remove('active');
+      }
+    }
+
+    function toggleTradingLimit(id) {
+      const checkbox = document.getElementById(`check-trade-${id}`);
+      const limitsDiv = document.getElementById(`trade-limits-${id}`);
+      
+      if (checkbox.checked) {
+        limitsDiv.style.display = 'block';
+      } else {
+        limitsDiv.style.display = 'none';
+      }
+    }
+
+    function openNewUserModal() {
+      document.getElementById('new-user-modal').style.display = 'flex';
+    }
+
+    function closeNewUserModal() {
+      document.getElementById('new-user-modal').style.display = 'none';
+    }
+
+    function submitNewUser() {
+      const btn = document.querySelector('#new-user-modal .btn-primary');
+      const originalText = btn.innerText;
+      btn.innerText = 'Sending Invite...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        alert('Invite sent successfully!');
+        btn.innerText = originalText;
+        btn.disabled = false;
+        closeNewUserModal();
+      }, 1000);
+    }
+
+    function openLinkCompanyModal() {
+      document.getElementById('link-company-modal').style.display = 'flex';
+    }
+
+    function closeLinkCompanyModal() {
+      document.getElementById('link-company-modal').style.display = 'none';
+    }
+
+    function confirmLinkCompany() {
+      alert('User linked to company successfully!');
+      closeLinkCompanyModal();
+    }
+
+    function toggleAccountStatus(userId) {
+      const checkbox = document.getElementById(`status-toggle-${userId}`);
+      const label = document.getElementById(`status-label-${userId}`);
+      
+      if (checkbox.checked) {
+        label.innerText = '(Unlocked)';
+        label.className = 'text-sm text-success font-bold';
+      } else {
+        label.innerText = '(Locked)';
+        label.className = 'text-sm text-danger font-bold';
+      }
+    }
+
+    function saveChanges(userId) {
+      const btn = document.querySelector(`#${userId} .btn-primary`);
+      const originalText = btn.innerText;
+      
+      btn.innerText = 'Saving...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        // Show success notification
+        const notification = document.createElement('div');
+        notification.className = 'fixed bottom-4 right-4 bg-success text-white px-6 py-3 rounded shadow-lg z-50';
+        notification.style.backgroundColor = '#2dce89'; // Ensure green color
+        notification.innerText = 'Changes saved successfully!';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+
+        // Reset button
+        btn.innerText = originalText;
+        btn.disabled = false;
+        
+        // Close accordion
+        toggleUser(userId);
+      }, 800);
+    }
+  </script>
+
+  <script src="../../assets/js/nav-active.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

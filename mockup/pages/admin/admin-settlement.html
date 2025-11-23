@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Settlement - QCrypto Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <aside class="layout-sidebar">
+      <div class="sidebar-logo">
+        <span class="sidebar-logo-text">QCrypto</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Client</div>
+          <a href="../client/dashboard.html" class="sidebar-nav-item" data-page="dashboard">
+            <span class="sidebar-nav-icon">📊</span>
+            <span class="sidebar-nav-text">Dashboard</span>
+          </a>
+          <a href="../client/wallets.html" class="sidebar-nav-item" data-page="wallets">
+            <span class="sidebar-nav-icon">💼</span>
+            <span class="sidebar-nav-text">Wallets</span>
+          </a>
+          <a href="../client/transactions.html" class="sidebar-nav-item" data-page="transactions">
+            <span class="sidebar-nav-icon">📝</span>
+            <span class="sidebar-nav-text">Transactions</span>
+            <span class="sidebar-nav-badge">3</span>
+          </a>
+          <a href="../client/address-book.html" class="sidebar-nav-item" data-page="address-book">
+            <span class="sidebar-nav-icon">📖</span>
+            <span class="sidebar-nav-text">Address Book</span>
+          </a>
+          <a href="../client/deposit.html" class="sidebar-nav-item" data-page="deposit">
+            <span class="sidebar-nav-icon">⬇️</span>
+            <span class="sidebar-nav-text">Deposit</span>
+          </a>
+          <a href="../client/withdraw.html" class="sidebar-nav-item" data-page="withdraw">
+            <span class="sidebar-nav-icon">⬆️</span>
+            <span class="sidebar-nav-text">Withdraw</span>
+          </a>
+          <a href="../client/staking.html" class="sidebar-nav-item" data-page="staking">
+            <span class="sidebar-nav-icon">⚡</span>
+            <span class="sidebar-nav-text">Staking</span>
+          </a>
+          <a href="../client/settlement.html" class="sidebar-nav-item" data-page="settlement">
+            <span class="sidebar-nav-icon">🏛️</span>
+            <span class="sidebar-nav-text">Settlement</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Admin</div>
+          <a href="admin-overview.html" class="sidebar-nav-item" data-page="admin-overview">
+            <span class="sidebar-nav-icon">📊</span>
+            <span class="sidebar-nav-text">Overview</span>
+          </a>
+          <a href="admin-clients.html" class="sidebar-nav-item" data-page="admin-clients">
+            <span class="sidebar-nav-icon">👥</span>
+            <span class="sidebar-nav-text">Clients</span>
+          </a>
+          <a href="admin-crypto.html" class="sidebar-nav-item" data-page="admin-crypto">
+            <span class="sidebar-nav-icon">🪙</span>
+            <span class="sidebar-nav-text">Crypto</span>
+          </a>
+          <a href="admin-settlement.html" class="sidebar-nav-item active" data-page="admin-settlement">
+            <span class="sidebar-nav-icon">🏛️</span>
+            <span class="sidebar-nav-text">Settlement</span>
+          </a>
+          <a href="admin-compliance.html" class="sidebar-nav-item" data-page="admin-compliance">
+            <span class="sidebar-nav-icon">📜</span>
+            <span class="sidebar-nav-text">Compliance</span>
+          </a>
+          <a href="admin-administration.html" class="sidebar-nav-item" data-page="admin-administration">
+            <span class="sidebar-nav-icon">⚙️</span>
+            <span class="sidebar-nav-text">Administration</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">AIFM</div>
+          <a href="../aifm/aifm-dashboard.html" class="sidebar-nav-item" data-page="aifm-dashboard">
+            <span class="sidebar-nav-icon">🏦</span>
+            <span class="sidebar-nav-text">AIFM Dashboard</span>
+          </a>
+          <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
+            <span class="sidebar-nav-icon">💼</span>
+            <span class="sidebar-nav-text">Fund Manager</span>
+          </a>
+          <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
+            <span class="sidebar-nav-icon">💹</span>
+            <span class="sidebar-nav-text">Trader</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Operations</div>
+          <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
+            <span class="sidebar-nav-icon">📋</span>
+            <span class="sidebar-nav-text">Middle Office</span>
+          </a>
+          <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
+            <span class="sidebar-nav-icon">🏦</span>
+            <span class="sidebar-nav-text">Depositary</span>
+          </a>
+        </div>
+
+        <div class="sidebar-nav-section">
+          <div class="sidebar-nav-section-title">Settings</div>
+          <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
+            <span class="sidebar-nav-icon">🔒</span>
+            <span class="sidebar-nav-text">Security</span>
+          </a>
+          <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
+            <span class="sidebar-nav-icon">👤</span>
+            <span class="sidebar-nav-text">Profile</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="layout-main">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn btn-secondary btn-sm">☰</button>
+        </div>
+
+        <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="search" class="search-input" placeholder="Search...">
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="notification-icon">
+            <span>🔔</span>
+            <span class="notification-count">2</span>
+          </div>
+
+          <div class="user-menu">
+            <div class="user-avatar">AD</div>
+            <div class="user-info">
+              <div class="user-name">Admin User</div>
+              <div class="user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="content-container">
+        <div class="page-header">
+          <h1 class="page-title">Admin Settlement</h1>
+          <p class="page-subtitle">Manage settlement operations.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Settlement Operations</h3>
+          </div>
+          <p>This is a placeholder page for Admin Settlement.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../assets/js/nav-active.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>
