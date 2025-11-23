@@ -365,8 +365,8 @@
 
               <!-- Actions -->
               <div style="flex: 0 0 auto; display: flex; gap: var(--space-2);">
-                <button class="btn btn-secondary" onclick="openStakeModal('eth')">Stake More</button>
-                <button class="btn btn-outline-secondary" onclick="openUnstakeModal('eth')">Unstake</button>
+                <button type="button" class="btn btn-secondary" onclick="openStakeModal('eth')">Stake More</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="openUnstakeModal('eth')">Unstake</button>
               </div>
             </div>
           </div>
@@ -408,8 +408,8 @@
 
               <!-- Actions -->
               <div style="flex: 0 0 auto; display: flex; gap: var(--space-2);">
-                <button class="btn btn-secondary" onclick="openStakeModal('avax')">Stake More</button>
-                <button class="btn btn-outline-secondary" onclick="openUnstakeModal('avax')">Unstake</button>
+                <button type="button" class="btn btn-secondary" onclick="openStakeModal('avax')">Stake More</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="openUnstakeModal('avax')">Unstake</button>
               </div>
             </div>
           </div>
@@ -451,8 +451,8 @@
 
               <!-- Actions -->
               <div style="flex: 0 0 auto; display: flex; gap: var(--space-2);">
-                <button class="btn btn-secondary" onclick="openStakeModal('pol')">Stake More</button>
-                <button class="btn btn-outline-secondary" onclick="openUnstakeModal('pol')">Unstake</button>
+                <button type="button" class="btn btn-secondary" onclick="openStakeModal('pol')">Stake More</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="openUnstakeModal('pol')">Unstake</button>
               </div>
             </div>
           </div>
@@ -472,7 +472,7 @@
   </div>
 
   <!-- Stake Modal -->
-  <div id="stake-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+  <div id="stake-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="handleModalClick(event, 'stake-modal')">
     <div class="card" style="width: 450px; max-width: 90%;">
       <div class="card-header">
         <h2 class="card-title">Stake <span id="modal-asset-name">Asset</span></h2>
@@ -526,7 +526,7 @@
   </div>
 
   <!-- Unstake Modal -->
-  <div id="unstake-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+  <div id="unstake-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="handleModalClick(event, 'unstake-modal')">
     <div class="card" style="width: 450px; max-width: 90%;">
       <div class="card-header">
         <h2 class="card-title">Unstake <span id="unstake-asset-name">Asset</span></h2>
@@ -564,7 +564,7 @@
   </div>
 
   <!-- Asset Selection Modal (Placeholder for "Stake New Asset") -->
-  <div id="assetModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+  <div id="assetModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="handleModalClick(event, 'assetModal')">
     <div style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); animation: slideUp 0.3s ease-out;">
       <div style="padding: var(--space-6); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
         <h3 style="margin: 0; font-size: var(--text-xl);">Select Asset to Stake</h3>
@@ -593,17 +593,27 @@
     let currentAsset = null;
 
     function openStakeModal(assetId) {
-      currentAsset = stakingData[assetId];
-      document.getElementById('modal-asset-name').textContent = currentAsset.name;
-      document.getElementById('modal-balance').textContent = currentAsset.balance;
-      document.getElementById('modal-balance-select').textContent = currentAsset.balance;
-      document.querySelectorAll('.modal-ticker').forEach(el => el.textContent = currentAsset.symbol);
-      document.getElementById('modal-apy').textContent = currentAsset.apy + '%';
-      document.getElementById('modal-activation').textContent = currentAsset.activation;
-      document.getElementById('modal-min-lock').textContent = currentAsset.minLock;
-      document.getElementById('stake-amount').value = '';
-      document.getElementById('modal-monthly-reward').textContent = '0.00';
-      document.getElementById('stake-modal').style.display = 'flex';
+      try {
+        console.log('Opening stake modal for:', assetId);
+        currentAsset = stakingData[assetId];
+        if (!currentAsset) {
+          console.error('Asset not found:', assetId);
+          return;
+        }
+        document.getElementById('modal-asset-name').textContent = currentAsset.name;
+        document.getElementById('modal-balance').textContent = currentAsset.balance;
+        document.getElementById('modal-balance-select').textContent = currentAsset.balance;
+        document.querySelectorAll('.modal-ticker').forEach(el => el.textContent = currentAsset.symbol);
+        document.getElementById('modal-apy').textContent = currentAsset.apy + '%';
+        document.getElementById('modal-activation').textContent = currentAsset.activation;
+        document.getElementById('modal-min-lock').textContent = currentAsset.minLock;
+        document.getElementById('stake-amount').value = '';
+        document.getElementById('modal-monthly-reward').textContent = '0.00';
+        document.getElementById('stake-modal').style.display = 'flex';
+      } catch (e) {
+        console.error('Error opening stake modal:', e);
+        alert('An error occurred while opening the staking window. Please check the console for details.');
+      }
     }
 
     function calculateMonthlyReward() {
@@ -615,13 +625,18 @@
     }
 
     function openUnstakeModal(assetId) {
-      currentAsset = stakingData[assetId];
-      document.getElementById('unstake-asset-name').textContent = currentAsset.name;
-      document.getElementById('unstake-balance').textContent = currentAsset.staked;
-      document.querySelectorAll('.unstake-ticker').forEach(el => el.textContent = currentAsset.symbol);
-      document.getElementById('unstake-period').textContent = currentAsset.period;
-      document.getElementById('unstake-amount').value = '';
-      document.getElementById('unstake-modal').style.display = 'flex';
+      try {
+        currentAsset = stakingData[assetId];
+        if (!currentAsset) return;
+        document.getElementById('unstake-asset-name').textContent = currentAsset.name;
+        document.getElementById('unstake-balance').textContent = currentAsset.staked;
+        document.querySelectorAll('.unstake-ticker').forEach(el => el.textContent = currentAsset.symbol);
+        document.getElementById('unstake-period').textContent = currentAsset.period;
+        document.getElementById('unstake-amount').value = '';
+        document.getElementById('unstake-modal').style.display = 'flex';
+      } catch (e) {
+        console.error('Error opening unstake modal:', e);
+      }
     }
 
     function closeModal(modalId) {
@@ -659,11 +674,14 @@
       closeModal('unstake-modal');
     }
 
-    // Close modals on outside click
-    window.onclick = function(event) {
-      if (event.target.id === 'stake-modal') closeModal('stake-modal');
-      if (event.target.id === 'unstake-modal') closeModal('unstake-modal');
-      if (event.target.id === 'assetModal') closeAssetModal();
+    function handleModalClick(e, modalId) {
+      if (e.target === e.currentTarget) {
+        if (modalId === 'assetModal') {
+          closeAssetModal();
+        } else {
+          closeModal(modalId);
+        }
+      }
     }
   </script>
 </body>

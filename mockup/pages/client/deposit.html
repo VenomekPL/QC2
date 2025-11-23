@@ -174,11 +174,19 @@
               <h2 class="card-title">3. Deposit Details</h2>
             </div>
 
-            <div style="display: flex; gap: var(--space-8); flex-wrap: wrap;">
+            <!-- Address Selection Dropdown -->
+            <div style="margin-bottom: var(--space-6);">
+                <label style="display: block; margin-bottom: var(--space-2); font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--text-secondary);">Select Receiving Address</label>
+                <select id="deposit-address-select" class="select-input" style="width: 100%; padding: 10px; border: 1px solid var(--border-light); border-radius: var(--radius-md); background: var(--bg-input); color: var(--text-primary);" onchange="onAddressSelected()">
+                    <option value="">-- Select an address --</option>
+                </select>
+            </div>
+
+            <div id="deposit-info-container" style="display: none; gap: var(--space-8); flex-wrap: wrap;">
               <!-- QR Code Section -->
               <div style="flex: 0 0 250px; text-align: center;">
                 <div style="background: white; padding: var(--space-4); border-radius: var(--radius-lg); border: 1px solid var(--border-light); display: inline-block;">
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" alt="QR Code" style="width: 200px; height: 200px; display: block;">
+                  <img id="deposit-qr-code" src="" alt="QR Code" style="width: 200px; height: 200px; display: block;">
                 </div>
                 <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-secondary);">Scan to Deposit</p>
               </div>
@@ -191,11 +199,11 @@
 
                 <div style="margin-bottom: var(--space-6);">
                   <label style="display: block; margin-bottom: var(--space-2); font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--text-secondary);">Deposit Address</label>
-                  <div style="display: flex; gap: var(--space-2);">
-                    <div style="flex: 1; background: var(--bg-secondary); padding: var(--space-3); border-radius: var(--radius-md); font-family: monospace; word-break: break-all;" id="deposit-address">
+                  <div style="display: flex; align-items: center; background: var(--bg-secondary); padding: var(--space-2); border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+                    <div style="flex: 1; font-family: monospace; word-break: break-all; padding: var(--space-1);" id="deposit-address">
                       0x...
                     </div>
-                    <button class="btn btn-secondary" onclick="copyAddress()">
+                    <button class="btn btn-sm btn-white" onclick="copyAddress()" style="margin-left: var(--space-2); box-shadow: var(--shadow-sm); flex-shrink: 0;">
                       <span>📋</span> Copy
                     </button>
                   </div>
@@ -208,7 +216,7 @@
                   </div>
                   <div>
                     <label style="display: block; margin-bottom: var(--space-1); font-size: var(--text-xs); font-weight: var(--font-bold); color: var(--text-secondary);">Expected Arrival</label>
-                    <div style="font-weight: var(--font-medium);">~15 mins (3 confirmations)</div>
+                    <div style="font-weight: var(--font-medium);" id="expected-arrival-time">~15 mins (3 confirmations)</div>
                   </div>
                 </div>
               </div>
@@ -303,19 +311,62 @@
 
     function showDepositDetails() {
       const container = document.getElementById('step-deposit-details');
+      const infoContainer = document.getElementById('deposit-info-container');
+      const addressSelect = document.getElementById('deposit-address-select');
       
-      // Update UI
-      document.getElementById('selected-asset-symbol').textContent = selectedAsset.symbol;
-      document.getElementById('selected-network-name').textContent = selectedNetwork;
+      // Reset UI
+      infoContainer.style.display = 'none';
+      addressSelect.innerHTML = '<option value="">-- Select an address --</option>';
       
-      // Mock Address Generation
-      const mockAddress = generateMockAddress(selectedAsset.symbol, selectedNetwork);
-      document.getElementById('deposit-address').textContent = mockAddress;
-      
-      // Update Tickers
-      document.querySelectorAll('.asset-ticker').forEach(el => el.textContent = selectedAsset.symbol);
+      // Populate Address Dropdown (Mock Data)
+      const baseAddress = generateMockAddress(selectedAsset.symbol, selectedNetwork);
+      const mockAddresses = [
+          { label: 'Main Wallet', address: baseAddress },
+          { label: 'Trading Wallet', address: baseAddress.replace(/[a-zA-Z0-9]/, 'X') }, // Simple variation
+          { label: 'Savings Vault', address: baseAddress.replace(/[a-zA-Z0-9]/, 'Y') }
+      ];
+
+      mockAddresses.forEach((addr) => {
+          const option = document.createElement('option');
+          option.value = addr.address;
+          option.textContent = `${addr.label} (${addr.address.substr(0, 6)}...${addr.address.substr(-4)})`;
+          addressSelect.appendChild(option);
+      });
 
       container.style.display = 'block';
+    }
+
+    function onAddressSelected() {
+        const select = document.getElementById('deposit-address-select');
+        const infoContainer = document.getElementById('deposit-info-container');
+        const address = select.value;
+
+        if (!address) {
+            infoContainer.style.display = 'none';
+            return;
+        }
+
+        // Update UI with selected address
+        document.getElementById('selected-asset-symbol').textContent = selectedAsset.symbol;
+        document.getElementById('selected-network-name').textContent = selectedNetwork;
+        document.getElementById('deposit-address').textContent = address;
+        document.getElementById('deposit-qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${address}`;
+        
+        // Update Tickers
+        document.querySelectorAll('.asset-ticker').forEach(el => el.textContent = selectedAsset.symbol);
+        
+        // Update Arrival Time
+        let arrivalTime = '~15 mins (3 confirmations)';
+        if (selectedAsset.symbol === 'BTC') arrivalTime = '~60 mins (3 confirmations)';
+        else if (selectedAsset.symbol === 'ETH') arrivalTime = '~5 mins (12 confirmations)';
+        else if (['AVAX', 'POL', 'SOL'].includes(selectedAsset.symbol)) arrivalTime = '~2 seconds (Instant)';
+        else if (selectedAsset.symbol === 'USDC') {
+             if (selectedNetwork.includes('Ethereum')) arrivalTime = '~5 mins';
+             else arrivalTime = '~2 seconds';
+        }
+        document.getElementById('expected-arrival-time').textContent = arrivalTime;
+        
+        infoContainer.style.display = 'flex';
     }
 
     function generateMockAddress(symbol, network) {

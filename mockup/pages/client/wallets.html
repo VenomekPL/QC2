@@ -191,7 +191,8 @@
                   <!-- Address Info -->
                   <div>
                     <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="font-bold wallet-name" style="color: var(--text-primary);">Main Wallet</span>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; border: none;">✏️</button>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--space-2);">
                       <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
@@ -267,7 +268,8 @@
                   <!-- Address Info -->
                   <div>
                     <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="font-bold wallet-name" style="color: var(--text-primary);">Main Wallet</span>
+                      <button class="btn btn-xs btn-outline-secondary" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; border: none;">✏️</button>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--space-2);">
                       <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</code>
@@ -343,7 +345,8 @@
                   <!-- Address Info -->
                   <div>
                     <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="font-bold wallet-name" style="color: var(--text-primary);">Main Wallet</span>
+                      <button class="btn btn-xs btn-ghost" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; color: var(--text-tertiary);">✏️</button>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--space-2);">
                       <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj</code>
@@ -419,7 +422,8 @@
                   <!-- Address Info -->
                   <div>
                     <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="font-bold wallet-name" style="color: var(--text-primary);">Main Wallet</span>
+                      <button class="btn btn-xs btn-ghost" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; color: var(--text-tertiary);">✏️</button>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--space-2);">
                       <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0</code>
@@ -495,7 +499,8 @@
                   <!-- Address Info -->
                   <div>
                     <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="font-bold wallet-name" style="color: var(--text-primary);">Main Wallet</span>
+                      <button class="btn btn-xs btn-ghost" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; color: var(--text-tertiary);">✏️</button>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--space-2);">
                       <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0xKulaTokenAddressOnAvaxNetwork...</code>
@@ -581,7 +586,8 @@
                   <!-- Address Info -->
                   <div>
                     <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-                      <span class="font-bold" style="color: var(--text-primary);">Main Wallet</span>
+                      <span class="font-bold wallet-name" style="color: var(--text-primary);">Main Wallet</span>
+                      <button class="btn btn-xs btn-ghost" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; color: var(--text-tertiary);">✏️</button>
                       <span class="badge badge-info" style="margin-left: 8px;">Ethereum</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: var(--space-2);">
@@ -706,6 +712,17 @@
       usdc: '0xUSDCAddressOnMultipleNetworks...'
     };
 
+    // Edit Wallet Name
+    function editWalletName(btn) {
+      const nameSpan = btn.previousElementSibling;
+      const currentName = nameSpan.textContent;
+      const newName = prompt('Enter new wallet name:', currentName);
+      
+      if (newName && newName.trim() !== '') {
+        nameSpan.textContent = newName.trim();
+      }
+    }
+
     // Add new address function
     function addAddress(currency) {
       const index = addressCounters[currency]++;
@@ -753,7 +770,8 @@
           <!-- Address Info -->
           <div>
             <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
-              <span class="font-bold" style="color: var(--text-primary);">Wallet ${index}</span>
+              <span class="font-bold wallet-name" style="color: var(--text-primary);">Wallet ${index}</span>
+              <button class="btn btn-xs btn-outline-secondary" onclick="editWalletName(this)" title="Edit Name" style="padding: 2px 6px; border: none;">✏️</button>
               ${badgeHtml}
               <span class="badge badge-success" style="font-size: 9px;">New</span>
             </div>
@@ -817,11 +835,33 @@
         </div>`;
       }
 
+      // Define average times
+      const averageTimes = {
+        btc: '~60 mins (3 confirmations)',
+        eth: '~5 mins (12 confirmations)',
+        avax: '~2 seconds (Instant)',
+        pol: '~2 seconds (Instant)',
+        sol: '~1 second (Instant)',
+        kula: '~2 seconds (Instant)',
+        usdc: '~5 mins (Ethereum) / ~2s (Others)'
+      };
+      
+      // Refine USDC time based on network if available
+      let avgTime = averageTimes[currency] || '~10 mins';
+      if (currency === 'usdc' && network) {
+         if (network.includes('Ethereum')) avgTime = '~5 mins';
+         else avgTime = '~2 seconds';
+      }
+
       showSuccessModal(
         'Deposit to ' + accountName,
         `${networkWarning}
          <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${address}" alt="QR Code" style="border: 1px solid #eee; padding: 4px; border-radius: 4px;">
+         </div>
+         <div style="text-align: center; margin-bottom: 1rem; background: var(--bg-secondary); padding: 8px; border-radius: 4px;">
+            <div style="font-size: 0.85rem; color: var(--text-secondary);">Average Arrival Time</div>
+            <div style="font-weight: bold; color: var(--text-primary);">${avgTime}</div>
          </div>
          Send ${currency.toUpperCase()} to this address:<br><br><code style="word-break: break-all;">${address}</code><br><br>Your funds will be credited after network confirmation.`
       );
