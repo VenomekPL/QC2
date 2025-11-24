@@ -281,3 +281,44 @@ input:focus, select:focus, textarea:focus {
 input::placeholder {
   color: var(--text-tertiary);
 }
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-secondary);
+  font-weight: var(--font-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.table td {
+  padding: var(--space-4);
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background-color: rgba(67, 24, 255, 0.02);
+}
+
+.table .text-right {
+  text-align: right;
+}
+
+.table .text-center {
+  text-align: center;
+}

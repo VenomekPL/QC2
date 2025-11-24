@@ -10,6 +10,92 @@
   <link rel="stylesheet" href="../../assets/css/variables.css">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-4); }
+    .border-l-4 { border-left-width: 4px; border-left-style: solid; }
+    .border-success { border-color: #2dce89; }
+    .border-warning { border-color: #fb6340; }
+    .bg-secondary-light { background-color: #f8f9fe; }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    
+    /* Donut Chart Hover Effects */
+    .donut-segment { cursor: pointer; transition: stroke-width 0.3s ease; }
+    .donut-segment:hover { stroke-width: 7; opacity: 0.9; }
+    .font-mono { font-family: 'Courier New', Courier, monospace; }
+    .w-8 { width: 2rem; }
+    .h-8 { height: 2rem; }
+    .w-5 { width: 1.25rem; }
+    .h-5 { height: 1.25rem; }
+    .w-6 { width: 1.5rem; }
+    .h-6 { height: 1.5rem; }
+    .w-10 { width: 2.5rem; }
+    .h-10 { height: 2.5rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .rounded-full { border-radius: 9999px; }
+    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+    .flex { display: flex; }
+    .justify-between { justify-content: space-between; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .text-right { text-align: right; }
+    .font-bold { font-weight: 700; }
+    .text-success { color: #2dce89; }
+    .text-secondary { color: #8898aa; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .uppercase { text-transform: uppercase; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .p-4 { padding: 1rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-0 { padding: 0; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .badge-warning { background-color: #ffe5d0; color: #fb6340; }
+    
+    /* Progress Bar */
+    .progress-wrapper { margin-top: var(--space-4); }
+    .progress-label { display: flex; justify-content: space-between; font-size: var(--text-xs); font-weight: 600; margin-bottom: var(--space-2); text-transform: uppercase; color: var(--text-secondary); }
+    .progress-bar-bg { height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background-color: var(--brand-primary); border-radius: 4px; transition: width 0.6s ease; }
+    .progress-bar-fill.success { background-color: #2dce89; }
+    .progress-bar-fill.warning { background-color: #fb6340; }
+    
+    /* Pie Chart (Simple CSS Conic Gradient) */
+    .pie-chart-container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+    .pie-chart { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(#F7931A 0% 40%, #627EEA 40% 65%, #2775CA 65% 75%, #14F195 75% 83%, #E6007A 83% 88%, #8247E5 88% 93%, #2A5ADA 93% 97%, #E84142 97% 100%); position: relative; flex-shrink: 0; }
+    .pie-chart::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: white; border-radius: 50%; }
+    
+    .pie-chart-large { width: 160px; height: 160px; border-radius: 50%; background: conic-gradient(#F7931A 0% 40%, #627EEA 40% 65%, #2775CA 65% 75%, #14F195 75% 83%, #E6007A 83% 88%, #8247E5 88% 93%, #2A5ADA 93% 97%, #E84142 97% 100%); position: relative; flex-shrink: 0; }
+    .pie-chart-large::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 110px; height: 110px; background: white; border-radius: 50%; }
+
+    .pie-legend { font-size: 10px; display: flex; flex-direction: column; gap: 2px; }
+    .pie-legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); font-size: var(--text-sm); }
+    .legend-item { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+    .legend-color { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+    /* Accordion / Wallet List */
+    .wallet-list { display: flex; flex-direction: column; gap: var(--space-3); }
+    .wallet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: var(--space-4); }
+    .wallet-item { border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; background: white; }
+    .wallet-header { padding: var(--space-4); display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--bg-card); transition: background-color 0.2s; }
+    .wallet-header:hover { background: var(--bg-secondary); }
+    .wallet-item.active .wallet-content { display: block; }
+    .wallet-content { display: none; padding: var(--space-4); border-top: 1px solid var(--border-light); background: #f8f9fe; }
+    .address-row { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; border-bottom: 1px dashed var(--border-light); }
+    .address-row:last-child { border-bottom: none; }
+
+    /* Funds Table Specifics */
+    .funds-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); padding-bottom: 12px; }
+    .funds-table td { padding: 16px 12px; border-bottom: 1px solid var(--border-light); }
+    .funds-table tr:last-child td { border-bottom: none; }
+    .funds-table .asset-icon { width: 24px; height: 24px; border-radius: 50%; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 2px; }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -67,9 +153,17 @@
             <span class="sidebar-nav-icon">👥</span>
             <span class="sidebar-nav-text">Clients</span>
           </a>
-          <a href="admin-crypto.html" class="sidebar-nav-item active" data-page="admin-crypto">
+          <a href="admin-users.html" class="sidebar-nav-item" data-page="admin-users">
+            <span class="sidebar-nav-icon">👤</span>
+            <span class="sidebar-nav-text">Users</span>
+          </a>
+          <a href="admin-crypto.html" class="sidebar-nav-item" data-page="admin-crypto">
             <span class="sidebar-nav-icon">🪙</span>
             <span class="sidebar-nav-text">Crypto</span>
+          </a>
+          <a href="admin-commissions.html" class="sidebar-nav-item" data-page="admin-commissions">
+            <span class="sidebar-nav-icon">💰</span>
+            <span class="sidebar-nav-text">Commissions</span>
           </a>
           <a href="admin-settlement.html" class="sidebar-nav-item" data-page="admin-settlement">
             <span class="sidebar-nav-icon">🏛️</span>
@@ -136,10 +230,7 @@
         </div>
 
         <div class="topbar-center">
-          <div class="search-bar">
-            <span class="search-icon">🔍</span>
-            <input type="search" class="search-input" placeholder="Search...">
-          </div>
+          <!-- Search removed/simplified -->
         </div>
 
         <div class="topbar-right">
@@ -161,15 +252,480 @@
       <!-- Page Content -->
       <div class="content-container">
         <div class="page-header">
-          <h1 class="page-title">Admin Crypto</h1>
-          <p class="page-subtitle">Manage supported cryptocurrencies and assets.</p>
+          <div>
+            <h1 class="page-title">Crypto Custody & Operations</h1>
+            <p class="page-subtitle">Monitor blockchain nodes, cold storage, and funds under custody.</p>
+          </div>
+          <div class="flex gap-3">
+             <button class="btn btn-outline">Manage Nodes</button>
+             <button class="btn btn-primary">Initiate Cold Transfer</button>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Crypto Assets</h3>
+        <!-- KPI Cards -->
+        <div class="grid-4 mb-6">
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Total Assets Under Custody</div>
+            <div class="text-2xl font-bold">€ 245,890,000</div>
+            <div class="text-success text-sm mt-1">▲ 2.4% vs last week</div>
           </div>
-          <p>This is a placeholder page for Admin Crypto.</p>
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Cold Storage Ratio</div>
+            <div class="text-2xl font-bold">92.5%</div>
+            <div class="text-secondary text-sm mt-1">Target: >90%</div>
+            <div class="progress-wrapper">
+               <div class="progress-bar-bg">
+                  <div class="progress-bar-fill success" style="width: 92.5%"></div>
+               </div>
+            </div>
+          </div>
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">24h Net Flow</div>
+            <div class="text-2xl font-bold text-success">+ € 1,250,000</div>
+            <div class="text-secondary text-sm mt-1 flex justify-between">
+               <span><span class="text-success">⬇ 1.8M</span> In</span>
+               <span><span class="text-danger">⬆ 550k</span> Out</span>
+            </div>
+            <div class="flex h-1 mt-3 w-full rounded-full overflow-hidden bg-secondary-light">
+               <div class="bg-success" style="width: 75%"></div>
+               <div class="bg-danger" style="width: 25%"></div>
+            </div>
+          </div>
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Active Nodes</div>
+            <div class="text-2xl font-bold">12<span class="text-secondary text-lg">/12</span></div>
+            <div class="text-success text-sm mt-1">All Systems Operational</div>
+          </div>
+        </div>
+
+        <!-- Blockchain Node Status & Staking -->
+        <h3 class="section-title mb-4">Blockchain Node & Staking Status</h3>
+        <div class="grid-4 mb-6">
+           <!-- Bitcoin -->
+           <div class="card p-4 border-l-4 border-success">
+              <div class="flex justify-between items-start mb-3">
+                 <div class="flex items-center gap-2">
+                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="w-8 h-8" alt="BTC">
+                    <span class="font-bold">Bitcoin Core</span>
+                 </div>
+                 <span class="badge badge-success">Synced</span>
+              </div>
+              <div class="space-y-2 text-sm mb-3">
+                 <div class="flex justify-between"><span class="text-secondary">Height</span> <span class="font-mono">818,293</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Peers</span> <span>42</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Latency</span> <span>24ms</span></div>
+              </div>
+              <div class="pt-3 border-t border-light">
+                 <div class="text-xs font-bold uppercase text-secondary mb-1">Staking</div>
+                 <div class="text-sm text-secondary">Not Applicable</div>
+              </div>
+           </div>
+           <!-- Ethereum -->
+           <div class="card p-4 border-l-4 border-success">
+              <div class="flex justify-between items-start mb-3">
+                 <div class="flex items-center gap-2">
+                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="w-8 h-8" alt="ETH">
+                    <span class="font-bold">Geth / Lighthouse</span>
+                 </div>
+                 <span class="badge badge-success">Synced</span>
+              </div>
+              <div class="space-y-2 text-sm mb-3">
+                 <div class="flex justify-between"><span class="text-secondary">Height</span> <span class="font-mono">18,652,102</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Peers</span> <span>85</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Latency</span> <span>12ms</span></div>
+              </div>
+              <div class="pt-3 border-t border-light">
+                 <div class="text-xs font-bold uppercase text-secondary mb-1">Staking (Attesting)</div>
+                 <div class="flex justify-between text-sm"><span class="text-secondary">Staked</span> <span class="font-bold">32,000 ETH</span></div>
+                 <div class="flex justify-between text-sm"><span class="text-secondary">Rewards (24h)</span> <span class="text-success">+4.2 ETH</span></div>
+              </div>
+           </div>
+           <!-- Solana -->
+           <div class="card p-4 border-l-4 border-warning">
+              <div class="flex justify-between items-start mb-3">
+                 <div class="flex items-center gap-2">
+                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="w-8 h-8" alt="SOL">
+                    <span class="font-bold">Solana Validator</span>
+                 </div>
+                 <span class="badge badge-warning">Syncing (99%)</span>
+              </div>
+              <div class="space-y-2 text-sm mb-3">
+                 <div class="flex justify-between"><span class="text-secondary">Slot</span> <span class="font-mono">234,123,555</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Peers</span> <span>120</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Latency</span> <span>45ms</span></div>
+              </div>
+              <div class="pt-3 border-t border-light">
+                 <div class="text-xs font-bold uppercase text-secondary mb-1">Staking (Voting)</div>
+                 <div class="flex justify-between text-sm"><span class="text-secondary">Staked</span> <span class="font-bold">500,000 SOL</span></div>
+                 <div class="flex justify-between text-sm"><span class="text-secondary">Rewards (24h)</span> <span class="text-success">+95 SOL</span></div>
+              </div>
+           </div>
+           <!-- Polygon -->
+           <div class="card p-4 border-l-4 border-success">
+              <div class="flex justify-between items-start mb-3">
+                 <div class="flex items-center gap-2">
+                    <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" class="w-8 h-8" alt="MATIC">
+                    <span class="font-bold">Polygon Heimdall</span>
+                 </div>
+                 <span class="badge badge-success">Synced</span>
+              </div>
+              <div class="space-y-2 text-sm mb-3">
+                 <div class="flex justify-between"><span class="text-secondary">Height</span> <span class="font-mono">50,123,999</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Peers</span> <span>34</span></div>
+                 <div class="flex justify-between"><span class="text-secondary">Latency</span> <span>30ms</span></div>
+              </div>
+              <div class="pt-3 border-t border-light">
+                 <div class="text-xs font-bold uppercase text-secondary mb-1">Staking (Checkpt)</div>
+                 <div class="flex justify-between text-sm"><span class="text-secondary">Staked</span> <span class="font-bold">2.5M POL</span></div>
+                 <div class="flex justify-between text-sm"><span class="text-secondary">Rewards (24h)</span> <span class="text-success">+1,200 POL</span></div>
+              </div>
+           </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-6); margin-bottom: var(--space-6);">
+           <!-- Funds Under Custody -->
+           <div class="card">
+              <div class="card-header flex justify-between items-center">
+                 <h3 class="card-title">Funds Under Custody (Ledger vs On-Chain)</h3>
+                 <button class="btn btn-sm btn-outline">Reconcile</button>
+              </div>
+              <div class="p-0">
+                 <table class="table funds-table w-full">
+                    <thead>
+                       <tr>
+                          <th class="pl-6">Asset</th>
+                          <th class="text-right">Client Ledger</th>
+                          <th class="text-right">On-Chain Custody</th>
+                          <th class="text-right">Difference</th>
+                          <th class="text-right pr-6">Cold Storage %</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                       <tr>
+                          <td class="pl-6">
+                             <div class="flex items-center gap-3">
+                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="asset-icon">
+                                <span class="font-bold">Bitcoin</span>
+                                <span class="text-xs text-secondary">BTC</span>
+                             </div>
+                          </td>
+                          <td class="text-right font-mono font-bold">1,240.50</td>
+                          <td class="text-right font-mono text-secondary">1,240.50</td>
+                          <td class="text-right text-success font-mono font-bold">0.00</td>
+                          <td class="text-right pr-6"><span class="badge badge-success">98%</span></td>
+                       </tr>
+                       <tr>
+                          <td class="pl-6">
+                             <div class="flex items-center gap-3">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="asset-icon">
+                                <span class="font-bold">Ethereum</span>
+                                <span class="text-xs text-secondary">ETH</span>
+                             </div>
+                          </td>
+                          <td class="text-right font-mono font-bold">15,400.00</td>
+                          <td class="text-right font-mono text-secondary">15,400.00</td>
+                          <td class="text-right text-success font-mono font-bold">0.00</td>
+                          <td class="text-right pr-6"><span class="badge badge-success">95%</span></td>
+                       </tr>
+                       <tr>
+                          <td class="pl-6">
+                             <div class="flex items-center gap-3">
+                                <img src="https://cryptologos.cc/logos/usdc-usdc-logo.png" class="asset-icon">
+                                <span class="font-bold">USD Coin</span>
+                                <span class="text-xs text-secondary">USDC</span>
+                             </div>
+                          </td>
+                          <td class="text-right font-mono font-bold">50,000,000</td>
+                          <td class="text-right font-mono text-secondary">50,000,000</td>
+                          <td class="text-right text-success font-mono font-bold">0.00</td>
+                          <td class="text-right pr-6"><span class="badge badge-warning">80%</span></td>
+                       </tr>
+                       <tr>
+                          <td class="pl-6">
+                             <div class="flex items-center gap-3">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="asset-icon">
+                                <span class="font-bold">Solana</span>
+                                <span class="text-xs text-secondary">SOL</span>
+                             </div>
+                          </td>
+                          <td class="text-right font-mono font-bold">500,000</td>
+                          <td class="text-right font-mono text-secondary">500,000</td>
+                          <td class="text-right text-success font-mono font-bold">0.00</td>
+                          <td class="text-right pr-6"><span class="badge badge-success">100%</span></td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+           </div>
+
+           <!-- Funds Distribution (Large) -->
+           <div class="card">
+              <div class="card-header flex justify-between items-center">
+                 <h3 class="card-title">Asset Allocation</h3>
+                 <button class="btn btn-sm btn-outline">Export</button>
+              </div>
+              <div style="height: 300px; display: flex; align-items: center; justify-content: center; padding: var(--space-6);">
+                 <svg width="260" height="260" viewBox="0 0 40 40" class="donut-chart">
+                    <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="transparent"></circle>
+                    <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#eee" stroke-width="5"></circle>
+                    
+                    <!-- BTC 40% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#F7931A" stroke-width="5" stroke-dasharray="40 60" stroke-dashoffset="25">
+                       <title>Bitcoin (BTC): 40%</title>
+                    </circle>
+                    
+                    <!-- ETH 25% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#627EEA" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="-15">
+                       <title>Ethereum (ETH): 25%</title>
+                    </circle>
+                    
+                    <!-- USDC 10% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#2775CA" stroke-width="5" stroke-dasharray="10 90" stroke-dashoffset="-40">
+                       <title>USD Coin (USDC): 10%</title>
+                    </circle>
+                    
+                    <!-- SOL 8% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#14F195" stroke-width="5" stroke-dasharray="8 92" stroke-dashoffset="-50">
+                       <title>Solana (SOL): 8%</title>
+                    </circle>
+                    
+                    <!-- DOT 5% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#E6007A" stroke-width="5" stroke-dasharray="5 95" stroke-dashoffset="-58">
+                       <title>Polkadot (DOT): 5%</title>
+                    </circle>
+                    
+                    <!-- MATIC 5% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#8247E5" stroke-width="5" stroke-dasharray="5 95" stroke-dashoffset="-63">
+                       <title>Polygon (MATIC): 5%</title>
+                    </circle>
+                    
+                    <!-- LINK 4% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#2A5ADA" stroke-width="5" stroke-dasharray="4 96" stroke-dashoffset="-68">
+                       <title>Chainlink (LINK): 4%</title>
+                    </circle>
+                    
+                    <!-- Other 3% -->
+                    <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke="#E84142" stroke-width="5" stroke-dasharray="3 97" stroke-dashoffset="-72">
+                       <title>Other: 3%</title>
+                    </circle>
+                 </svg>
+              </div>
+           </div>
+        </div>
+
+        <!-- Cold Wallets Management (Full Width) -->
+        <h3 class="section-title mb-4">Cold Storage Address Management</h3>
+
+        <!-- Bitcoin Section -->
+        <div class="card mb-6">
+           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+              <div style="display: flex; align-items: center; gap: var(--space-4);">
+                 <div style="width: 56px; height: 56px; background-color: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold; box-shadow: 0 4px 10px rgba(247, 147, 26, 0.3);">₿</div>
+                 <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                       <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin: 0;">Bitcoin Cold Storage</h2>
+                       <span class="badge badge-info">Deep Cold</span>
+                    </div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">BTC • €29,950 per coin</div>
+                 </div>
+              </div>
+              <div style="text-align: right;">
+                 <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">1,240.50 BTC</div>
+                 <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €37,152,975</div>
+              </div>
+           </div>
+
+           <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                 <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Managed Addresses</h3>
+                 <button class="btn btn-sm btn-secondary" onclick="addColdAddress('btc')">+ Add Address</button>
+              </div>
+
+              <div id="btc-addresses" style="display: flex; flex-direction: column; gap: var(--space-3);">
+                 <!-- Address 1 -->
+                 <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4);">
+                    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: var(--space-4); align-items: center;">
+                       <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#1</div>
+                       <div>
+                          <div class="wallet-name-container" style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                             <span class="wallet-name" style="font-weight: var(--font-bold); color: var(--text-primary);">Deep Cold Storage #1</span>
+                             <button class="btn btn-xs btn-ghost" onclick="renameWallet(this)" title="Rename" style="padding: 2px 6px; opacity: 0.5; border: none; background: none; cursor: pointer;">✏️</button>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: var(--space-2);">
+                             <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)" title="Copy Address">📋</button>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+                          </div>
+                       </div>
+                       <div style="text-align: right; display: flex; gap: var(--space-6); align-items: center;">
+                          <div style="text-align: right;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">850.00 BTC</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Amount</div>
+                          </div>
+                          <div style="text-align: right; min-width: 100px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">€25,457,500</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Est. Value</div>
+                          </div>
+                          <div style="text-align: right; min-width: 60px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">68.5%</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">of Total</div>
+                          </div>
+                       </div>
+                    </div>
+                    <!-- Hidden QR Code Area -->
+                    <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                      <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" alt="QR Code">
+                      </div>
+                      <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit BTC</div>
+                    </div>
+                 </div>
+                 <!-- Address 2 -->
+                 <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4);">
+                    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: var(--space-4); align-items: center;">
+                       <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#2</div>
+                       <div>
+                          <div class="wallet-name-container" style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                             <span class="wallet-name" style="font-weight: var(--font-bold); color: var(--text-primary);">Deep Cold Storage #2</span>
+                             <button class="btn btn-xs btn-ghost" onclick="renameWallet(this)" title="Rename" style="padding: 2px 6px; opacity: 0.5; border: none; background: none; cursor: pointer;">✏️</button>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: var(--space-2);">
+                             <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">bc1q99...22mm</code>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('bc1q99...22mm', this)" title="Copy Address">📋</button>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+                          </div>
+                       </div>
+                       <div style="text-align: right; display: flex; gap: var(--space-6); align-items: center;">
+                          <div style="text-align: right;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">390.50 BTC</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Amount</div>
+                          </div>
+                          <div style="text-align: right; min-width: 100px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">€11,695,475</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Est. Value</div>
+                          </div>
+                          <div style="text-align: right; min-width: 60px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">31.5%</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">of Total</div>
+                          </div>
+                       </div>
+                    </div>
+                    <!-- Hidden QR Code Area -->
+                    <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                      <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=bc1q99...22mm" alt="QR Code">
+                      </div>
+                      <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit BTC</div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <!-- Ethereum Section -->
+        <div class="card mb-6">
+           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6);">
+              <div style="display: flex; align-items: center; gap: var(--space-4);">
+                 <div style="width: 56px; height: 56px; background-color: #627EEA; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: bold; box-shadow: 0 4px 10px rgba(98, 126, 234, 0.3);">Ξ</div>
+                 <div>
+                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                       <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); margin: 0;">Ethereum Cold Storage</h2>
+                       <span class="badge badge-info">Multi-Sig</span>
+                    </div>
+                    <div style="font-size: var(--text-sm); color: var(--text-secondary); margin-top: var(--space-1);">ETH • €2,807 per coin</div>
+                 </div>
+              </div>
+              <div style="text-align: right;">
+                 <div style="font-size: var(--text-2xl); font-weight: var(--font-bold);">15,400.00 ETH</div>
+                 <div style="font-size: var(--text-lg); color: var(--text-secondary);">≈ €43,227,800</div>
+              </div>
+           </div>
+
+           <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-4);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                 <h3 style="font-size: var(--text-lg); font-weight: var(--font-bold);">Managed Addresses</h3>
+                 <button class="btn btn-sm btn-secondary" onclick="addColdAddress('eth')">+ Add Address</button>
+              </div>
+
+              <div id="eth-addresses" style="display: flex; flex-direction: column; gap: var(--space-3);">
+                 <!-- Address 1 -->
+                 <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4);">
+                    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: var(--space-4); align-items: center;">
+                       <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#1</div>
+                       <div>
+                          <div class="wallet-name-container" style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                             <span class="wallet-name" style="font-weight: var(--font-bold); color: var(--text-primary);">Multi-Sig Vault #1</span>
+                             <button class="btn btn-xs btn-ghost" onclick="renameWallet(this)" title="Rename" style="padding: 2px 6px; opacity: 0.5; border: none; background: none; cursor: pointer;">✏️</button>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: var(--space-2);">
+                             <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0x71C...92F1</code>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('0x71C...92F1', this)" title="Copy Address">📋</button>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+                          </div>
+                       </div>
+                       <div style="text-align: right; display: flex; gap: var(--space-6); align-items: center;">
+                          <div style="text-align: right;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">12,000 ETH</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Amount</div>
+                          </div>
+                          <div style="text-align: right; min-width: 100px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">€33,684,000</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Est. Value</div>
+                          </div>
+                          <div style="text-align: right; min-width: 60px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">77.9%</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">of Total</div>
+                          </div>
+                       </div>
+                    </div>
+                    <!-- Hidden QR Code Area -->
+                    <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                      <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=0x71C...92F1" alt="QR Code">
+                      </div>
+                      <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit ETH</div>
+                    </div>
+                 </div>
+                 <!-- Address 2 -->
+                 <div class="account-item" style="background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4);">
+                    <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: var(--space-4); align-items: center;">
+                       <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#2</div>
+                       <div>
+                          <div class="wallet-name-container" style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                             <span class="wallet-name" style="font-weight: var(--font-bold); color: var(--text-primary);">Staking Contract Reserve</span>
+                             <button class="btn btn-xs btn-ghost" onclick="renameWallet(this)" title="Rename" style="padding: 2px 6px; opacity: 0.5; border: none; background: none; cursor: pointer;">✏️</button>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: var(--space-2);">
+                             <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">0x88A...B221</code>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('0x88A...B221', this)" title="Copy Address">📋</button>
+                             <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+                          </div>
+                       </div>
+                       <div style="text-align: right; display: flex; gap: var(--space-6); align-items: center;">
+                          <div style="text-align: right;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">3,400 ETH</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Amount</div>
+                          </div>
+                          <div style="text-align: right; min-width: 100px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">€9,543,800</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">Est. Value</div>
+                          </div>
+                          <div style="text-align: right; min-width: 60px;">
+                              <div style="font-weight: var(--font-bold); color: var(--text-primary);">22.1%</div>
+                              <div style="font-size: var(--text-xs); color: var(--text-secondary);">of Total</div>
+                          </div>
+                       </div>
+                    </div>
+                    <!-- Hidden QR Code Area -->
+                    <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+                      <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=0x88A...B221" alt="QR Code">
+                      </div>
+                      <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit ETH</div>
+                    </div>
+                 </div>
+              </div>
+           </div>
         </div>
       </div>
     </main>
@@ -177,5 +733,150 @@
 
   <script src="../../assets/js/nav-active.js"></script>
   <script src="../../assets/js/app.js"></script>
+  <script>
+    // Address counters
+    let addressCounters = {
+      btc: 3,
+      eth: 3
+    };
+
+    // Toggle QR Code
+    function toggleQR(btn) {
+      const row = btn.closest('.account-item');
+      const qrArea = row.querySelector('.qr-code-area');
+      if (qrArea.style.display === 'none') {
+        qrArea.style.display = 'block';
+        btn.classList.add('active');
+        btn.style.color = 'var(--color-primary)';
+        btn.style.borderColor = 'var(--color-primary)';
+      } else {
+        qrArea.style.display = 'none';
+        btn.classList.remove('active');
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }
+    }
+
+    // Rename Wallet
+    function renameWallet(btn) {
+      const container = btn.closest('.wallet-name-container');
+      const nameSpan = container.querySelector('.wallet-name');
+      const currentName = nameSpan.innerText;
+      
+      // Create input
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = currentName;
+      input.className = 'form-control form-control-sm';
+      input.style.width = '200px';
+      input.style.display = 'inline-block';
+      input.style.padding = '2px 6px';
+      input.style.fontSize = 'var(--text-sm)';
+      input.style.border = '1px solid var(--border-light)';
+      input.style.borderRadius = '4px';
+      
+      // Replace span with input
+      nameSpan.style.display = 'none';
+      container.insertBefore(input, btn);
+      btn.style.display = 'none'; // Hide edit button
+      
+      input.focus();
+      
+      // Save on blur or enter
+      function save() {
+        const newName = input.value.trim() || currentName;
+        nameSpan.innerText = newName;
+        nameSpan.style.display = '';
+        input.remove();
+        btn.style.display = '';
+      }
+      
+      input.addEventListener('blur', save);
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') save();
+      });
+    }
+
+    // Add Cold Address
+    function addColdAddress(currency) {
+      const index = addressCounters[currency]++;
+      const container = document.getElementById(`${currency}-addresses`);
+      
+      let address, namePrefix, symbol, price;
+      
+      if (currency === 'btc') {
+        address = 'bc1q' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        namePrefix = 'Deep Cold Storage';
+        symbol = 'BTC';
+        price = 29950;
+      } else {
+        address = '0x' + Math.random().toString(16).substring(2, 40);
+        namePrefix = 'Multi-Sig Vault';
+        symbol = 'ETH';
+        price = 2807;
+      }
+
+      // Random stats for mock
+      const amount = (Math.random() * 100).toFixed(2);
+      const value = (amount * price).toLocaleString('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+      const percent = (Math.random() * 5).toFixed(1) + '%'; // Small % for new addresses
+
+      const newItem = document.createElement('div');
+      newItem.className = 'account-item';
+      newItem.style.cssText = 'background: var(--bg-body); border-radius: var(--radius-md); padding: var(--space-4); animation: fadeIn 0.3s ease-in-out;';
+      
+      newItem.innerHTML = `
+        <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: var(--space-4); align-items: center;">
+           <div style="font-weight: var(--font-bold); color: var(--text-tertiary); text-align: center;">#${index}</div>
+           <div>
+              <div class="wallet-name-container" style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1);">
+                 <span class="wallet-name" style="font-weight: var(--font-bold); color: var(--text-primary);">${namePrefix} #${index}</span>
+                 <button class="btn btn-xs btn-ghost" onclick="renameWallet(this)" title="Rename" style="padding: 2px 6px; opacity: 0.5; border: none; background: none; cursor: pointer;">✏️</button>
+                 <span class="badge badge-info text-xs">New</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-2);">
+                 <code style="font-size: var(--text-xs); color: var(--text-secondary); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">${address}</code>
+                 <button class="btn btn-xs btn-outline-secondary" onclick="copyToClipboard('${address}', this)" title="Copy Address">📋</button>
+                 <button class="btn btn-xs btn-outline-secondary" onclick="toggleQR(this)" title="Show QR Code">📱</button>
+              </div>
+           </div>
+           <div style="text-align: right; display: flex; gap: var(--space-6); align-items: center;">
+              <div style="text-align: right;">
+                  <div style="font-weight: var(--font-bold); color: var(--text-primary);">${amount} ${symbol}</div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary);">Amount</div>
+              </div>
+              <div style="text-align: right; min-width: 100px;">
+                  <div style="font-weight: var(--font-bold); color: var(--text-primary);">${value}</div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary);">Est. Value</div>
+              </div>
+              <div style="text-align: right; min-width: 60px;">
+                  <div style="font-weight: var(--font-bold); color: var(--text-primary);">${percent}</div>
+                  <div style="font-size: var(--text-xs); color: var(--text-secondary);">of Total</div>
+                          </div>
+                       </div>
+                    </div>
+        <!-- Hidden QR Code Area -->
+        <div class="qr-code-area" style="display: none; text-align: center; padding-top: var(--space-4); border-top: 1px dashed var(--border-light); margin-top: var(--space-4);">
+          <div style="width: 120px; height: 120px; background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${address}" alt="QR Code">
+          </div>
+          <div style="font-size: var(--text-xs); color: var(--text-secondary); margin-top: var(--space-2);">Scan to deposit ${symbol}</div>
+        </div>
+      `;
+      
+      container.appendChild(newItem);
+      newItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // Add animation style
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
