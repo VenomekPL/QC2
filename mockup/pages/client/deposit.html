@@ -600,9 +600,9 @@
     // --- Compliance / Pending Transactions Logic ---
 
     const pendingTransactions = [
-      { id: 'tx_1', sender: '0x123...abc', recipient: '0x789...xyz', amount: '1.5 ETH', value: '€2,450.00', status: 'Pending' },
-      { id: 'tx_2', sender: 'bc1q...987', recipient: 'bc1q...123', amount: '0.05 BTC', value: '€1,800.00', status: 'Pending' },
-      { id: 'tx_3', sender: 'HN7c...4YWrH', recipient: 'Sol...Wallet', amount: '150 SOL', value: '€3,200.00', status: 'Approved' }
+      { id: 'tx_1', sender: '0x123abc456def78901234567890abcdef12345678', recipient: '0x789xyz123abc456def78901234567890abcdef12', amount: '1.5 ETH', value: '€2,450.00', status: 'Pending' },
+      { id: 'tx_2', sender: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', recipient: 'bc1qab34cd56ef78gh90ij12kl34mn56op78qr90st', amount: '0.05 BTC', value: '€1,800.00', status: 'Pending' },
+      { id: 'tx_3', sender: 'HN7cABqLq46Es1jh92dQQisAq662SmxELLLsHHe4YWrH', recipient: 'SolanaWalletAddressExample1234567890ABCDEF', amount: '150 SOL', value: '€3,200.00', status: 'Approved' }
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -622,10 +622,17 @@
 
     function renderPendingTransactions() {
       const tbody = document.getElementById('compliance-table-body');
-      tbody.innerHTML = pendingTransactions.map(tx => `
+      tbody.innerHTML = pendingTransactions.map(tx => {
+        // Helper to shorten address
+        const shorten = (addr) => {
+            if (addr.length < 10) return addr;
+            return addr.substring(0, 6) + '...' + addr.substring(addr.length - 4);
+        };
+
+        return `
         <tr>
-          <td style="font-family: monospace;">${tx.sender}</td>
-          <td style="font-family: monospace;">${tx.recipient}</td>
+          <td style="font-family: monospace;" title="${tx.sender}">${shorten(tx.sender)}</td>
+          <td style="font-family: monospace;" title="${tx.recipient}">${shorten(tx.recipient)}</td>
           <td>${tx.amount}</td>
           <td>${tx.value}</td>
           <td><span class="badge badge-${tx.status === 'Approved' ? 'success' : 'warning'}">${tx.status}</span></td>
@@ -635,7 +642,7 @@
               : '<span class="text-success">✓ Verified</span>'}
           </td>
         </tr>
-      `).join('');
+      `}).join('');
     }
 
     function openDeclareModal(txId) {
