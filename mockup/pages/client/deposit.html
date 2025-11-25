@@ -6,7 +6,76 @@
   <title>Deposit - QCrypto Client Panel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css"><link rel="stylesheet" href="../../assets/css/layout.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css"><link rel="stylesheet" href="../../assets/css/variables.css"><link rel="stylesheet" href="../../assets/css/global.css">  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    /* Custom Styles for Compliance Modal (Reused from Address Book) */
+    .radio-group {
+      display: flex;
+      flex-direction: row;
+      gap: var(--space-2);
+    }
+
+    .radio-card {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 8px 12px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      background: var(--bg-card);
+      flex: 1;
+      min-width: fit-content;
+    }
+
+    .radio-card:hover {
+      border-color: var(--color-primary);
+      background: var(--bg-hover);
+    }
+
+    .radio-card.checked {
+      border-color: var(--color-primary);
+      background: rgba(67, 24, 255, 0.05);
+      color: var(--color-primary);
+      font-weight: var(--font-medium);
+    }
+
+    .radio-card input[type="radio"] {
+      margin-right: 8px;
+      accent-color: var(--color-primary);
+      transform: scale(0.9);
+      width: auto;
+      height: auto;
+      flex-shrink: 0;
+    }
+    
+    .radio-card span {
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .compliance-section {
+      background: var(--bg-body);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      border: 1px solid var(--border-light);
+    }
+
+    .compliance-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+      color: var(--brand-primary);
+      font-weight: var(--font-bold);
+      font-size: var(--text-sm);
+    }
+
+    .compliance-icon {
+      font-size: 1.2em;
+    }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -251,8 +320,108 @@
             </div>
           </div>
         </div>
+
+        <!-- Pending Compliance Checks -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Pending Compliance Checks</h2>
+            <p class="text-secondary">Incoming transactions requiring source declaration before crediting.</p>
+          </div>
+          
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Sender</th>
+                  <th>Recipient</th>
+                  <th>Amount</th>
+                  <th>Value</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="compliance-table-body">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </main>
+  </div>
+
+  <!-- Declare Source Modal -->
+  <div id="declare-source-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="card" style="width: 500px; max-width: 90%; max-height: 90vh; overflow-y: auto;">
+      <div class="card-header">
+        <h2 class="card-title">Declare Source of Funds</h2>
+        <button onclick="closeDeclareModal()" style="background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+      </div>
+      
+      <form onsubmit="handleDeclareSource(event)">
+        <input type="hidden" id="declare-tx-id">
+        
+        <div class="mb-4">
+          <label class="d-block mb-2 font-medium">Transaction ID</label>
+          <div id="display-tx-id" style="font-family: monospace; font-size: var(--text-xs); color: var(--text-secondary); word-break: break-all;"></div>
+        </div>
+
+        <!-- Compliance Section -->
+        <div class="mb-4 compliance-section">
+          <div class="compliance-header">
+            <span class="compliance-icon">🛡️</span>
+            <h4>Compliance Information (Travel Rule)</h4>
+          </div>
+          
+          <!-- Wallet Origin -->
+          <div class="mb-4">
+            <label class="d-block mb-2 font-medium text-sm text-secondary">Wallet Type</label>
+            <div class="radio-group">
+              <label class="radio-card">
+                <input type="radio" name="wallet-type" value="custodial" onchange="toggleComplianceFields()" required>
+                <span>Hosted (Custodial)</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="wallet-type" value="non-custodial" onchange="toggleComplianceFields()">
+                <span>Self-hosted (Non-custodial)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Custodial Details -->
+          <div id="custodial-fields" class="mb-3" style="display: none;">
+            <label class="d-block mb-2 font-medium">Wallet Host / Exchange Name</label>
+            <input type="text" id="wallet-host" placeholder="e.g. Coinbase, Binance" class="form-input">
+          </div>
+
+          <!-- Non-Custodial Details -->
+          <div id="non-custodial-fields" class="mb-3" style="display: none;">
+            <label class="d-block mb-2 font-medium text-sm text-secondary">Ownership</label>
+            <div class="radio-group mb-3">
+              <label class="radio-card">
+                <input type="radio" name="wallet-ownership" value="self" onchange="toggleOwnershipFields()">
+                <span>Owned by me</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="wallet-ownership" value="third-party" onchange="toggleOwnershipFields()">
+                <span>Owned by someone else</span>
+              </label>
+            </div>
+            
+            <div id="beneficiary-fields" style="display: none;">
+              <label class="d-block mb-2 font-medium">Beneficiary Name (Person or Entity)</label>
+              <input type="text" id="beneficiary-name" placeholder="Full Name or Company Name" class="form-input">
+            </div>
+          </div>
+        </div>
+        
+        <div style="display: flex; justify-content: flex-end; gap: var(--space-3);">
+          <button type="button" class="btn btn-secondary" onclick="closeDeclareModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Declaration</button>
+        </div>
+      </form>
+    </div>
   </div>  <script src="../../assets/js/nav-active.js"></script>
 
 
@@ -426,6 +595,119 @@
       navigator.clipboard.writeText(address).then(() => {
         showSuccessMessage('Address copied to clipboard!');
       });
+    }
+
+    // --- Compliance / Pending Transactions Logic ---
+
+    const pendingTransactions = [
+      { id: 'tx_1', sender: '0x123...abc', recipient: '0x789...xyz', amount: '1.5 ETH', value: '€2,450.00', status: 'Pending' },
+      { id: 'tx_2', sender: 'bc1q...987', recipient: 'bc1q...123', amount: '0.05 BTC', value: '€1,800.00', status: 'Pending' },
+      { id: 'tx_3', sender: 'HN7c...4YWrH', recipient: 'Sol...Wallet', amount: '150 SOL', value: '€3,200.00', status: 'Approved' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPendingTransactions();
+      
+      // Initialize radio card interactions (copied from address-book)
+      document.querySelectorAll('.radio-card input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          const group = e.target.closest('.radio-group');
+          if (!group) return;
+          group.querySelectorAll('.radio-card').forEach(card => card.classList.remove('checked'));
+          const parentCard = e.target.closest('.radio-card');
+          if (parentCard) parentCard.classList.add('checked');
+        });
+      });
+    });
+
+    function renderPendingTransactions() {
+      const tbody = document.getElementById('compliance-table-body');
+      tbody.innerHTML = pendingTransactions.map(tx => `
+        <tr>
+          <td style="font-family: monospace;">${tx.sender}</td>
+          <td style="font-family: monospace;">${tx.recipient}</td>
+          <td>${tx.amount}</td>
+          <td>${tx.value}</td>
+          <td><span class="badge badge-${tx.status === 'Approved' ? 'success' : 'warning'}">${tx.status}</span></td>
+          <td>
+            ${tx.status === 'Pending' 
+              ? `<button class="btn btn-sm btn-primary" onclick="openDeclareModal('${tx.id}')">Declare Source</button>` 
+              : '<span class="text-success">✓ Verified</span>'}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openDeclareModal(txId) {
+      const tx = pendingTransactions.find(t => t.id === txId);
+      document.getElementById('declare-tx-id').value = txId;
+      document.getElementById('display-tx-id').textContent = txId + ' (Hash: ' + Math.random().toString(36).substring(7) + '...)';
+      document.getElementById('declare-source-modal').style.display = 'flex';
+    }
+
+    function closeDeclareModal() {
+      document.getElementById('declare-source-modal').style.display = 'none';
+      // Reset form
+      const walletTypes = document.getElementsByName('wallet-type');
+      walletTypes.forEach(r => r.checked = false);
+      const ownershipTypes = document.getElementsByName('wallet-ownership');
+      ownershipTypes.forEach(r => r.checked = false);
+      document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('checked'));
+      document.getElementById('wallet-host').value = '';
+      document.getElementById('beneficiary-name').value = '';
+      document.getElementById('custodial-fields').style.display = 'none';
+      document.getElementById('non-custodial-fields').style.display = 'none';
+      document.getElementById('beneficiary-fields').style.display = 'none';
+    }
+
+    function toggleComplianceFields() {
+      const type = document.querySelector('input[name="wallet-type"]:checked').value;
+      const custodialFields = document.getElementById('custodial-fields');
+      const nonCustodialFields = document.getElementById('non-custodial-fields');
+      
+      if (type === 'custodial') {
+        custodialFields.style.display = 'block';
+        nonCustodialFields.style.display = 'none';
+        document.getElementById('wallet-host').required = true;
+        const ownershipRadios = document.getElementsByName('wallet-ownership');
+        ownershipRadios.forEach(r => r.required = false);
+        document.getElementById('beneficiary-name').required = false;
+      } else {
+        custodialFields.style.display = 'none';
+        nonCustodialFields.style.display = 'block';
+        document.getElementById('wallet-host').required = false;
+        const ownershipRadios = document.getElementsByName('wallet-ownership');
+        ownershipRadios.forEach(r => r.required = true);
+      }
+    }
+
+    function toggleOwnershipFields() {
+      const ownership = document.querySelector('input[name="wallet-ownership"]:checked').value;
+      const beneficiaryFields = document.getElementById('beneficiary-fields');
+      const beneficiaryInput = document.getElementById('beneficiary-name');
+      
+      if (ownership === 'third-party') {
+        beneficiaryFields.style.display = 'block';
+        beneficiaryInput.required = true;
+      } else {
+        beneficiaryFields.style.display = 'none';
+        beneficiaryInput.required = false;
+      }
+    }
+
+    function handleDeclareSource(e) {
+      e.preventDefault();
+      const txId = document.getElementById('declare-tx-id').value;
+      
+      // Update mock status
+      const txIndex = pendingTransactions.findIndex(t => t.id === txId);
+      if (txIndex !== -1) {
+        pendingTransactions[txIndex].status = 'Approved';
+        renderPendingTransactions();
+      }
+      
+      closeDeclareModal();
+      // alert('Source declared successfully! Funds will be credited shortly.');
     }
   </script>
 </body>
