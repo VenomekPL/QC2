@@ -10,6 +10,33 @@
   <link rel="stylesheet" href="../../assets/css/variables.css">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <link rel="stylesheet" href="../../assets/css/layout.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-4); }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .uppercase { text-transform: uppercase; }
+    .text-secondary { color: var(--text-secondary); }
+    .text-success { color: var(--color-success); }
+    .text-right { text-align: right; }
+    .text-left { text-align: left; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .p-4 { padding: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .w-full { width: 100%; }
+    .border-b { border-bottom-width: 1px; border-style: solid; }
+    .border-light { border-color: var(--border-light); }
+    .font-mono { font-family: monospace; }
+    .flex { display: flex; }
+    .justify-between { justify-content: space-between; }
+    .items-center { align-items: center; }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -173,17 +200,358 @@
           <p class="page-subtitle">Manage platform fees and commission structures.</p>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Commissions Overview</h3>
+        <div class="grid-4 mb-6">
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Total Revenue (YTD)</div>
+            <div class="text-2xl font-bold">€ 1,245,890</div>
+            <div class="text-success text-sm mt-1">▲ 12.4% vs last year</div>
           </div>
-          <div class="p-4">
-            <p class="text-secondary">Commission management interface coming soon.</p>
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Pending Invoices</div>
+            <div class="text-2xl font-bold">€ 45,230</div>
+            <div class="text-secondary text-sm mt-1">12 Clients to bill</div>
+          </div>
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Avg. Monthly Revenue</div>
+            <div class="text-2xl font-bold">€ 112,500</div>
+            <div class="text-success text-sm mt-1">Last 6 months</div>
+          </div>
+          <div class="card p-4">
+            <div class="text-secondary text-xs uppercase font-bold mb-2">Top Revenue Source</div>
+            <div class="text-2xl font-bold">AUC Fees</div>
+            <div class="text-secondary text-sm mt-1">45% of total revenue</div>
+          </div>
+        </div>
+
+        <div class="grid-2 gap-6 mb-6">
+          <!-- Monthly Revenue Trend -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Monthly Revenue Trend</h3>
+            </div>
+            <div class="p-4" style="height: 300px; width: 100%;">
+              <canvas id="revenueTrendChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Revenue Breakdown by Fee Type -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Revenue Breakdown by Fee Type</h3>
+            </div>
+            <div class="p-4" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+              <canvas id="revenueBreakdownChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Client Revenue Explorer -->
+        <div class="card mb-6">
+          <div class="card-header flex justify-between items-center">
+            <h3 class="card-title">Client Revenue Explorer</h3>
+            <div class="flex gap-2">
+              <button class="btn btn-xs btn-primary" onclick="updateClientRevenue(30)">30D</button>
+              <button class="btn btn-xs btn-outline-secondary" onclick="updateClientRevenue(90)">90D</button>
+              <button class="btn btn-xs btn-outline-secondary" onclick="updateClientRevenue(365)">365D</button>
+            </div>
+          </div>
+          <div class="p-4 border-b border-light">
+            <div class="w-full" style="max-width: 400px;">
+              <select id="clientSelect" class="select-input w-full" onchange="handleClientSelect()">
+                <option value="" selected disabled>Select Client...</option>
+                <option value="1">Alpha Capital Ltd</option>
+                <option value="2">BlueSky Ventures GmbH</option>
+                <option value="3">Quantum Trading PLC</option>
+                <option value="4">Stellar Assets Management</option>
+              </select>
+            </div>
+          </div>
+          <div class="p-4" style="height: 300px; width: 100%; position: relative;">
+            <div id="clientChartPlaceholder" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--bg-card); z-index: 10;">
+              <div class="text-secondary">Please select a client to view revenue history</div>
+            </div>
+            <canvas id="clientRevenueChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Pending Invoices / Settlements -->
+        <div class="card mb-6">
+          <div class="card-header flex justify-between items-center">
+            <h3 class="card-title">Pending Commission Settlements</h3>
+            <button class="btn btn-sm btn-primary">Generate Invoices</button>
+          </div>
+          
+          <!-- Filters -->
+          <div class="p-4 border-b border-light grid-4" style="grid-template-columns: 2fr 1fr 1fr;">
+            <div>
+              <label class="text-xs font-bold text-secondary block mb-2">Search Client</label>
+              <div class="search-bar w-full">
+                <span class="search-icon">🔍</span>
+                <input type="search" class="search-input" placeholder="Search client name...">
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-bold text-secondary block mb-2">Period</label>
+              <input type="month" class="select-input w-full" value="2025-11">
+            </div>
+            <div>
+              <label class="text-xs font-bold text-secondary block mb-2">Status</label>
+              <select class="select-input w-full">
+                <option value="all">All Statuses</option>
+                <option value="pending" selected>Pending</option>
+                <option value="processed">Processed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-container" style="max-height: 500px; overflow-y: auto;">
+            <table class="table w-full">
+              <thead style="position: sticky; top: 0; background: var(--bg-card); z-index: 10;">
+                <tr class="text-left border-b border-light">
+                  <th class="p-4 text-xs text-secondary uppercase">Client</th>
+                  <th class="p-4 text-xs text-secondary uppercase">Period</th>
+                  <th class="p-4 text-xs text-secondary uppercase text-right">Total Due</th>
+                  <th class="p-4 text-xs text-secondary uppercase">Status</th>
+                  <th class="p-4 text-xs text-secondary uppercase">Action</th>
+                </tr>
+              </thead>
+              <tbody id="settlementsTableBody">
+                <tr class="border-b border-light">
+                  <td class="p-4 font-semibold">Alpha Capital Ltd</td>
+                  <td class="p-4 text-sm">Nov 2025</td>
+                  <td class="p-4 text-right font-mono font-bold">€ 1,820.00</td>
+                  <td class="p-4"><span class="badge badge-warning" id="status-1">Pending</span></td>
+                  <td class="p-4"><button class="btn btn-xs btn-outline" onclick="toggleStatus(1)">Mark Processed</button></td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-4 font-semibold">BlueSky Ventures GmbH</td>
+                  <td class="p-4 text-sm">Nov 2025</td>
+                  <td class="p-4 text-right font-mono font-bold">€ 970.00</td>
+                  <td class="p-4"><span class="badge badge-warning" id="status-2">Pending</span></td>
+                  <td class="p-4"><button class="btn btn-xs btn-outline" onclick="toggleStatus(2)">Mark Processed</button></td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-4 font-semibold">Quantum Trading PLC</td>
+                  <td class="p-4 text-sm">Nov 2025</td>
+                  <td class="p-4 text-right font-mono font-bold">€ 3,450.00</td>
+                  <td class="p-4"><span class="badge badge-warning" id="status-3">Pending</span></td>
+                  <td class="p-4"><button class="btn btn-xs btn-outline" onclick="toggleStatus(3)">Mark Processed</button></td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-4 font-semibold">Stellar Assets Management</td>
+                  <td class="p-4 text-sm">Nov 2025</td>
+                  <td class="p-4 text-right font-mono font-bold">€ 2,100.00</td>
+                  <td class="p-4"><span class="badge badge-success" id="status-4">Processed</span></td>
+                  <td class="p-4"><button class="btn btn-xs btn-outline" onclick="toggleStatus(4)">Mark Pending</button></td>
+                </tr>
+                <!-- Infinite scroll placeholder -->
+                <tr>
+                  <td colspan="5" class="p-4 text-center text-secondary text-sm">
+                    Loading more settlements...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </main>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // --- Monthly Revenue Trend Chart ---
+      const trendCtx = document.getElementById('revenueTrendChart').getContext('2d');
+      new Chart(trendCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+          datasets: [{
+            label: 'Monthly Revenue',
+            data: [98000, 105000, 102000, 115000, 128000, 142000],
+            borderColor: '#4318FF', // Brand Primary
+            backgroundColor: 'rgba(67, 24, 255, 0.1)',
+            tension: 0.4,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return '€ ' + context.parsed.y.toLocaleString();
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              grid: { borderDash: [5, 5], color: '#E0E5F2' },
+              ticks: {
+                callback: function(value) { return '€' + (value/1000) + 'k'; }
+              }
+            },
+            x: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+
+      // --- Revenue Breakdown Pie Chart ---
+      const breakdownCtx = document.getElementById('revenueBreakdownChart').getContext('2d');
+      new Chart(breakdownCtx, {
+        type: 'pie',
+        data: {
+          labels: ['AUC Fees', 'Trading Comm.', 'Staking Comm.', 'Withdrawal Fees', 'Onboarding'],
+          datasets: [{
+            data: [45, 25, 20, 5, 5],
+            backgroundColor: [
+              '#4318FF', // Primary
+              '#6AD2FF', // Info
+              '#05CD99', // Success
+              '#FFB547', // Warning
+              '#E31A1A'  // Danger
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.label + ': ' + context.parsed + '%';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // --- Client Revenue Explorer Chart ---
+      let clientRevenueChart;
+      let currentClientDays = 30;
+
+      const initClientChart = (days) => {
+        const ctx = document.getElementById('clientRevenueChart').getContext('2d');
+        const placeholder = document.getElementById('clientChartPlaceholder');
+        const clientSelect = document.getElementById('clientSelect');
+
+        if (!clientSelect.value) {
+          placeholder.style.display = 'flex';
+          return;
+        }
+        
+        placeholder.style.display = 'none';
+        
+        // Generate mock labels and data based on days
+        // For line chart, we need dates as labels
+        const labels = [];
+        const data = [];
+        const today = new Date();
+        
+        // Generate data points (fewer points for longer periods to keep it clean)
+        const points = days === 30 ? 15 : (days === 90 ? 12 : 12);
+        const interval = Math.floor(days / points);
+
+        for (let i = points; i >= 0; i--) {
+          const d = new Date(today);
+          d.setDate(d.getDate() - (i * interval));
+          labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+          data.push(Math.floor(Math.random() * 2000) + 500);
+        }
+
+        if (clientRevenueChart) {
+          clientRevenueChart.destroy();
+        }
+
+        clientRevenueChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: `Revenue (Last ${days} Days)`,
+              data: data,
+              borderColor: '#4318FF',
+              backgroundColor: 'rgba(67, 24, 255, 0.1)',
+              tension: 0.4,
+              fill: true,
+              pointRadius: 4,
+              pointHoverRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    return '€ ' + context.parsed.y.toLocaleString();
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { borderDash: [5, 5], color: '#E0E5F2' },
+                ticks: {
+                  callback: function(value) { return '€' + value; }
+                }
+              },
+              x: {
+                grid: { display: false }
+              }
+            }
+          }
+        });
+      };
+
+      // Handle Client Selection
+      window.handleClientSelect = () => {
+        initClientChart(currentClientDays);
+      };
+
+      // Expose update function globally
+      window.updateClientRevenue = (days) => {
+        currentClientDays = days;
+        // Update buttons state
+        const buttons = document.querySelectorAll('.card-header button'); // Note: this selector might be too broad if there are other buttons
+        // A better way would be to target the specific container, but for now let's just re-render if a client is selected
+        initClientChart(days);
+      };
+
+      // --- Toggle Status Function ---
+      window.toggleStatus = (id) => {
+        const badge = document.getElementById(`status-${id}`);
+        const btn = badge.parentElement.nextElementSibling.querySelector('button');
+        const currentStatus = badge.innerText.trim(); // Use trim() to handle potential whitespace
+        
+        if (currentStatus === 'Pending') {
+          badge.className = 'badge badge-success';
+          badge.innerText = 'Processed';
+          btn.innerText = 'Mark Pending';
+        } else {
+          badge.className = 'badge badge-warning';
+          badge.innerText = 'Pending';
+          btn.innerText = 'Mark Processed';
+        }
+      };
+    });
+  </script>
 
   <script src="../../assets/js/nav-active.js"></script>
   <script src="../../assets/js/app.js"></script>
