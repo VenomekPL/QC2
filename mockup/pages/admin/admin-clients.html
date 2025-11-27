@@ -303,7 +303,8 @@
           <div id="step-indicator-1" class="step active" style="font-weight: bold; color: var(--brand-primary);">1. Company Profile</div>
           <div id="step-indicator-2" class="step text-secondary">2. Key People</div>
           <div id="step-indicator-3" class="step text-secondary">3. Fees</div>
-          <div id="step-indicator-4" class="step text-secondary">4. Review</div>
+          <div id="step-indicator-4" class="step text-secondary">4. Settlement</div>
+          <div id="step-indicator-5" class="step text-secondary">5. Review</div>
         </div>
 
         <form id="new-client-form">
@@ -438,8 +439,72 @@
             </div>
           </div>
 
-          <!-- STEP 4: Review & Invite -->
+          <!-- STEP 4: Settlement -->
           <div id="step-4" class="step-content" style="display: none;">
+            <div class="section-title mb-4">Settlement Account Details (Optional)</div>
+            <p class="text-secondary mb-4">Specify the bank details for client settlements.</p>
+
+            <!-- SEPA Details -->
+            <div class="mb-4 p-4 bg-secondary rounded border border-light">
+              <h5 class="font-bold mb-3">SEPA (Europe)</h5>
+              <div class="grid-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label">Beneficiary Name</label>
+                  <input type="text" class="form-input" placeholder="e.g. QCrypto Operations Ltd.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bank Name</label>
+                  <input type="text" class="form-input" placeholder="e.g. Deutsche Bank AG">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                  <label class="form-label">IBAN</label>
+                  <input type="text" class="form-input" placeholder="DE89 3704...">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">BIC / SWIFT</label>
+                  <input type="text" class="form-input" placeholder="DEUTDEFF">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Reference / Memo</label>
+                  <input type="text" class="form-input" placeholder="QC-USER-...">
+                </div>
+              </div>
+            </div>
+
+            <!-- SWIFT Details -->
+            <div class="mb-4 p-4 bg-secondary rounded border border-light">
+              <h5 class="font-bold mb-3">SWIFT (International)</h5>
+              <div class="grid-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label">Beneficiary Name</label>
+                  <input type="text" class="form-input" placeholder="e.g. QCrypto Operations Ltd.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bank Name</label>
+                  <input type="text" class="form-input" placeholder="e.g. JPMorgan Chase Bank, N.A.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Account Number</label>
+                  <input type="text" class="form-input" placeholder="9876543210">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">SWIFT / BIC</label>
+                  <input type="text" class="form-input" placeholder="CHASUS33">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                  <label class="form-label">Bank Address</label>
+                  <input type="text" class="form-input" placeholder="270 Park Avenue, New York, NY 10017, USA">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Reference / Memo</label>
+                  <input type="text" class="form-input" placeholder="QC-USER-...">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 5: Review & Invite -->
+          <div id="step-5" class="step-content" style="display: none;">
             <div class="section-title mb-4">Review & Send Invites</div>
             <p class="text-secondary mb-4">Review the list of people to onboard. Select the actions to perform for each person.</p>
             
@@ -449,6 +514,7 @@
           </div>
 
         </form>
+
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" id="btn-back" onclick="prevStep()" style="display: none;">Back</button>
@@ -670,11 +736,11 @@
         btnBack.style.display = 'none';
         btnNext.style.display = 'block';
         btnSubmit.style.display = 'none';
-      } else if (step === 2 || step === 3) {
+      } else if (step >= 2 && step <= 4) {
         btnBack.style.display = 'block';
         btnNext.style.display = 'block';
         btnSubmit.style.display = 'none';
-      } else if (step === 4) {
+      } else if (step === 5) {
         btnBack.style.display = 'block';
         btnNext.style.display = 'none';
         btnSubmit.style.display = 'block';
@@ -683,7 +749,7 @@
     }
 
     function nextStep() {
-      if (currentStep < 4) {
+      if (currentStep < 5) {
         currentStep++;
         showStep(currentStep);
       }
