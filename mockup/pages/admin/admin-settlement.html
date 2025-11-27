@@ -6,10 +6,92 @@
   <title>Admin Settlement - QCrypto Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/reset.css">
   <link rel="stylesheet" href="../../assets/css/variables.css">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    /* Custom Styles for this page */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-header {
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      margin: 0;
+      color: var(--text-primary);
+    }
+    .modal-body {
+      padding: var(--space-6);
+    }
+    .modal-footer {
+      padding: var(--space-4) var(--space-6);
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+    }
+    
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .detail-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: var(--font-bold);
+    }
+    .detail-value {
+      font-weight: 500;
+      font-size: 1rem;
+      word-break: break-all;
+      color: var(--text-primary);
+    }
+    .copy-btn {
+      font-size: 0.75rem;
+      color: var(--brand-primary);
+      cursor: pointer;
+      margin-left: 0.5rem;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -79,7 +161,7 @@
             <span class="sidebar-nav-icon">💰</span>
             <span class="sidebar-nav-text">Commissions</span>
           </a>
-          <a href="admin-settlement.html" class="sidebar-nav-item" data-page="admin-settlement">
+          <a href="admin-settlement.html" class="sidebar-nav-item active" data-page="admin-settlement">
             <span class="sidebar-nav-icon">🏛️</span>
             <span class="sidebar-nav-text">Settlement</span>
           </a>
@@ -99,38 +181,6 @@
             <span class="sidebar-nav-icon">🏦</span>
             <span class="sidebar-nav-text">AIFM Dashboard</span>
           </a>
-          <a href="../aifm/fund-manager-dashboard.html" class="sidebar-nav-item" data-page="fund-manager-dashboard">
-            <span class="sidebar-nav-icon">💼</span>
-            <span class="sidebar-nav-text">Fund Manager</span>
-          </a>
-          <a href="../aifm/trader-dashboard.html" class="sidebar-nav-item" data-page="trader-dashboard">
-            <span class="sidebar-nav-icon">💹</span>
-            <span class="sidebar-nav-text">Trader</span>
-          </a>
-        </div>
-
-        <div class="sidebar-nav-section">
-          <div class="sidebar-nav-section-title">Operations</div>
-          <a href="../aifm/middle-office-dashboard.html" class="sidebar-nav-item" data-page="middle-office-dashboard">
-            <span class="sidebar-nav-icon">📋</span>
-            <span class="sidebar-nav-text">Middle Office</span>
-          </a>
-          <a href="../aifm/depositary-dashboard.html" class="sidebar-nav-item" data-page="depositary-dashboard">
-            <span class="sidebar-nav-icon">🏦</span>
-            <span class="sidebar-nav-text">Depositary</span>
-          </a>
-        </div>
-
-        <div class="sidebar-nav-section">
-          <div class="sidebar-nav-section-title">Settings</div>
-          <a href="../client/security.html" class="sidebar-nav-item" data-page="security">
-            <span class="sidebar-nav-icon">🔒</span>
-            <span class="sidebar-nav-text">Security</span>
-          </a>
-          <a href="../client/profile.html" class="sidebar-nav-item" data-page="profile">
-            <span class="sidebar-nav-icon">👤</span>
-            <span class="sidebar-nav-text">Profile</span>
-          </a>
         </div>
       </nav>
     </aside>
@@ -140,13 +190,13 @@
       <!-- Top Bar -->
       <header class="topbar">
         <div class="topbar-left">
-          <button class="btn btn-secondary btn-sm">☰</button>
+          <button class="btn btn-secondary btn-sm" style="background: transparent; border: none; font-size: 1.2rem;">☰</button>
         </div>
 
         <div class="topbar-center">
           <div class="search-bar">
             <span class="search-icon">🔍</span>
-            <input type="search" class="search-input" placeholder="Search...">
+            <input type="search" class="search-input" placeholder="Search settlements, companies...">
           </div>
         </div>
 
@@ -166,23 +216,429 @@
         </div>
       </header>
 
-      <!-- Page Content -->
       <div class="content-container">
+        <!-- Page Header -->
         <div class="page-header">
-          <h1 class="page-title">Admin Settlement</h1>
-          <p class="page-subtitle">Manage settlement operations.</p>
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Settlement Operations</h1>
+              <p class="page-subtitle">Manage and confirm manual fiat transfers</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" onclick="alert('Export feature coming soon')">Export CSV</button>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Settlement Operations</h3>
+        <!-- Filters -->
+        <div class="card mb-6">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+            <!-- Status -->
+            <div>
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Status</label>
+              <select class="select-input" style="width: 100%; padding: 10px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" id="filter-status" onchange="filterTable()">
+                <option value="all">All Statuses</option>
+                <option value="pending" selected>⏳ Pending</option>
+                <option value="completed">✅ Completed</option>
+              </select>
+            </div>
+
+            <!-- Date Range -->
+            <div style="grid-column: span 2;">
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Date Range</label>
+              <div style="display: flex; gap: var(--space-2);">
+                <input type="date" class="select-input" style="width: 100%; padding: 10px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" id="filter-date-start">
+                <input type="date" class="select-input" style="width: 100%; padding: 10px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" id="filter-date-end">
+              </div>
+            </div>
+
+            <!-- Company -->
+            <div>
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Company</label>
+              <select class="select-input" style="width: 100%; padding: 10px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" id="filter-company">
+                <option value="all">All Companies</option>
+                <option value="Alpha Capital">Alpha Capital</option>
+                <option value="Beta Trading">Beta Trading</option>
+                <option value="Gamma Funds">Gamma Funds</option>
+              </select>
+            </div>
+
+            <!-- Currency -->
+            <div>
+              <label style="display: block; font-size: var(--text-xs); font-weight: var(--font-bold); margin-bottom: var(--space-2); color: var(--text-secondary);">Currency</label>
+              <select class="select-input" style="width: 100%; padding: 10px; border: 1px solid var(--border-light); border-radius: var(--radius-md);" id="filter-currency">
+                <option value="all">All Currencies</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+              </select>
+            </div>
+
+            <!-- Reset Button -->
+            <div style="display: flex; align-items: flex-end;">
+              <button class="btn btn-outline-secondary btn-sm" style="width: 100%; padding: 10px;" onclick="resetFilters()">Reset Filters</button>
+            </div>
           </div>
-          <p>This is a placeholder page for Admin Settlement.</p>
+        </div>
+
+        <!-- Settlements Table -->
+        <div class="card">
+          <div style="overflow-x: auto;">
+            <table class="table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-light); text-align: left;">
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em;">Created At</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em;">Company</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em;">Beneficiary</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em;">Bank</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em; text-align: right;">Amount</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em;">Type</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em;">Status</th>
+                  <th style="padding: var(--space-4); color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; font-weight: var(--font-bold); letter-spacing: 0.05em; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="settlements-table-body">
+                <!-- Pending Item 1 -->
+                <tr data-status="pending" data-company="Alpha Capital" data-currency="EUR" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium); color: var(--text-primary);">Nov 27, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">09:30</div>
+                  </td>
+                  <td style="padding: var(--space-4); font-weight: var(--font-bold); color: var(--text-primary);">Alpha Capital Ltd</td>
+                  <td style="padding: var(--space-4); color: var(--text-secondary);">Alpha Ops Ltd</td>
+                  <td style="padding: var(--space-4); color: var(--text-secondary);">Deutsche Bank</td>
+                  <td style="padding: var(--space-4); text-align: right; font-weight: bold; color: var(--text-primary);">€ 125,000.00</td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-info">SEPA</span></td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-warning">Pending</span></td>
+                  <td style="padding: var(--space-4); text-align: right;">
+                    <button class="btn btn-sm btn-primary" onclick="openDetails('tx-001')">Process</button>
+                  </td>
+                </tr>
+                <!-- Pending Item 2 -->
+                <tr data-status="pending" data-company="Beta Trading" data-currency="USD" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium); color: var(--text-primary);">Nov 27, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">10:15</div>
+                  </td>
+                  <td style="padding: var(--space-4); font-weight: var(--font-bold); color: var(--text-primary);">Beta Trading PLC</td>
+                  <td style="padding: var(--space-4); color: var(--text-secondary);">Beta Global Inc</td>
+                  <td style="padding: var(--space-4); color: var(--text-secondary);">JPMorgan Chase</td>
+                  <td style="padding: var(--space-4); text-align: right; font-weight: bold; color: var(--text-primary);">$ 500,000.00</td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-info">SWIFT</span></td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-warning">Pending</span></td>
+                  <td style="padding: var(--space-4); text-align: right;">
+                    <button class="btn btn-sm btn-primary" onclick="openDetails('tx-002')">Process</button>
+                  </td>
+                </tr>
+                <!-- Completed Item 1 -->
+                <tr data-status="completed" data-company="Gamma Funds" data-currency="EUR" style="border-bottom: 1px solid var(--border-light);">
+                  <td style="padding: var(--space-4);">
+                    <div style="font-weight: var(--font-medium); color: var(--text-primary);">Nov 26, 2025</div>
+                    <div style="font-size: var(--text-xs); color: var(--text-tertiary);">14:20</div>
+                  </td>
+                  <td style="padding: var(--space-4); font-weight: var(--font-bold); color: var(--text-primary);">Gamma Funds</td>
+                  <td style="padding: var(--space-4); color: var(--text-secondary);">Gamma Treasury</td>
+                  <td style="padding: var(--space-4); color: var(--text-secondary);">Barclays</td>
+                  <td style="padding: var(--space-4); text-align: right; font-weight: bold; color: var(--text-primary);">€ 75,000.00</td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-info">SEPA</span></td>
+                  <td style="padding: var(--space-4);"><span class="badge badge-success">Completed</span></td>
+                  <td style="padding: var(--space-4); text-align: right;">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="openDetails('tx-003')">Details</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
+  <!-- Details Modal -->
+  <div id="details-modal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Settlement Details</h3>
+        <button class="btn btn-sm btn-outline-secondary" onclick="closeDetails()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Status Banner -->
+        <div id="modal-status-banner" class="mb-6 p-4 rounded text-center" style="background-color: rgba(255, 181, 71, 0.1); color: var(--color-warning); border: 1px solid rgba(255, 181, 71, 0.2);">
+          <h4 class="font-bold text-lg">ACTION REQUIRED</h4>
+          <p>Please initiate the bank transfer manually using the details below.</p>
+        </div>
+
+        <div class="section-title mb-4" style="font-weight: bold; color: var(--text-primary);">Transfer Information</div>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-label">Amount</span>
+            <span class="detail-value text-xl font-bold" id="modal-amount">€ 125,000.00</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Currency</span>
+            <span class="detail-value" id="modal-currency">EUR</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Transfer Type</span>
+            <span class="detail-value" id="modal-type">SEPA</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Reference / Memo</span>
+            <span class="detail-value" id="modal-ref">QC-SETT-2025-001 <span class="copy-btn" onclick="copyText('QC-SETT-2025-001')">Copy</span></span>
+          </div>
+        </div>
+
+        <div class="section-title mb-4" style="font-weight: bold; color: var(--text-primary);">Beneficiary Details</div>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-label">Beneficiary Name</span>
+            <span class="detail-value" id="modal-beneficiary">Alpha Ops Ltd <span class="copy-btn" onclick="copyText('Alpha Ops Ltd')">Copy</span></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Bank Name</span>
+            <span class="detail-value" id="modal-bank">Deutsche Bank</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">IBAN / Account Number</span>
+            <span class="detail-value" id="modal-account">DE89 3704 0044 0532 0130 00 <span class="copy-btn" onclick="copyText('DE89 3704 0044 0532 0130 00')">Copy</span></span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">BIC / SWIFT</span>
+            <span class="detail-value" id="modal-swift">DEUTDEFF <span class="copy-btn" onclick="copyText('DEUTDEFF')">Copy</span></span>
+          </div>
+          <div class="detail-item" style="grid-column: span 2;">
+            <span class="detail-label">Bank Address</span>
+            <span class="detail-value" id="modal-address">Taunusanlage 12, 60325 Frankfurt am Main, Germany</span>
+          </div>
+        </div>
+
+        <div class="section-title mb-4" style="font-weight: bold; color: var(--text-primary);">Audit Trail</div>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-label">Created At</span>
+            <span class="detail-value" id="modal-created">2025-11-27 09:30</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Completed At</span>
+            <span class="detail-value" id="modal-completed">-</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Completed By</span>
+            <span class="detail-value" id="modal-by">-</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" onclick="closeDetails()">Close</button>
+        <button id="btn-confirm-transfer" class="btn btn-primary" onclick="initiateConfirmation()">Confirm Transfer Completed</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Double Confirmation Modal -->
+  <div id="confirm-modal" class="modal-overlay" style="z-index: 1100;">
+    <div class="modal-container" style="max-width: 400px;">
+      <div class="modal-header" style="background-color: rgba(238, 93, 80, 0.1); border-bottom: 1px solid rgba(238, 93, 80, 0.2);">
+        <h3 class="modal-title text-danger">Confirm Action</h3>
+      </div>
+      <div class="modal-body text-center">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+        <p class="mb-4 font-bold">This is a sensitive operation.</p>
+        <p class="mb-4">By clicking confirm, you certify that you have <strong>manually initiated</strong> the bank transfer of <span id="confirm-amount" class="font-bold">€ 125,000.00</span> to the specified beneficiary.</p>
+        <p class="text-sm text-secondary">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-center">
+        <button class="btn btn-outline-secondary" onclick="closeConfirm()">Cancel</button>
+        <button class="btn btn-primary" style="background-color: var(--color-danger); border-color: var(--color-danger);" onclick="finalizeTransfer()">Yes, I have sent the funds</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mock Data
+    const transactions = {
+      'tx-001': {
+        id: 'tx-001',
+        status: 'pending',
+        amount: '€ 125,000.00',
+        currency: 'EUR',
+        type: 'SEPA',
+        ref: 'QC-SETT-2025-001',
+        beneficiary: 'Alpha Ops Ltd',
+        bank: 'Deutsche Bank',
+        account: 'DE89 3704 0044 0532 0130 00',
+        swift: 'DEUTDEFF',
+        address: 'Taunusanlage 12, 60325 Frankfurt am Main, Germany',
+        created: '2025-11-27 09:30',
+        completed: '-',
+        by: '-'
+      },
+      'tx-002': {
+        id: 'tx-002',
+        status: 'pending',
+        amount: '$ 500,000.00',
+        currency: 'USD',
+        type: 'SWIFT',
+        ref: 'QC-SETT-2025-002',
+        beneficiary: 'Beta Global Inc',
+        bank: 'JPMorgan Chase',
+        account: '9876543210',
+        swift: 'CHASUS33',
+        address: '270 Park Avenue, New York, NY 10017, USA',
+        created: '2025-11-27 10:15',
+        completed: '-',
+        by: '-'
+      },
+      'tx-003': {
+        id: 'tx-003',
+        status: 'completed',
+        amount: '€ 75,000.00',
+        currency: 'EUR',
+        type: 'SEPA',
+        ref: 'QC-SETT-2025-003',
+        beneficiary: 'Gamma Treasury',
+        bank: 'Barclays',
+        account: 'GB29 BARC 2020 2012 3456 78',
+        swift: 'BARCGB22',
+        address: '1 Churchill Place, London E14 5HP, UK',
+        created: '2025-11-26 14:20',
+        completed: '2025-11-26 15:45',
+        by: 'Admin User'
+      }
+    };
+
+    let currentTxId = null;
+
+    function openDetails(txId) {
+      currentTxId = txId;
+      const tx = transactions[txId];
+      
+      // Populate Modal
+      document.getElementById('modal-amount').innerText = tx.amount;
+      document.getElementById('modal-currency').innerText = tx.currency;
+      document.getElementById('modal-type').innerText = tx.type;
+      document.getElementById('modal-ref').innerHTML = `${tx.ref} <span class="copy-btn" onclick="copyText('${tx.ref}')">Copy</span>`;
+      
+      document.getElementById('modal-beneficiary').innerHTML = `${tx.beneficiary} <span class="copy-btn" onclick="copyText('${tx.beneficiary}')">Copy</span>`;
+      document.getElementById('modal-bank').innerText = tx.bank;
+      document.getElementById('modal-account').innerHTML = `${tx.account} <span class="copy-btn" onclick="copyText('${tx.account}')">Copy</span>`;
+      document.getElementById('modal-swift').innerHTML = `${tx.swift} <span class="copy-btn" onclick="copyText('${tx.swift}')">Copy</span>`;
+      document.getElementById('modal-address').innerText = tx.address;
+      
+      document.getElementById('modal-created').innerText = tx.created;
+      document.getElementById('modal-completed').innerText = tx.completed;
+      document.getElementById('modal-by').innerText = tx.by;
+
+      // Adjust UI based on status
+      const banner = document.getElementById('modal-status-banner');
+      const btnConfirm = document.getElementById('btn-confirm-transfer');
+      
+      if (tx.status === 'pending') {
+        banner.style.display = 'block';
+        banner.className = 'mb-6 p-4 rounded text-center';
+        banner.style.backgroundColor = 'rgba(255, 181, 71, 0.1)';
+        banner.style.color = 'var(--color-warning)';
+        banner.style.border = '1px solid rgba(255, 181, 71, 0.2)';
+        banner.innerHTML = '<h4 class="font-bold text-lg">ACTION REQUIRED</h4><p>Please initiate the bank transfer manually using the details below.</p>';
+        
+        btnConfirm.style.display = 'block';
+      } else {
+        banner.style.display = 'block';
+        banner.style.backgroundColor = 'rgba(5, 205, 153, 0.1)';
+        banner.style.color = 'var(--color-success)';
+        banner.style.border = '1px solid rgba(5, 205, 153, 0.2)';
+        banner.innerHTML = '<h4 class="font-bold text-lg">COMPLETED</h4><p>This transfer has been processed.</p>';
+        
+        btnConfirm.style.display = 'none';
+      }
+
+      document.getElementById('details-modal').style.display = 'flex';
+    }
+
+    function closeDetails() {
+      document.getElementById('details-modal').style.display = 'none';
+    }
+
+    function initiateConfirmation() {
+      const tx = transactions[currentTxId];
+      document.getElementById('confirm-amount').innerText = tx.amount;
+      document.getElementById('confirm-modal').style.display = 'flex';
+    }
+
+    function closeConfirm() {
+      document.getElementById('confirm-modal').style.display = 'none';
+    }
+
+    function finalizeTransfer() {
+      // Update Data
+      const tx = transactions[currentTxId];
+      tx.status = 'completed';
+      
+      const now = new Date();
+      const dateStr = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0].substring(0, 5);
+      
+      tx.completed = dateStr;
+      tx.by = 'Admin User';
+
+      // Update UI
+      closeConfirm();
+      closeDetails();
+      
+      // Find row and update badge
+      const rows = document.querySelectorAll('#settlements-table-body tr');
+      rows.forEach(row => {
+        if (row.innerHTML.includes(`openDetails('${currentTxId}')`)) {
+          const badge = row.querySelector('.badge');
+          badge.className = 'badge badge-success';
+          badge.innerText = 'Completed';
+          
+          const btn = row.querySelector('.btn');
+          btn.className = 'btn btn-sm btn-outline-secondary';
+          btn.innerText = 'Details';
+          
+          // Update row data attribute for filtering
+          row.setAttribute('data-status', 'completed');
+        }
+      });
+
+      alert('Transfer marked as completed successfully.');
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        // Could show a toast here
+        console.log('Copied to clipboard');
+      });
+    }
+
+    function filterTable() {
+      const status = document.getElementById('filter-status').value;
+      const rows = document.querySelectorAll('#settlements-table-body tr');
+      
+      rows.forEach(row => {
+        const rowStatus = row.getAttribute('data-status');
+        if (status === 'all' || status === rowStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-status').value = 'pending';
+      document.getElementById('filter-date-start').value = '';
+      document.getElementById('filter-date-end').value = '';
+      document.getElementById('filter-company').value = 'all';
+      document.getElementById('filter-currency').value = 'all';
+      filterTable();
+    }
+    
+    // Initialize filter
+    filterTable();
+
+  </script>
   <script src="../../assets/js/nav-active.js"></script>
   <script src="../../assets/js/app.js"></script>
 </body>
