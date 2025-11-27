@@ -6,10 +6,158 @@
   <title>Admin Compliance - QCrypto Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/reset.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/reset.css">
   <link rel="stylesheet" href="../../assets/css/variables.css">
   <link rel="stylesheet" href="../../assets/css/global.css">
   <link rel="stylesheet" href="../../assets/css/layout.css">
+  <style>
+    /* Compliance Specific Styles */
+    .compliance-tabs {
+      display: flex;
+      gap: var(--space-4);
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: var(--space-6);
+    }
+    .compliance-tab {
+      padding: var(--space-3) var(--space-4);
+      font-weight: var(--font-medium);
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .compliance-tab:hover {
+      color: var(--text-primary);
+    }
+    .compliance-tab.active {
+      color: var(--brand-primary);
+      border-bottom-color: var(--brand-primary);
+      font-weight: var(--font-bold);
+    }
+    
+    .risk-score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+    .risk-low { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .risk-medium { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+    .risk-high { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background-color: var(--bg-body);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--brand-primary);
+      border-radius: 4px;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--bg-card);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-close {
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+    .modal-header {
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .modal-section {
+      margin-bottom: var(--space-4);
+    }
+    .modal-section-title {
+      font-weight: bold;
+      margin-bottom: var(--space-2);
+      color: var(--text-primary);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+    .detail-item label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    .detail-item div {
+      font-weight: 500;
+    }
+    .tag-container {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    /* Checklist Styles */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 16px;
+      font-size: 0.75rem;
+      margin-top: 8px;
+      color: var(--text-secondary);
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .text-success { color: var(--color-success); }
+    .text-warning { color: var(--color-warning); }
+    .text-danger { color: var(--color-danger); }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -83,7 +231,7 @@
             <span class="sidebar-nav-icon">🏛️</span>
             <span class="sidebar-nav-text">Settlement</span>
           </a>
-          <a href="admin-compliance.html" class="sidebar-nav-item" data-page="admin-compliance">
+          <a href="admin-compliance.html" class="sidebar-nav-item active" data-page="admin-compliance">
             <span class="sidebar-nav-icon">📜</span>
             <span class="sidebar-nav-text">Compliance</span>
           </a>
@@ -140,49 +288,884 @@
       <!-- Top Bar -->
       <header class="topbar">
         <div class="topbar-left">
-          <button class="btn btn-secondary btn-sm">☰</button>
+          <button class="btn btn-secondary btn-sm" style="background: transparent; border: none; font-size: 1.2rem;">☰</button>
         </div>
 
         <div class="topbar-center">
           <div class="search-bar">
             <span class="search-icon">🔍</span>
-            <input type="search" class="search-input" placeholder="Search...">
+            <input type="search" class="search-input" placeholder="Search compliance records...">
           </div>
         </div>
 
         <div class="topbar-right">
           <div class="notification-icon">
             <span>🔔</span>
-            <span class="notification-count">2</span>
+            <span class="notification-count">5</span>
           </div>
 
           <div class="user-menu">
             <div class="user-avatar">AD</div>
             <div class="user-info">
               <div class="user-name">Admin User</div>
-              <div class="user-role">Administrator</div>
+              <div class="user-role">Compliance Officer</div>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- Page Content -->
       <div class="content-container">
+        <!-- Page Header -->
         <div class="page-header">
-          <h1 class="page-title">Admin Compliance</h1>
-          <p class="page-subtitle">Manage compliance and regulatory requirements.</p>
+          <div class="page-header-top">
+            <div>
+              <h1 class="page-title">Compliance & Risk Management</h1>
+              <p class="page-subtitle">Monitor KYC/KYB, Sanctions, and Transaction Risk</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-outline-secondary">Generate Report</button>
+              <button class="btn btn-primary">Sanctions Check</button>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Compliance Overview</h3>
-          </div>
-          <p>This is a placeholder page for Admin Compliance.</p>
+        <!-- Tabs -->
+        <div class="compliance-tabs">
+          <div class="compliance-tab active" onclick="switchTab('companies')">Companies (KYB)</div>
+          <div class="compliance-tab" onclick="switchTab('users')">Users (KYC)</div>
+          <div class="compliance-tab" onclick="switchTab('wallets')">Wallets</div>
+          <div class="compliance-tab" onclick="switchTab('transactions')">Transaction Screening</div>
         </div>
-      </div>
+
+        <!-- Companies (KYB) Tab -->
+        <div id="tab-companies" class="tab-content active">
+          <div class="card">
+                        <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Corporate Verification (KYB)</h3>
+              <div class="flex gap-2">
+                <input type="text" placeholder="Filter companies..." class="form-input text-sm" style="width: 200px;">
+                <select class="select-input text-sm" style="width: 150px;">
+                  <option value="">All Statuses</option>
+                  <option value="verified">Verified</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="action-required">Action Required</option>
+                </select>
+                <select class="select-input text-sm" style="width: 160px;">
+                  <option value="">All Jurisdictions</option>
+                  <option value="malta">Malta</option>
+                  <option value="cyprus">Cyprus</option>
+                  <option value="bvi">BVI</option>
+                  <option value="uk">UK</option>
+                  <option value="usa">USA</option>
+                </select>
+              </div>
+            </div>
+            
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Company & Jurisdiction</th>
+                  <th style="width: 10%;">Risk</th>
+                  <th style="width: 45%;">Verification Checklist</th>
+                  <th style="width: 10%;">Status</th>
+                  <th class="text-right" style="width: 10%;">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <!-- Company 1: 100% Verified -->
+                <tr>
+                  <td style="vertical-align: top;">
+                    <div class="font-bold text-base">Alpha Capital Ltd</div>
+                    <div class="text-sm text-secondary mt-1">🇲🇹 Malta</div>
+                    <div class="text-xs text-secondary mt-2">Reg: C-12345</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="risk-score risk-low">15</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="progress-bar-container" style="width: 150px;">
+                        <div class="progress-bar-fill" style="width: 100%;"></div>
+                      </div>
+                      <span class="text-xs font-bold">100% (7/7)</span>
+                    </div>
+                    <div class="checklist-grid">
+                      <div class="checklist-item"><span class="text-success">✔</span> Articles of Association</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Public Registry</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Proof of Address</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> UBO Identification</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Directors Identification</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> PEP & RCA Screening</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Sanction Screening</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-success">Verified</span>
+                  </td>
+                  <td class="text-right" style="vertical-align: top;">
+                    <button class="btn btn-sm btn-outline-secondary">Details</button>
+                  </td>
+                </tr>
+
+                <!-- Company 2: 71% In Progress -->
+                <tr>
+                  <td style="vertical-align: top;">
+                    <div class="font-bold text-base">Beta Trading PLC</div>
+                    <div class="text-sm text-secondary mt-1">🇨🇾 Cyprus</div>
+                    <div class="text-xs text-secondary mt-2">Reg: HE-98765</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="risk-score risk-medium">45</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="progress-bar-container" style="width: 150px;">
+                        <div class="progress-bar-fill" style="width: 71%;"></div>
+                      </div>
+                      <span class="text-xs font-bold">71% (5/7)</span>
+                    </div>
+                    <div class="checklist-grid">
+                      <div class="checklist-item"><span class="text-success">✔</span> Articles of Association</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Public Registry</div>
+                      <div class="checklist-item"><span class="text-warning">⏳</span> Proof of Address</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> UBO Identification</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> Directors Identification</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> PEP & RCA Screening</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Sanction Screening</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-warning">In Progress</span>
+                  </td>
+                  <td class="text-right" style="vertical-align: top;">
+                    <button class="btn btn-sm btn-primary">Review</button>
+                  </td>
+                </tr>
+
+                <!-- Company 3: 14% Action Required -->
+                <tr>
+                  <td style="vertical-align: top;">
+                    <div class="font-bold text-base">Gamma Funds</div>
+                    <div class="text-sm text-secondary mt-1">🇻🇬 BVI</div>
+                    <div class="text-xs text-secondary mt-2">Reg: BVI-555</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="risk-score risk-high">85</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="progress-bar-container" style="width: 150px;">
+                        <div class="progress-bar-fill" style="width: 14%;"></div>
+                      </div>
+                      <span class="text-xs font-bold">14% (1/7)</span>
+                    </div>
+                    <div class="checklist-grid">
+                      <div class="checklist-item"><span class="text-success">✔</span> Articles of Association</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> Public Registry</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> Proof of Address</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> UBO Identification</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> Directors Identification</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> PEP & RCA Screening</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> Sanction Screening</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-danger">Action Required</span>
+                  </td>
+                  <td class="text-right" style="vertical-align: top;">
+                    <button class="btn btn-sm btn-primary">Review</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Users (KYC) Tab -->
+        <div id="tab-users" class="tab-content">
+          <div class="card">
+            <div class="flex justify-between items-start mb-4 flex-wrap gap-4">
+              <h3 class="text-lg font-bold">User Verification (KYC)</h3>
+              <div class="flex gap-2 flex-wrap">
+                <input type="text" placeholder="Search Name or Email..." class="form-input text-sm" style="width: 200px;">
+                <select class="select-input text-sm" style="width: 160px;">
+                  <option value="">All Countries</option>
+                  <option value="usa">USA</option>
+                  <option value="uk">UK</option>
+                  <option value="germany">Germany</option>
+                  <option value="uae">UAE</option>
+                </select>
+                <select class="select-input text-sm" style="width: 150px;">
+                  <option value="">All Statuses</option>
+                  <option value="approved">Approved</option>
+                  <option value="docs-requested">Docs Requested</option>
+                  <option value="pep-match">PEP Match</option>
+                </select>
+                <select class="select-input text-sm" style="width: 150px;">
+                  <option value="">All Risks</option>
+                  <option value="low">Low Risk</option>
+                  <option value="medium">Medium Risk</option>
+                  <option value="high">High Risk</option>
+                </select>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">User</th>
+                  <th style="width: 15%;">Nationality / Tax Res.</th>
+                  <th style="width: 10%;">Risk Level</th>
+                  <th style="width: 35%;">Verification Checklist (SumSub)</th>
+                  <th style="width: 10%;">Status</th>
+                  <th style="width: 10%;">Last Update</th>
+                  <th class="text-right" style="width: 10%;">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <!-- User 1: 100% Verified -->
+                <tr>
+                  <td style="vertical-align: top;">
+                    <div class="font-bold text-base">John Doe</div>
+                    <div class="text-sm text-secondary mt-1">john.doe@example.com</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="text-sm">🇺🇸 USA</div>
+                    <div class="text-xs text-secondary mt-1">Tax: 🇺🇸 USA</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-success">Low</span>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="progress-bar-container" style="width: 150px;">
+                        <div class="progress-bar-fill" style="width: 100%;"></div>
+                      </div>
+                      <span class="text-xs font-bold">100% (6/6)</span>
+                    </div>
+                    <div class="checklist-grid">
+                      <div class="checklist-item"><span class="text-success">✔</span> Identity Document</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Liveness Check</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Proof of Address</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Email/Phone Verified</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> AML/PEP Screening</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Risk Questionnaire</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-success">Approved</span>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="text-sm">Nov 25, 2025</div>
+                  </td>
+                  <td class="text-right" style="vertical-align: top;">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="window.open('https://sumsub.com', '_blank')">Details</button>
+                  </td>
+                </tr>
+
+                <!-- User 2: 50% In Progress (Different Nationality/Tax) -->
+                <tr>
+                  <td style="vertical-align: top;">
+                    <div class="font-bold text-base">Jane Smith</div>
+                    <div class="text-sm text-secondary mt-1">jane.smith@example.com</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="text-sm">🇬🇧 UK</div>
+                    <div class="text-xs text-secondary mt-1">Tax: 🇦🇪 UAE</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-warning">Medium</span>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="progress-bar-container" style="width: 150px;">
+                        <div class="progress-bar-fill" style="width: 50%;"></div>
+                      </div>
+                      <span class="text-xs font-bold">50% (3/6)</span>
+                    </div>
+                    <div class="checklist-grid">
+                      <div class="checklist-item"><span class="text-success">✔</span> Identity Document</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Liveness Check</div>
+                      <div class="checklist-item"><span class="text-warning">⏳</span> Proof of Address</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Email/Phone Verified</div>
+                      <div class="checklist-item"><span class="text-secondary">○</span> AML/PEP Screening</div>
+                      <div class="checklist-item"><span class="text-secondary">○</span> Risk Questionnaire</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-warning">Docs Requested</span>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="text-sm">Nov 26, 2025</div>
+                  </td>
+                  <td class="text-right" style="vertical-align: top;">
+                    <button class="btn btn-sm btn-primary" onclick="window.open('https://sumsub.com', '_blank')">Review</button>
+                  </td>
+                </tr>
+
+                <!-- User 3: High Risk / Action Required -->
+                <tr>
+                  <td style="vertical-align: top;">
+                    <div class="font-bold text-base">Robert Brown</div>
+                    <div class="text-sm text-secondary mt-1">robert.b@example.com</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="text-sm">🇩🇪 Germany</div>
+                    <div class="text-xs text-secondary mt-1">Tax: 🇩🇪 Germany</div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-danger">High</span>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="flex items-center gap-2 mb-2">
+                      <div class="progress-bar-container" style="width: 150px;">
+                        <div class="progress-bar-fill" style="width: 83%;"></div>
+                      </div>
+                      <span class="text-xs font-bold">83% (5/6)</span>
+                    </div>
+                    <div class="checklist-grid">
+                      <div class="checklist-item"><span class="text-success">✔</span> Identity Document</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Liveness Check</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Proof of Address</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Email/Phone Verified</div>
+                      <div class="checklist-item"><span class="text-danger">✘</span> AML/PEP Screening (Match)</div>
+                      <div class="checklist-item"><span class="text-success">✔</span> Risk Questionnaire</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <span class="badge badge-danger">PEP Match</span>
+                  </td>
+                  <td style="vertical-align: top;">
+                    <div class="text-sm">Nov 27, 2025</div>
+                  </td>
+                  <td class="text-right" style="vertical-align: top;">
+                    <button class="btn btn-sm btn-primary" onclick="window.open('https://sumsub.com', '_blank')">Review</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Wallets Tab -->
+        <!-- Wallets Tab -->
+        <div id="tab-wallets" class="tab-content">
+          <div class="card">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Wallets</h3>
+              <div class="flex gap-2">
+                <button class="btn btn-sm btn-outline-secondary">Scan New Address</button>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Network</th>
+                  <th>Address</th>
+                  <th>Declared Owner</th>
+                  <th>Owner Type</th>
+                  <th>Balance</th>
+                  <th>Risk Score</th>
+                  <th>Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-outline">Ethereum</span></td>
+                  <td>
+                    <a href="https://etherscan.io/address/0x71C...976F" target="_blank" class="text-primary font-mono text-sm hover:underline">0x71C...976F</a>
+                  </td>
+                  <td>
+                    <div class="font-bold">Alice Smith</div>
+                    <div class="text-xs text-secondary">Individual</div>
+                  </td>
+                  <td>
+                    <div class="font-bold">Self-hosted</div>
+                    <div class="text-xs text-secondary">Private Wallet</div>
+                  </td>
+                  <td class="font-mono">14.50 ETH</td>
+                  <td><div class="risk-score risk-low">5</div></td>
+                  <td><span class="badge badge-success">Clear</span></td>
+                  <td class="text-right"><button class="btn btn-sm btn-outline-secondary" onclick="openWalletDetails('0x71C...976F')">Details</button></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-outline">Bitcoin</span></td>
+                  <td>
+                    <a href="https://mempool.space/address/bc1q...83kk" target="_blank" class="text-primary font-mono text-sm hover:underline">bc1q...83kk</a>
+                  </td>
+                  <td>
+                    <div class="font-bold">Bob Jones</div>
+                    <div class="text-xs text-secondary">Individual</div>
+                  </td>
+                  <td>
+                    <div class="font-bold">Hosted (CASP)</div>
+                    <div class="text-xs text-secondary">Binance</div>
+                  </td>
+                  <td class="font-mono">0.05 BTC</td>
+                  <td><div class="risk-score risk-high">92</div></td>
+                  <td><span class="badge badge-danger">Sanctioned</span></td>
+                  <td class="text-right"><button class="btn btn-sm btn-primary" onclick="openWalletDetails('bc1q...83kk')">Details</button></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-outline">Solana</span></td>
+                  <td>
+                    <a href="https://solscan.io/account/HN7c...He4Y" target="_blank" class="text-primary font-mono text-sm hover:underline">HN7c...He4Y</a>
+                  </td>
+                  <td>
+                    <div class="font-bold">Charlie Brown</div>
+                    <div class="text-xs text-secondary">Individual</div>
+                  </td>
+                  <td>
+                    <div class="font-bold">Hosted (CASP)</div>
+                    <div class="text-xs text-secondary">Coinbase</div>
+                  </td>
+                  <td class="font-mono">1,500.00 SOL</td>
+                  <td><div class="risk-score risk-low">12</div></td>
+                  <td><span class="badge badge-success">Clear</span></td>
+                  <td class="text-right"><button class="btn btn-sm btn-outline-secondary" onclick="openWalletDetails('HN7c...He4Y')">Details</button></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-outline">Ethereum</span></td>
+                  <td>
+                    <a href="https://etherscan.io/address/0x888...1234" target="_blank" class="text-primary font-mono text-sm hover:underline">0x888...1234</a>
+                  </td>
+                  <td>
+                    <div class="font-bold">Unknown</div>
+                    <div class="text-xs text-secondary">Not Declared</div>
+                  </td>
+                  <td>
+                    <div class="font-bold">Self-hosted</div>
+                    <div class="text-xs text-secondary">Unknown Owner</div>
+                  </td>
+                  <td class="font-mono">5,000.00 USDT</td>
+                  <td><div class="risk-score risk-medium">45</div></td>
+                  <td><span class="badge badge-warning">Review</span></td>
+                  <td class="text-right"><button class="btn btn-sm btn-primary" onclick="openWalletDetails('0x888...1234')">Details</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>        <!-- Transactions Tab -->
+        <!-- Transactions Tab -->
+        <div id="tab-transactions" class="tab-content">
+          <div class="card">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Transaction Monitoring</h3>
+              <div class="flex gap-2">
+                <select class="select-input text-sm"><option>All Alerts</option><option>Structuring</option><option>Sanctions</option></select>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Tx Hash</th>
+                  <th>Network</th>
+                  <th>Type</th>
+                  <th>Asset</th>
+                  <th>Amount / Value</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>AML Score</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1: Incoming, Clear -->
+                <tr>
+                  <td>
+                    <a href="https://etherscan.io/tx/0xabc...123" target="_blank" class="font-mono text-sm text-primary hover:underline">0xabc...123</a>
+                  </td>
+                  <td><span class="badge badge-outline">Ethereum</span></td>
+                  <td><span class="text-success font-bold">⬇️ IN</span></td>
+                  <td>USDC</td>
+                  <td>
+                    <div class="font-bold">50,000.00</div>
+                    <div class="text-xs text-secondary">≈ $50,000</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Alice Smith</div>
+                    <div class="text-xs text-secondary">Self-hosted</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Alpha Capital Ltd</div>
+                    <div class="text-xs text-secondary">Hosted (QCrypto)</div>
+                  </td>
+                  <td><div class="risk-score risk-low">10</div></td>
+                  <td class="text-right"><button class="btn btn-sm btn-outline-secondary" onclick="openTxDetails('0xabc...123')">Details</button></td>
+                </tr>
+                <!-- Row 2: Outgoing, Sanctioned -->
+                <tr>
+                  <td>
+                    <a href="https://etherscan.io/tx/0xdef...456" target="_blank" class="font-mono text-sm text-primary hover:underline">0xdef...456</a>
+                  </td>
+                  <td><span class="badge badge-outline">Ethereum</span></td>
+                  <td><span class="text-danger font-bold">⬆️ OUT</span></td>
+                  <td>ETH</td>
+                  <td>
+                    <div class="font-bold">150.00</div>
+                    <div class="text-xs text-secondary">≈ $450,000</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Beta Trading PLC</div>
+                    <div class="text-xs text-secondary">Hosted (QCrypto)</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Bob Jones</div>
+                    <div class="text-xs text-secondary">Hosted (Binance)</div>
+                  </td>
+                  <td><div class="risk-score risk-high">88</div></td>
+                  <td class="text-right"><button class="btn btn-sm btn-primary" onclick="openTxDetails('0xdef...456')">Details</button></td>
+                </tr>
+                <!-- Row 3: Incoming, High Value -->
+                <tr>
+                  <td>
+                    <a href="https://mempool.space/tx/tx123...789" target="_blank" class="font-mono text-sm text-primary hover:underline">tx123...789</a>
+                  </td>
+                  <td><span class="badge badge-outline">Bitcoin</span></td>
+                  <td><span class="text-success font-bold">⬇️ IN</span></td>
+                  <td>BTC</td>
+                  <td>
+                    <div class="font-bold">5.50</div>
+                    <div class="text-xs text-secondary">≈ $500,000</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Unknown</div>
+                    <div class="text-xs text-secondary">Self-hosted</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Gamma Funds</div>
+                    <div class="text-xs text-secondary">Hosted (QCrypto)</div>
+                  </td>
+                  <td><div class="risk-score risk-high">95</div></td>
+                  <td class="text-right"><button class="btn btn-sm btn-primary" onclick="openTxDetails('tx123...789')">Details</button></td>
+                </tr>
+                <!-- Row 4: Outgoing, Small -->
+                <tr>
+                  <td>
+                    <a href="https://solscan.io/tx/tx456...012" target="_blank" class="font-mono text-sm text-primary hover:underline">tx456...012</a>
+                  </td>
+                  <td><span class="badge badge-outline">Solana</span></td>
+                  <td><span class="text-danger font-bold">⬆️ OUT</span></td>
+                  <td>SOL</td>
+                  <td>
+                    <div class="font-bold">100.00</div>
+                    <div class="text-xs text-secondary">≈ $15,000</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">John Doe</div>
+                    <div class="text-xs text-secondary">Hosted (QCrypto)</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Charlie Brown</div>
+                    <div class="text-xs text-secondary">Self-hosted</div>
+                  </td>
+                  <td><div class="risk-score risk-low">12</div></td>
+                  <td class="text-right"><button class="btn btn-sm btn-outline-secondary" onclick="openTxDetails('tx456...012')">Details</button></td>
+                </tr>
+                <!-- Row 5: Incoming, Exchange -->
+                <tr>
+                  <td>
+                    <a href="https://polygonscan.com/tx/0xghi...345" target="_blank" class="font-mono text-sm text-primary hover:underline">0xghi...345</a>
+                  </td>
+                  <td><span class="badge badge-outline">Polygon</span></td>
+                  <td><span class="text-success font-bold">⬇️ IN</span></td>
+                  <td>USDT</td>
+                  <td>
+                    <div class="font-bold">1,000.00</div>
+                    <div class="text-xs text-secondary">≈ $1,000</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Kraken Hot Wallet</div>
+                    <div class="text-xs text-secondary">Hosted (Kraken)</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Alpha Capital Ltd</div>
+                    <div class="text-xs text-secondary">Hosted (QCrypto)</div>
+                  </td>
+                  <td><div class="risk-score risk-low">5</div></td>
+                  <td class="text-right"><button class="btn btn-sm btn-outline-secondary" onclick="openTxDetails('0xghi...345')">Details</button></td>
+                </tr>
+                <!-- Row 6: Outgoing, DeFi -->
+                <tr>
+                  <td>
+                    <a href="https://etherscan.io/tx/0xjkl...678" target="_blank" class="font-mono text-sm text-primary hover:underline">0xjkl...678</a>
+                  </td>
+                  <td><span class="badge badge-outline">Ethereum</span></td>
+                  <td><span class="text-danger font-bold">⬆️ OUT</span></td>
+                  <td>WBTC</td>
+                  <td>
+                    <div class="font-bold">1.00</div>
+                    <div class="text-xs text-secondary">≈ $90,000</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Beta Trading PLC</div>
+                    <div class="text-xs text-secondary">Hosted (QCrypto)</div>
+                  </td>
+                  <td>
+                    <div class="font-bold text-sm">Uniswap V3 Pool</div>
+                    <div class="text-xs text-secondary">Smart Contract</div>
+                  </td>
+                  <td><div class="risk-score risk-medium">60</div></td>
+                  <td class="text-right"><button class="btn btn-sm btn-primary" onclick="openTxDetails('0xjkl...678')">Details</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>      </div>
     </main>
   </div>
 
+  <!-- Wallet Details Modal -->
+  <div id="wallet-details-modal" class="modal-overlay">
+    <div class="modal-content text-center" style="max-width: 700px;">
+      <button class="modal-close" onclick="closeModal('wallet-details-modal')">&times;</button>
+      <div class="modal-header flex flex-col items-center border-b-0 pb-0">
+        <h2 class="text-2xl font-bold mb-1">Wallet Details</h2>
+        <p class="text-sm text-secondary" id="wallet-modal-subtitle">Analysis for 0x...</p>
+      </div>
+      
+      <div class="modal-section mt-6">
+        <div class="flex flex-col items-center gap-8">
+          <!-- Removed Icon as requested -->
+          
+          <div class="w-full flex flex-col gap-6">
+            <div class="detail-item w-full">
+              <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Full Address</label>
+              <div class="font-mono text-sm bg-gray-50 p-4 rounded-lg border border-gray-100 select-all text-center text-primary" style="word-break: break-all;" id="wallet-full-address">0x...</div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-8 w-full px-4">
+              <div class="detail-item flex flex-col items-center">
+                <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Network</label>
+                <div id="wallet-network" class="font-bold text-lg text-primary">Ethereum</div>
+              </div>
+              <div class="detail-item flex flex-col items-center">
+                <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Owner Type</label>
+                <div id="wallet-owner-type" class="font-bold text-lg text-primary">Self-hosted</div>
+              </div>
+              <div class="detail-item flex flex-col items-center">
+                <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Risk Score</label>
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="risk-score risk-low text-lg w-10 h-10 flex items-center justify-center" id="wallet-risk-score">5</div>
+                  <span id="wallet-risk-label" class="font-bold text-base text-primary">Low Risk</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section mt-8">
+        <h3 class="modal-section-title text-center mb-4 text-lg">Risk Tags</h3>
+        <div class="tag-container justify-center gap-3" id="wallet-tags">
+          <span class="badge badge-outline px-3 py-1 text-sm">New Address</span>
+          <span class="badge badge-outline px-3 py-1 text-sm">High Velocity</span>
+        </div>
+      </div>
+
+      <div class="modal-section mt-8">
+        <h3 class="modal-section-title text-center mb-4 text-lg">Recent Transactions</h3>
+        <div class="overflow-x-auto">
+          <table class="table text-sm w-full text-left" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="text-center py-3" style="width: 15%;">Date</th>
+                <th class="text-center py-3" style="width: 45%;">Hash</th>
+                <th class="text-center py-3" style="width: 10%;">Type</th>
+                <th class="text-center py-3" style="width: 15%;">Amount</th>
+                <th class="text-center py-3" style="width: 15%;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="wallet-tx-list">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-section border-t pt-6 mt-6 flex justify-center gap-3">
+        <button class="btn btn-outline-secondary px-6" onclick="window.open('https://etherscan.io', '_blank')">View in Explorer</button>
+        <button class="btn btn-danger px-6">Block Address</button>
+        <button class="btn btn-warning px-6">Report to Authority</button>
+        <button class="btn btn-success px-6">Verify Owner</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction Details Modal -->
+  <div id="tx-details-modal" class="modal-overlay">
+    <div class="modal-content text-center" style="max-width: 800px;">
+      <button class="modal-close" onclick="closeModal('tx-details-modal')">&times;</button>
+      <div class="modal-header flex flex-col items-center border-b-0 pb-0">
+        <h2 class="text-2xl font-bold mb-1">Transaction Screening Details</h2>
+        <p class="text-sm text-secondary mt-2" style="word-break: break-all; max-width: 90%;" id="tx-modal-subtitle">Tx Hash: 0x...</p>
+      </div>
+
+      <div class="modal-section mt-6">
+        <div class="detail-grid grid grid-cols-1 gap-8 justify-items-center">
+          
+          <div class="detail-item w-full">
+            <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Transaction Hash</label>
+            <div class="font-mono text-sm bg-gray-50 p-4 rounded-lg border border-gray-100 select-all text-center text-primary" style="word-break: break-all;" id="tx-hash">0x...</div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-8 w-full px-4">
+            <div class="detail-item flex flex-col items-center">
+              <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Network & Asset</label>
+              <div id="tx-asset" class="font-bold text-lg text-primary">Ethereum - USDC</div>
+            </div>
+            <div class="detail-item flex flex-col items-center">
+              <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Amount</label>
+              <div id="tx-amount" class="font-bold text-lg text-primary">50,000.00 USDC</div>
+            </div>
+            <div class="detail-item flex flex-col items-center">
+              <label class="block text-secondary text-xs uppercase tracking-wider mb-2">Est. Value (USD)</label>
+              <div id="tx-value" class="font-bold text-lg text-primary">$50,000.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section mt-8">
+        <div class="grid grid-cols-2 gap-8">
+          <div class="p-6 bg-gray-50 rounded-lg border border-gray-100 flex flex-col items-center shadow-sm">
+            <h4 class="font-bold text-base mb-4 text-primary uppercase tracking-wide">Source (From)</h4>
+            <div class="detail-item w-full mb-4">
+              <label class="block text-secondary text-xs mb-2">Address</label>
+              <div class="font-mono text-xs bg-white p-3 rounded border border-gray-200 text-center" style="word-break: break-all;" id="tx-from-address">0x...</div>
+            </div>
+            <div class="detail-item w-full">
+              <label class="block text-secondary text-xs mb-2">Owner / Host</label>
+              <div id="tx-from-owner" class="font-bold text-base text-primary">Alice Smith (Self-hosted)</div>
+            </div>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg border border-gray-100 flex flex-col items-center shadow-sm">
+            <h4 class="font-bold text-base mb-4 text-primary uppercase tracking-wide">Destination (To)</h4>
+            <div class="detail-item w-full mb-4">
+              <label class="block text-secondary text-xs mb-2">Address</label>
+              <div class="font-mono text-xs bg-white p-3 rounded border border-gray-200 text-center" style="word-break: break-all;" id="tx-to-address">0x...</div>
+            </div>
+            <div class="detail-item w-full">
+              <label class="block text-secondary text-xs mb-2">Owner / Host</label>
+              <div id="tx-to-owner" class="font-bold text-base text-primary">QCrypto Wallet (Hosted)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section mt-8">
+        <h3 class="modal-section-title text-center mb-4 text-lg">Risk Analysis</h3>
+        <div class="flex flex-col items-center gap-3 mb-4">
+          <div class="risk-score risk-low text-2xl w-16 h-16 flex items-center justify-center rounded-full border-4" id="tx-risk-score">10</div>
+          <div class="text-center">
+            <div class="font-bold text-xl text-primary">Low Risk</div>
+            <div class="text-sm text-secondary mt-1">No sanctions matches found.</div>
+          </div>
+        </div>
+        <div class="tag-container justify-center gap-3" id="tx-tags">
+          <span class="badge badge-success px-3 py-1 text-sm">Clear</span>
+        </div>
+      </div>
+
+      <div class="modal-section border-t pt-6 mt-6 flex justify-center gap-3">
+        <button class="btn btn-outline-secondary px-6" onclick="window.open('https://etherscan.io', '_blank')">View in Explorer</button>
+        <button class="btn btn-danger px-6">Block Transaction</button>
+        <button class="btn btn-warning px-6">Report Activity</button>
+        <button class="btn btn-success px-6">Mark as Verified</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    // Helper to generate random hex string
+    const randomHex = (len) => [...Array(len)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+    const generateFullAddress = () => '0x' + randomHex(40);
+    const generateFullTxHash = () => '0x' + randomHex(64);
+
+    function openWalletDetails(address) {
+      const fullAddress = (address && address.length > 20) ? address : generateFullAddress();
+      
+      document.getElementById('wallet-full-address').textContent = fullAddress;
+      // Show full address in subtitle as well, or just "Analysis for..."
+      document.getElementById('wallet-modal-subtitle').textContent = 'Analysis for ' + fullAddress;
+      
+      // Randomize slightly for demo
+      const isHighRisk = Math.random() > 0.7;
+      const score = isHighRisk ? Math.floor(Math.random() * 20) + 80 : Math.floor(Math.random() * 20);
+      const scoreEl = document.getElementById('wallet-risk-score');
+      scoreEl.textContent = score;
+      scoreEl.className = 'risk-score ' + (score > 70 ? 'risk-high' : (score > 30 ? 'risk-medium' : 'risk-low'));
+      document.getElementById('wallet-risk-label').textContent = score > 70 ? 'High Risk' : (score > 30 ? 'Medium Risk' : 'Low Risk');
+
+      // Mock transactions with full hashes
+      const tbody = document.getElementById('wallet-tx-list');
+      tbody.innerHTML = `
+        <tr>
+          <td class="text-center py-2">2025-11-27</td>
+          <td class="font-mono text-xs text-center" style="word-break: break-all;">${generateFullTxHash()}</td>
+          <td class="text-center py-2"><span class="text-success font-bold">IN</span></td>
+          <td class="text-center py-2 font-bold">1.5 ETH</td>
+          <td class="text-center py-2"><span class="badge badge-success">Cleared</span></td>
+        </tr>
+        <tr>
+          <td class="text-center py-2">2025-11-26</td>
+          <td class="font-mono text-xs text-center" style="word-break: break-all;">${generateFullTxHash()}</td>
+          <td class="text-center py-2"><span class="text-danger font-bold">OUT</span></td>
+          <td class="text-center py-2 font-bold">0.2 ETH</td>
+          <td class="text-center py-2"><span class="badge badge-warning">Pending</span></td>
+        </tr>
+      `;
+
+      document.getElementById('wallet-details-modal').classList.add('active');
+    }
+
+    function openTxDetails(txHash) {
+      // Generate full hash if truncated
+      const fullHash = (txHash && txHash.length > 20) ? txHash : generateFullTxHash();
+      
+      document.getElementById('tx-hash').textContent = fullHash;
+      // Show FULL hash in subtitle as requested
+      document.getElementById('tx-modal-subtitle').textContent = 'Tx Hash: ' + fullHash;
+      
+      // Mock data
+      document.getElementById('tx-amount').textContent = (Math.random() * 1000).toFixed(2) + ' USDC';
+      document.getElementById('tx-value').textContent = '$' + (Math.random() * 1000).toFixed(2);
+      
+      // Mock full addresses for From/To
+      document.getElementById('tx-from-address').textContent = generateFullAddress();
+      document.getElementById('tx-to-address').textContent = generateFullAddress();
+
+      document.getElementById('tx-details-modal').classList.add('active');
+    }
+    
+    // Close on click outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal-overlay')) {
+        event.target.classList.remove('active');
+      }
+    }
+
+    function switchTab(tabName) {
+      // Hide all contents
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      // Deactivate all tabs
+      document.querySelectorAll('.compliance-tab').forEach(el => el.classList.remove('active'));
+      
+      // Activate selected
+      document.getElementById('tab-' + tabName).classList.add('active');
+      // Find the tab button that was clicked (simple way is to match text or index, but here we can just use event target if we passed event, or query selector)
+      // For simplicity in this mock, we'll just select by index or text content logic, but let's do it properly:
+      const tabs = document.querySelectorAll('.compliance-tab');
+      if(tabName === 'companies') tabs[0].classList.add('active');
+      if(tabName === 'users') tabs[1].classList.add('active');
+      if(tabName === 'wallets') tabs[2].classList.add('active');
+      if(tabName === 'transactions') tabs[3].classList.add('active');
+    }
+  </script>
   <script src="../../assets/js/nav-active.js"></script>
   <script src="../../assets/js/app.js"></script>
 </body>
