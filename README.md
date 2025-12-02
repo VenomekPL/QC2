@@ -83,7 +83,13 @@ This section outlines the features, widgets, and functionality available across 
     *   **Managed Accounts**: Owners can manage the address book and whitelist approved beneficiaries, while lower-privilege "Trader" or "Worker" accounts can only initiate transfers to these pre-approved destinations.
 
 ### Deposit (`client/deposit.html`)
-*   *Interface for depositing fiat or crypto assets.*
+*   **Guided Workflow**:
+    1.  **Asset Selection**: Searchable grid to choose the cryptocurrency to deposit.
+    2.  **Network Selection**: Critical step to choose the correct blockchain network (e.g., ERC20, TRC20, BEP20) to avoid fund loss.
+    3.  **Deposit Details**: Display of the unique deposit address and QR code.
+*   **Safety Features**:
+    *   **Network Warnings**: Prominent alerts ensuring the user sends the correct asset to the correct network.
+    *   **Copy Functionality**: One-click copy for addresses to prevent manual entry errors.
 
 ### Withdraw (`client/withdraw.html`)
 *   **Multi-Step Wizard**:
@@ -108,7 +114,13 @@ This section outlines the features, widgets, and functionality available across 
 *   **Staking Management**: Interface to stake new assets or unstake existing ones (implied by panel structure).
 
 ### Settlement (`client/settlement.html`)
-*   *View and manage settlement obligations and history.*
+*   **Fiat Account Management**:
+    *   **Balance Display**: Prominent view of the current fiat balance (supports negative balances for credit lines).
+    *   **Withdrawal Lock**: Automatic freezing of crypto withdrawals if the fiat balance is negative, enforcing settlement.
+*   **Payment Instructions**:
+    *   **Bank Details**: Tabbed view for SEPA (Europe) and SWIFT (International) transfer details.
+    *   **Reference Generation**: Unique reference codes (Memo) for reconciling incoming bank transfers.
+*   **History**: Log of recent settlement transactions and withdrawals.
 
 ### Security (`client/security.html`)
 *   **Account Protection**:
@@ -159,13 +171,32 @@ This section outlines the features, widgets, and functionality available across 
 *   **Security Audit**: View 2FA status and recent login activity for any user.
 
 ### Crypto (`admin/admin-crypto.html`)
-*   *Manage supported cryptocurrencies and their settings.*
+*   **Operational Dashboard**:
+    *   **Asset Monitoring**: Real-time tracking of Total Assets Under Custody (AUC) with growth metrics.
+    *   **Cold Storage Management**: Visual indicators for Cold Storage Ratio vs. targets, ensuring security compliance.
+    *   **Net Flow Analysis**: 24h inflow/outflow tracking to monitor liquidity requirements.
+    *   **Node Status**: Health check status for all active blockchain nodes.
+*   **Funds Management**:
+    *   **Detailed Asset Table**: Granular view of funds per asset (BTC, ETH, etc.) with balance and value in EUR.
+    *   **Wallet Breakdown**: Accordion-style list of specific wallets and addresses holding the funds.
 
 ### Commissions (`admin/admin-commissions.html`)
-*   *Configure and view platform commission structures.*
+*   **Revenue Analytics**:
+    *   **KPIs**: Track Total Revenue (YTD), Pending Invoices, and Average Monthly Revenue.
+    *   **Visualizations**: Charts for Monthly Revenue Trend and Revenue Breakdown by Fee Type (e.g., AUC Fees, Transaction Fees).
+*   **Client Revenue Explorer**:
+    *   **Granular Reporting**: Select specific clients to view their individual revenue contribution over 30, 90, or 365 days.
+*   **Settlement Management**:
+    *   **Invoicing**: View and manage pending commission settlements.
+    *   **Generation**: Tools to generate invoices for outstanding fees.
 
 ### Settlement (`admin/admin-settlement.html`)
-*   *Admin view for settlement operations and reconciliation.*
+*   **Fiat Operations**:
+    *   **Transfer Management**: Oversee and confirm manual fiat transfers (SEPA/SWIFT).
+    *   **Status Tracking**: Filter settlements by Status (Pending, Completed), Company, Currency, and Date Range.
+*   **Detailed Review**:
+    *   **Transaction Details**: Modal view for each settlement containing Beneficiary, Bank, IBAN/SWIFT, and Reference data.
+    *   **Actionable Workflow**: Mark transfers as completed after verification.
 
 ### Compliance (`admin/admin-compliance.html`)
 *   **Compliance Tabs**: Organized workflow for different compliance aspects:
